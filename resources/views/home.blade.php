@@ -461,3 +461,83 @@
     </div>
     <!--  END CONTENT AREA  -->
 @endsection
+
+@section('out-main-class-content')
+<!-- Modal POP UP START -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="exampleModalLabel">Select Finance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-primary mb-2" data-dismiss="modal" aria-label="Close" onclick="updateFinance(0)">Cash Finance</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button class="btn btn-primary mb-2" data-dismiss="modal" aria-label="Close" onclick="updateFinance(1)">Bank Finance</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+@push('style')
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{{ asset('plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/css/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <style type="text/css">
+        .widget-account-invoice-two .account-box .acc-action a{
+            padding: 0px;
+            box-shadow: none;
+        }
+        body.modal-open {
+            pointer-events: none;
+        }
+    </style>
+@endpush
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            App.init();
+            $('#exampleModal').modal('show');
+        });
+
+        function updateFinance(type) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url:'{{ route("update.finance.type") }}',
+                method:"POST",
+                data:{
+                    finance_type:type
+                },
+                success:function (response) {
+                    console.log(response)
+                },
+                error:function (error) {
+                    console.log(error)
+                }
+            })
+        }
+    </script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="{{ asset('plugins/apex/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboard/dash_1.js') }}"></script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+@endpush

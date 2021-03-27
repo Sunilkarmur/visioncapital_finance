@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,14 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function updateFinanceType(Request $request){
+        $this->validate($request,[
+           'finance_type' =>'required'
+        ]);
+        Auth::user()->finance_type=$request->finance_type;
+
+        return response()->json(['status'=>true,'message'=>'Update Your Session','data'=>Auth::user()],200);
     }
 }

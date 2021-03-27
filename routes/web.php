@@ -24,3 +24,7 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware'=>'auth'],function (){
+   Route::post('update-finance-type',[App\Http\Controllers\HomeController::class, 'updateFinanceType'])->name('update.finance.type');
+});

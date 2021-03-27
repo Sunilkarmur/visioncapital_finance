@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Vision Capital</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}"/>
     <link href="{{ asset('assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -14,20 +15,11 @@
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+    @stack('style')
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-    <link href="{{ asset('plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/css/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-    <style type="text/css">
-        .widget-account-invoice-two .account-box .acc-action a{
-            padding: 0px;
-            box-shadow: none;
-        }
-    </style>
 </head>
 <body class="alt-menu sidebar-noneoverflow">
+<input type="hidden" name="finance_type" id="finance_type" value="{{ isset(Auth::user()->finance_type)?Auth::user()->finance_type:'' }}">
 <!-- BEGIN LOADER -->
 <div id="load_screen"> <div class="loader"> <div class="loader-content">
             <div class="spinner-grow align-self-center"></div>
@@ -178,34 +170,8 @@
 </div>
 <!-- END MAIN CONTAINER -->
 
-<!-- Modal POP UP START -->
+@yield('out-main-class-content')
 
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h5 class="modal-title" id="exampleModalLabel">Select Finance</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-6 text-center"><button class="btn btn-primary mb-2" data-dismiss="modal" aria-label="Close">Cash Finance</button></div>
-                    <div class="col-6 text-center"><button class="btn btn-primary mb-2" data-dismiss="modal" aria-label="Close">Bank Finance</button></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal POP UP END -->
-<style type="text/css">
-    body.modal-open {
-        pointer-events: none;
-    }
-</style>
 
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
 <script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
@@ -213,20 +179,8 @@
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        App.init();
 
-        $('#exampleModal').modal('show');
-    });
-</script>
-<script src="{{ asset('assets/js/custom.js') }}"></script>
-<!-- END GLOBAL MANDATORY SCRIPTS -->
-
-<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-<script src="{{ asset('plugins/apex/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/js/dashboard/dash_1.js') }}"></script>
-<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+@stack('script')
 
 </body>
 </html>
