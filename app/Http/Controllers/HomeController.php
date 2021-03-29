@@ -31,8 +31,12 @@ class HomeController extends Controller
         $this->validate($request,[
            'finance_type' =>'required'
         ]);
-        Auth::user()->finance_type=$request->finance_type;
+        session(['finance_type' => $request->finance_type]);
 
-        return response()->json(['status'=>true,'message'=>'Update Your Session','data'=>Auth::user()],200);
+        return response()->json(['status'=>true,'message'=>'Update Your Session'],200);
+    }
+
+    public function financeForm(){
+        return view('finance-form');
     }
 }

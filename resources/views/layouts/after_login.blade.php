@@ -15,11 +15,21 @@
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <style type="text/css">
+        .widget-account-invoice-two .account-box .acc-action a{
+            padding: 0px;
+            box-shadow: none;
+        }
+        body.modal-open {
+            pointer-events: none;
+        }
+    </style>
     @stack('style')
 
 </head>
 <body class="alt-menu sidebar-noneoverflow">
-<input type="hidden" name="finance_type" id="finance_type" value="{{ isset(Auth::user()->finance_type)?Auth::user()->finance_type:'' }}">
 <!-- BEGIN LOADER -->
 <div id="load_screen"> <div class="loader"> <div class="loader-content">
             <div class="spinner-grow align-self-center"></div>
@@ -120,16 +130,16 @@
             </ul>
 
             <ul class="list-unstyled menu-categories" id="accordionExample">
-                <li class="menu active">
-                    <a href="{{ route('home') }}" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                <li class="menu {{ request()->route()->uri==='home'?'active':'' }}">
+                    <a href="{{ route('home') }}" data-toggle="collapse" aria-expanded="{{ request()->route()->uri==='home'?'true':'false' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Dashboard</span>
                         </div>
                     </a>
                 </li>
-                <li class="menu">
-                    <a href="finance.html" aria-expanded="false" class="dropdown-toggle">
+                <li class="menu {{ request()->route()->uri==='finance-form'?'active':'' }}">
+                    <a href="{{ route('finance.form') }}" aria-expanded="{{ request()->route()->uri==='finance-form'?'true':'false' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             <span>Finance Form</span>
@@ -137,7 +147,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="applications.html" aria-expanded="false" class="dropdown-toggle">
+                    <a href="{{ route('finance.form') }}" aria-expanded="{{ request()->route()->uri==='finance-form'?'true':'false' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             <span>Applications</span>
@@ -145,7 +155,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="approved-applications.html" aria-expanded="false" class="dropdown-toggle">
+                    <a href="{{ route('finance.form') }}" aria-expanded="{{ request()->route()->uri==='finance-form'?'true':'false' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             <span>Approved Applications</span>
@@ -153,7 +163,7 @@
                     </a>
                 </li>
                 <li class="menu">
-                    <a href="track-application.html" aria-expanded="false" class="dropdown-toggle">
+                    <a href="{{ route('home') }}" aria-expanded="{{ request()->route()->uri==='home'?'true':'false' }}" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             <span>Track Applications</span>
@@ -166,12 +176,33 @@
     <!--  END SIDEBAR  -->
 
     @yield('content')
-
 </div>
 <!-- END MAIN CONTAINER -->
 
-@yield('out-main-class-content')
-
+<!-- Modal POP UP START -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="exampleModalLabel">Select Finance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-primary mb-2" data-dismiss="modal" aria-label="Close" onclick="updateFinance('cash')">Cash Finance</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button class="btn btn-primary mb-2" data-dismiss="modal" aria-label="Close" onclick="updateFinance('bank')">Bank Finance</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
 <script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
@@ -180,7 +211,40 @@
 <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
 
-@stack('script')
+<script>
+    $(document).ready(function() {
+        App.init();
+    });
+</script>
 
+<script src="{{ asset('plugins/highlight/highlight.pack.js') }}"></script>
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+@if(!request()->session()->has('finance_type'))
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal').modal('show');
+        });
+        function updateFinance(type) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url:'{{ route("update.finance.type") }}',
+                method:"POST",
+                data:{
+                    finance_type:type
+                },
+                success:function (response) {
+                    console.log(response)
+                },
+                error:function (error) {
+                    console.log(error)
+                }
+            })
+        }
+    </script>
+@endif
+@stack('script')
 </body>
 </html>
