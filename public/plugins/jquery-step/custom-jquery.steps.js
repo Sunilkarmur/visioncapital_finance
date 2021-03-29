@@ -113,6 +113,15 @@ $("#pill-vertical").steps({
                     }
                 });
                 break;
+            case 2:
+                form = $('#business-detail-form');
+                form.validate({
+                    rules:{
+                        business_name:'required',
+                        business_started_date:"required"
+                    }
+                });
+                break;
         }
         return form.valid();
     },
