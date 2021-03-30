@@ -54,7 +54,7 @@ $("#pill-vertical").steps({
                         ref_affiliate_vc: "Please enter a valid email address",
                         ref_affiliate_type: "Please enter a valid email address",
                         ref_affiliate_type_other: "Please enter a valid email address"
-                    }
+                    },
                 });
                 break;
             case 1:
@@ -123,6 +123,9 @@ $("#pill-vertical").steps({
                 });
                 break;
         }
+        if (form.valid()){
+            addFinanceForm(currentIndex,form.serializeArray());
+        }
         return form.valid();
     },
     onFinishing: function (event, currentIndex)
@@ -149,3 +152,24 @@ $('[data-type="adhaar-number"]').keyup(function() {
     value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
     $(this).val(value);
 });
+
+// Finance Form add
+function addFinanceForm(step,data) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url:base_url+'finance-form/'+step,
+        method:"POST",
+        data:data,
+        dataType:'json',
+        success:function (response) {
+            alert(response.message);
+        },
+        error:function (error) {
+            const sources = error.responseJSON;
+            alert(sources.message)
+        }
+    })
+    return false
+}

@@ -35,8 +35,4 @@ class HomeController extends Controller
 
         return response()->json(['status'=>true,'message'=>'Update Your Session'],200);
     }
-
-    public function financeForm(){
-        return view('finance-form');
-    }
 }

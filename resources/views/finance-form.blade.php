@@ -42,8 +42,8 @@
                                                 <label for="ref_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to Vision Capital</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm ref_affiliate_vc" name="ref_affiliate_vc">
-                                                        <option value="1">Yes</option>
-                                                        <option value="0" selected="">No</option>
+                                                        <option value="Yes">Yes</option>
+                                                        <option value="No" selected="">No</option>
                                                     </select>
                                                 </div>
                                             </div>
