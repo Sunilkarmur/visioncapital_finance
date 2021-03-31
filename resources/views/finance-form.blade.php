@@ -12,6 +12,7 @@
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                         <h4>Basic information sheet</h4>
+                                        <input type="hidden" name="finance-form-id" id="finance-form-id" value="">
                                     </div>
                                 </div>
                             </div>
@@ -98,8 +99,8 @@
                                                 <label for="bor_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to Vision Capital</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm bor_affiliate_vc" name="bor_affiliate_vc">
-                                                        <option value="1">Yes</option>
-                                                        <option value="0" selected="">No</option>
+                                                        <option value="Yes">Yes</option>
+                                                        <option value="No" selected="">No</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -460,52 +461,6 @@
                                         </div>
                                         <div class="guarantor_section_clone"></div>
                                     </section>
-                                    <!-- <h3>FOR OFFICE USE ONLY</h3> -->
-                                    <!-- <section>
-                                        <div class="form-group row  mb-4 remarks">
-                                            <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Remarks</label>
-                                            <div class="col-sm-8">
-                                                <textarea name="remarks" class="form-control form-control-sm" id="remarks" placeholder="Remarks"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row  mb-4 remarks">
-                                            <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score Required?</label>
-                                            <div class="col-sm-8">
-                                                <select class="form-control form-control-sm cibil_socre_type" name="cibil_socre_type">
-                                                    <option value="1">Yes</option>
-                                                    <option value="0">No</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row cibil_score_row  mb-4 d-none">
-                                            <label for="cibil_socre" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="cibil_socre" class="form-control form-control-sm" id="cibil_socre" placeholder="CIBIL Score"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row cibil_score_row  mb-4">
-                                            <label for="attend_by" class="col-sm-4 col-form-label col-form-label-sm">Attended By</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="attend_by" class="form-control form-control-sm" id="attend_by" placeholder="Attended By"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row cibil_score_row  mb-4">
-                                            <label for="signature" class="col-sm-4 col-form-label col-form-label-sm">Signature</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="signature" class="form-control form-control-sm" id="signature" placeholder="Signature"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row  mb-4 remarks">
-                                            <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Status</label>
-                                            <div class="col-sm-8">
-                                                <select class="form-control form-control-sm cibil_socre_type" name="cibil_socre_type">
-                                                    <option value="Approved">Approved</option>
-                                                    <option value="Rejected">Rejected</option>
-                                                    <option value="Disbursed">Disbursed</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </section> -->
                                 </div>
                             </div>
                         </div>

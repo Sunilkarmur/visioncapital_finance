@@ -27,7 +27,8 @@ Auth::routes([
 Route::group(['middleware'=>'auth'],function (){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::get('application',[App\Http\Controllers\FinanceFormController::class, 'index'])->name('finance.index');
     Route::post('update-finance-type',[App\Http\Controllers\HomeController::class, 'updateFinanceType'])->name('update.finance.type');
-   Route::get('finance-form',[App\Http\Controllers\FinanceFormController::class, 'index'])->name('finance.form');
-   Route::post('finance-form/{step}',[App\Http\Controllers\FinanceFormController::class, 'store'])->name('finance.form.step');
+    Route::get('finance-form',[App\Http\Controllers\FinanceFormController::class, 'create'])->name('finance.form');
+    Route::post('finance-form/{step}',[App\Http\Controllers\FinanceFormController::class, 'store'])->name('finance.form.step');
 });

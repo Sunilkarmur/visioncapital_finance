@@ -15,7 +15,7 @@ class FinanceFormController extends Controller
      */
     public function index()
     {
-        return view('finance-form');
+        return view('application');
     }
 
     /**
@@ -25,7 +25,7 @@ class FinanceFormController extends Controller
      */
     public function create()
     {
-        //
+        return view('finance-form');
     }
 
     /**
@@ -39,6 +39,8 @@ class FinanceFormController extends Controller
     {
         if ($step==="0"){
            return $this->referranceDetail($request);
+        }elseif ($step==="1"){
+            return $this->borrowerDetails($request);
         }
     }
 
@@ -127,5 +129,54 @@ class FinanceFormController extends Controller
             'message'=>'Something Went Wrong!',
             'data'=>null
         ],422);
+    }
+
+    public function borrowerDetails(Request $request){
+        $validator = Validator::make($request->all(),[
+            'id'=>'required|exists:finance_forms,id',
+            'bor_name'=>'required',
+            'bor_amount'=>'required',
+            'bor_time_limit'=>'required',
+            'bor_purpose'=>'required',
+            'bor_affiliate_vc'=>'required',
+            'bor_affiliate_type'=>'required_if:bor_affiliate_vc,Yes',
+            'bor_affiliate_type_other'=>'required_if:bor_affiliate_type,Other',
+            'bor_pan_no'=>'required',
+            'bor_aadhar_no'=>'required',
+            'bor_pin_code'=>'required',
+            'bor_dob'=>'required',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status'=>false,
+                'message'=>$validator->errors()->first(),
+                'data'=>$validator->errors()->messages()
+            ],422);
+        }
+
+        $financeForm = FinanceForm::find($request->id);
+        if ($financeForm){
+            $financeForm->bor_name = $request->bor_name;
+            $financeForm->bor_amount = $request->bor_amount;
+            $financeForm->bor_time_limit = $request->bor_time_limit;
+            $financeForm->bor_purpose = $request->bor_purpose;
+            $financeForm->bor_affiliate_vc = $request->bor_affiliate_vc;
+            $financeForm->bor_affiliate_type = $request->bor_affiliate_type;
+            $financeForm->bor_affiliate_type_other = $request->bor_affiliate_type_other;
+            $financeForm->bor_pan_no = $request->bor_pan_no;
+            $financeForm->bor_aadhar_no = $request->bor_aadhar_no;
+            $financeForm->bor_pin_code = $request->bor_pin_code;
+            $financeForm->bor_dob = $request->bor_dob;
+            if ($financeForm->save()){
+                return response()->json(['status'=>true,
+                    'message'=>'Finance Borrower Detail Add Successfully!',
+                    'data'=>$financeForm],200);
+            }
+        }
+
+        return response()->json(['status'=>false,
+            'message'=>'Something Went Wrong!',
+            'data'=>[]],422);
     }
 }

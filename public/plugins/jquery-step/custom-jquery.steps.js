@@ -20,7 +20,7 @@ $("#example-vertical").steps({
     titleTemplate: '<span class="number">#index#</span>',
     stepsOrientation: "vertical"
 });
-
+var form = $("#referrance-finance-detail");
 $("#pill-vertical").steps({
     headerTag: "h3",
     bodyTag: "section",
@@ -30,15 +30,13 @@ $("#pill-vertical").steps({
     stepsOrientation: "vertical",
     onStepChanging: function (event, currentIndex, newIndex)
     {
-        var form = $("#referrance-finance-detail");
+
         switch (currentIndex) {
             case 0:
+                form = $("#referrance-finance-detail");
                 form.validate({
                     // Specify validation rules
                     rules: {
-                        // The key name on the left side is the name attribute
-                        // of an input field. Validation rules are defined
-                        // on the right side
                         ref_name: "required",
                         ref_firm: "required",
                         ref_contact: "required",
@@ -110,7 +108,7 @@ $("#pill-vertical").steps({
                             digits:"Please Enter Valid ZipCode Number"
                         },
                         bor_dob: "Please enter a valid Date Of birth"
-                    }
+                    },
                 });
                 break;
             case 2:
@@ -124,9 +122,35 @@ $("#pill-vertical").steps({
                 break;
         }
         if (form.valid()){
-            addFinanceForm(currentIndex,form.serializeArray());
+            var data = form.serializeArray();
+            if (currentIndex!==0){
+                data.push({name: 'id', value: $('#finance-form-id').val()});
+            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url:base_url+'finance-form/'+currentIndex,
+                method:"POST",
+                data:data,
+                dataType:'json',
+                success:function (response) {
+                    if (currentIndex===0){
+                        console.log(response.data.id)
+                        $('#finance-form-id').val(response.data.id)
+                    }
+                    alert(response.message)
+                },
+                error:function (error) {
+                    const sources = error.responseJSON;
+                    alert(sources.message)
+                    return !0;
+                }
+            })
+            return form.valid();
+        }else {
+            return form.valid();
         }
-        return form.valid();
     },
     onFinishing: function (event, currentIndex)
     {
