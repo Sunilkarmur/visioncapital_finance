@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FinanceForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables;
 
 class FinanceFormController extends Controller
 {
@@ -52,7 +53,8 @@ class FinanceFormController extends Controller
      */
     public function show(FinanceForm $financeForm)
     {
-        //
+        $applicationList = FinanceForm::where('finance_type','=',session()->get('finance_type'));
+        return DataTables::of($applicationList)->make(true);
     }
 
     /**
@@ -112,6 +114,7 @@ class FinanceFormController extends Controller
         $financeForm->ref_name = $request->ref_name;
         $financeForm->ref_firm = $request->ref_firm;
         $financeForm->ref_contact = $request->ref_contact;
+        $financeForm->finance_type = session()->get('finance_type');
         $financeForm->ref_affiliate_vc = $request->ref_affiliate_vc;
         if ($request->ref_affiliate_vc==='Yes'){
             $financeForm->ref_affiliate_type = $request->ref_affiliate_type;
