@@ -171,7 +171,7 @@
                                                 <div class="form-group row  mb-4">
                                                     <label for="business_started_date" class="col-sm-4 col-form-label col-form-label-sm">Started on</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" name="business_started_date" class="form-control form-control-sm" id="business_started_date" placeholder="Started on" required>
+                                                        <input type="date" name="business_started_date" class="form-control form-control-sm" id="business_started_date" placeholder="Started on" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row  mb-4">
@@ -249,27 +249,29 @@
                                     </section>
                                     <h3>RESIDENCE DETAILS</h3>
                                     <section>
-                                        <div class="form-group row  mb-4">
-                                            <label for="home_address" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="home_address" class="form-control form-control-sm" id="home_address" placeholder="Location / Address">
+                                        <form id="residence-detail">
+                                            <div class="form-group row  mb-4">
+                                                <label for="home_address" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="home_address" class="form-control form-control-sm" id="home_address" placeholder="Location / Address">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row  mb-4">
-                                            <label for="home_type" class="col-sm-4 col-form-label col-form-label-sm">Location Type</label>
-                                            <div class="col-sm-8">
-                                                <select class="form-control form-control-sm home_type" name="home_type">
-                                                    <option value="Own">Own</option>
-                                                    <option value="Rented">Rented</option>
-                                                </select>
+                                            <div class="form-group row  mb-4">
+                                                <label for="home_type" class="col-sm-4 col-form-label col-form-label-sm">Location Type</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control form-control-sm home_type" name="home_type">
+                                                        <option value="Own">Own</option>
+                                                        <option value="Rented">Rented</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row  mb-4">
-                                            <label for="home_duration_place" class="col-sm-4 col-form-label col-form-label-sm">Duration at that place:</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="home_duration_place" class="form-control form-control-sm" id="home_duration_place" placeholder="Duration at that place:">
+                                            <div class="form-group row  mb-4">
+                                                <label for="home_duration_place" class="col-sm-4 col-form-label col-form-label-sm">Duration at that place:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="home_duration_place" class="form-control form-control-sm" id="home_duration_place" placeholder="Duration at that place:">
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </section>
                                     <h3>BANKING & FINANCE</h3>
                                     <section>

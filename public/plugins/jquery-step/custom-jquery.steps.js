@@ -116,7 +116,56 @@ $("#pill-vertical").steps({
                 form.validate({
                     rules:{
                         business_name:'required',
-                        business_started_date:"required"
+                        business_started_date: {
+                            required:true,
+                            date:true
+                        },
+                        business_type:'required',
+                        promoter_name:'required',
+                        business_nature:'required',
+                        business_monthly_income:'required',
+                        total_no_machines:'required',
+                        total_no_employees:'required',
+                        monthly_turnover:'required',
+                        business_location:'required',
+                        business_location_type:'required',
+                        business_duration_place:'required',
+                    },
+                    messages: {
+                        business_name: "Please enter your Bussiness Name",
+                        business_started_date: {
+                            required:"Please Select Start Date",
+                            date:"Please select valid Date"
+                        },
+                        business_type: "Please Select your Bussiness Type",
+                        promoter_name: "Please Enter your Promoter Name",
+                        business_nature: "Please Enter your Promoter Name",
+                        business_monthly_income:'required',
+                        total_no_machines:'required',
+                        total_no_employees:'required',
+                        monthly_turnover:'required',
+                        business_location:'required',
+                        business_location_type:'required',
+                        business_duration_place:'required',
+                    }
+                });
+                break;
+            case 3:
+                form = $('#residence-detail');
+                form.validate({
+                    rules:{
+                        home_address:'required',
+                        home_type: {
+                            required:true,
+                        },
+                        home_duration_place:'required',
+                    },
+                    messages: {
+                        home_address:'required',
+                        home_type: {
+                            required:true,
+                        },
+                        home_duration_place:'required',
                     }
                 });
                 break;
@@ -136,7 +185,6 @@ $("#pill-vertical").steps({
                 dataType:'json',
                 success:function (response) {
                     if (currentIndex===0){
-                        console.log(response.data.id)
                         $('#finance-form-id').val(response.data.id)
                     }
                     alert(response.message)
@@ -152,15 +200,15 @@ $("#pill-vertical").steps({
             return form.valid();
         }
     },
-    onFinishing: function (event, currentIndex)
-    {
-        return !0;
-    },
     onFinished: function (event, currentIndex)
     {
         alert("Submitted!");
     }
-});
+}).validate({
+        errorPlacement: function (error, element) {
+            element.before(error);
+        },
+    });
 
 $('[data-type="adhaar-number"]').on("change, blur", function() {
     var value = $(this).val();
