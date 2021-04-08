@@ -150,101 +150,103 @@
                                     </section>
                                     <h3>BUSINESS DETAILS</h3>
                                     <section>
-                                        <form id="business_details">
+                                        <div id="business_details">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_business_details" type="button">Add</a>
                                                 </div>
                                             </div>
                                             <div class="business_details_row">
-                                                <div class="form-group row  mb-4">
-                                                    <div class="col-12">
-                                                        <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_business_details_btn d-none" type="button">Remove</a>
+                                                <form class="business_detail_form">
+                                                    <div class="form-group row  mb-4">
+                                                        <div class="col-12">
+                                                            <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_business_details_btn d-none" type="button">Remove</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="business_name[]" class="form-control form-control-sm" id="business_name" placeholder="Name of Firm" required>
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="business_name" class="form-control form-control-sm" id="business_name" placeholder="Name of Firm" required>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_started_date" class="col-sm-4 col-form-label col-form-label-sm">Started on</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="date" name="business_started_date[]" class="form-control form-control-sm" id="business_started_date" placeholder="Started on" required>
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_started_date" class="col-sm-4 col-form-label col-form-label-sm">Started on</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="date" name="business_started_date" class="form-control form-control-sm" id="business_started_date" placeholder="Started on" required>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control form-control-sm business_type" name="business_type[]">
-                                                            <option value="Proprietorship">Proprietorship</option>
-                                                            <option value="Partnership">Partnership</option>
-                                                            <option value="LLP">LLP</option>
-                                                            <option value="Pvt. Ltd.">Pvt. Ltd.</option>
-                                                        </select>
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm business_type" name="business_type">
+                                                                <option value="Proprietorship">Proprietorship</option>
+                                                                <option value="Partnership">Partnership</option>
+                                                                <option value="LLP">LLP</option>
+                                                                <option value="Pvt. Ltd.">Pvt. Ltd.</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group promoter_name_row d-none row  mb-4">
-                                                    <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Main Promoter Name</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="promoter_name[]" class="form-control form-control-sm" id="promoter_name" placeholder="Main Promoter Name">
+                                                    <div class="form-group promoter_name_row d-none row  mb-4">
+                                                        <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Main Promoter Name</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="promoter_name" class="form-control form-control-sm" id="promoter_name" placeholder="Main Promoter Name">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Nature / Activity</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="business_nature[]" class="form-control form-control-sm" id="business_nature" placeholder="Nature / Activity">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Nature / Activity</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="business_nature" class="form-control form-control-sm" id="business_nature" placeholder="Nature / Activity">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_monthly_income" class="col-sm-4 col-form-label col-form-label-sm">Monthly Income</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="business_monthly_income[]" class="form-control form-control-sm" id="business_monthly_income" placeholder="Monthly Income">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_monthly_income" class="col-sm-4 col-form-label col-form-label-sm">Monthly Income</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="business_monthly_income" class="form-control form-control-sm" id="business_monthly_income" placeholder="Monthly Income">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="total_no_machines" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Machines</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="total_no_machines[]" class="form-control form-control-sm" id="total_no_machines" placeholder="Total No. of Machines">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="total_no_machines" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Machines</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="total_no_machines" class="form-control form-control-sm" id="total_no_machines" placeholder="Total No. of Machines">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="total_no_employees" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Employees</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="total_no_employees[]" class="form-control form-control-sm" id="total_no_employees" placeholder="Total No. of Employees">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="total_no_employees" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Employees</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="total_no_employees" class="form-control form-control-sm" id="total_no_employees" placeholder="Total No. of Employees">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="monthly_turnover" class="col-sm-4 col-form-label col-form-label-sm">Turnover (Monthly)</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="monthly_turnover[]" class="form-control form-control-sm" id="monthly_turnover" placeholder="Turnover (Monthly)">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="monthly_turnover" class="col-sm-4 col-form-label col-form-label-sm">Turnover (Monthly)</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="monthly_turnover" class="form-control form-control-sm" id="monthly_turnover" placeholder="Turnover (Monthly)">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_location" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="business_location[]" class="form-control form-control-sm" id="business_location" placeholder="Location / Address">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_location" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="business_location" class="form-control form-control-sm" id="business_location" placeholder="Location / Address">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_location_type" class="col-sm-4 col-form-label col-form-label-sm">Ownership Type</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control form-control-sm business_location_type" name="business_location_type[]">
-                                                            <option value="Own">Own</option>
-                                                            <option value="Rented">Rented</option>
-                                                        </select>
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_location_type" class="col-sm-4 col-form-label col-form-label-sm">Ownership Type</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm business_location_type" name="business_location_type">
+                                                                <option value="Own">Own</option>
+                                                                <option value="Rented">Rented</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="business_duration_place" class="col-sm-4 col-form-label col-form-label-sm">Duration at that place:</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="business_duration_place[]" class="form-control form-control-sm" id="business_duration_place" placeholder="Duration at that place:">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="business_duration_place" class="col-sm-4 col-form-label col-form-label-sm">Duration at that place:</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="business_duration_place" class="form-control form-control-sm" id="business_duration_place" placeholder="Duration at that place:">
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                             <div class="business_details_clone_row"></div>
-                                        </form>
+                                        </div>
                                     </section>
                                     <h3>RESIDENCE DETAILS</h3>
                                     <section>
@@ -280,67 +282,69 @@
                                             </div>
                                         </div>
                                         <div class="banking_finance_row">
-                                            <div class="form-group row  mb-4">
-                                                <div class="col-12">
-                                                    <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_banking_finance_btn d-none" type="button">Remove</a>
+                                            <form class="banking_finance_form">
+                                                <div class="form-group row  mb-4">
+                                                    <div class="col-12">
+                                                        <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_banking_finance_btn d-none" type="button">Remove</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- <div class="form-group row  mb-4">
-                                                <label for="previous_loan" class="col-sm-4 col-form-label col-form-label-sm">Previous Loan</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="previous_loan" class="form-control form-control-sm" id="previous_loan" placeholder="Previous Loan">
+                                                <!-- <div class="form-group row  mb-4">
+                                                    <label for="previous_loan" class="col-sm-4 col-form-label col-form-label-sm">Previous Loan</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="previous_loan" class="form-control form-control-sm" id="previous_loan" placeholder="Previous Loan">
+                                                    </div>
+                                                </div> -->
+                                                <div class="form-group row  mb-4">
+                                                    <label for="previous_lona_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control form-control-sm previous_lona_type">
+                                                            <option value="1">Home Loan</option>
+                                                            <option value="2">Personal Loan</option>
+                                                            <option value="3">Business Loan</option>
+                                                            <option value="4">Machinary Loan</option>
+                                                            <option value="5">Vehicle Loan</option>
+                                                            <option value="6">Gold Loan</option>
+                                                            <option value="7">CC Loan</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div> -->
-                                            <div class="form-group row  mb-4">
-                                                <label for="previous_lona_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control form-control-sm previous_lona_type">
-                                                        <option value="1">Home Loan</option>
-                                                        <option value="2">Personal Loan</option>
-                                                        <option value="3">Business Loan</option>
-                                                        <option value="4">Machinary Loan</option>
-                                                        <option value="5">Vehicle Loan</option>
-                                                        <option value="6">Gold Loan</option>
-                                                        <option value="7">CC Loan</option>
-                                                    </select>
+                                                <div class="form-group row  mb-4">
+                                                    <label for="bank_name" class="col-sm-4 col-form-label col-form-label-sm">Bank</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="bank_name" class="form-control form-control-sm" id="bank_name" placeholder="Bank">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row  mb-4">
-                                                <label for="bank_name" class="col-sm-4 col-form-label col-form-label-sm">Bank</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="bank_name" class="form-control form-control-sm" id="bank_name" placeholder="Bank">
+                                                <div class="form-group row  mb-4">
+                                                    <label for="bank_branch" class="col-sm-4 col-form-label col-form-label-sm">Branch</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="bank_branch" class="form-control form-control-sm" id="bank_branch" placeholder="Branch">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row  mb-4">
-                                                <label for="bank_branch" class="col-sm-4 col-form-label col-form-label-sm">Branch</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="bank_branch" class="form-control form-control-sm" id="bank_branch" placeholder="Branch">
+                                                <div class="form-group row  mb-4">
+                                                    <label for="loan_amount" class="col-sm-4 col-form-label col-form-label-sm">Loan Amount</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row  mb-4">
-                                                <label for="loan_amount" class="col-sm-4 col-form-label col-form-label-sm">Loan Amount</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount">
+                                                <div class="form-group row  mb-4">
+                                                    <label for="emi_amount" class="col-sm-4 col-form-label col-form-label-sm">EMI Amount</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="emi_amount" class="form-control form-control-sm" id="emi_amount" placeholder="EMI Amount">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row  mb-4">
-                                                <label for="emi_amount" class="col-sm-4 col-form-label col-form-label-sm">EMI Amount</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="emi_amount" class="form-control form-control-sm" id="emi_amount" placeholder="EMI Amount">
+                                                <div class="form-group row  mb-4">
+                                                    <label for="bank_balance" class="col-sm-4 col-form-label col-form-label-sm">Outstanding Amount</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="bank_balance" class="form-control form-control-sm" id="bank_balance" placeholder="Balance Amount">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row  mb-4">
-                                                <label for="bank_balance" class="col-sm-4 col-form-label col-form-label-sm">Outstanding Amount</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="bank_balance" class="form-control form-control-sm" id="bank_balance" placeholder="Balance Amount">
+                                                <div class="form-group row  mb-4">
+                                                    <label for="duration" class="col-sm-4 col-form-label col-form-label-sm">Duration</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" name="duration" class="form-control form-control-sm" id="duration" placeholder="Duration">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row  mb-4">
-                                                <label for="duration" class="col-sm-4 col-form-label col-form-label-sm">Duration</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" name="duration" class="form-control form-control-sm" id="duration" placeholder="Duration">
-                                                </div>
-                                            </div>
+                                            </form>
 
                                         </div>
                                         <div class="banking_finance_clone_row"></div>
@@ -500,7 +504,7 @@
 @push('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script type="text/javascript">
-        var business_form_count=1;
+        var business_form_data=[];
         $(document).ready(function(){
 
             $('.add_gaurantor').on('click',function(){
@@ -580,11 +584,72 @@
 
 
             $('.add_business_details').on('click',function(){
-                business_form_count++;
-                var section = $('.business_details_row').clone();
-                section +='<form id="business_details_'+business_form_count+'">'+section+'</form>';
-                $('.business_details_clone_row').html(section);
-                $('.business_details_clone_row .business_details_row .remove_business_details_btn').removeClass('d-none');
+                var form = $('#business_details').find('.business_detail_form');
+                form.validate({
+                    rules:{
+                        business_name:'required',
+                        business_started_date: {
+                            required:true,
+                            date:true
+                        },
+                        business_type:'required',
+                        promoter_name:'required',
+                        business_nature:'required',
+                        business_monthly_income: {
+                            required:true,
+                            digits:true
+                        },
+                        total_no_machines:{
+                            required:true,
+                            digits:true
+                        },
+                        total_no_employees:{
+                            required:true,
+                            digits:true
+                        },
+                        monthly_turnover:{
+                            required:true,
+                            digits:true
+                        },
+                        business_location:'required',
+                        business_location_type:'required',
+                        business_duration_place:'required',
+                    },
+                    messages: {
+                        business_name: "Please enter your Bussiness Name",
+                        business_started_date: {
+                            required:"Please Select Start Date",
+                            date:"Please select valid Date"
+                        },
+                        business_type: "Please Select your Bussiness Type",
+                        promoter_name: "Please Enter your Promoter Name",
+                        business_nature: "Please Enter your Promoter Name",
+                        business_monthly_income:{
+                            required:'Please Enter your Business Monthly Income',
+                            digits:'Please Enter only digit Business Monthly Income'
+                        },
+                        total_no_machines:{
+                            required:'Please Enter your Total Number Of Machine',
+                            digits:'Please Enter only digit Total Number Of Machine'
+                        },
+                        total_no_employees:{
+                            required:'Please Enter your  Total Number Of Employees',
+                            digits:'Please Enter only digit  Total Number Of Employee'
+                        },
+                        monthly_turnover:{
+                            required:'Please Enter your Monthly turnover',
+                            digits:'Please Enter only digit  Monthly turnover'
+                        },
+                        business_location:'Please Enter your Business Location',
+                        business_location_type:'Please Enter your Business Location Type',
+                        business_duration_place:'Please Enter your Business Duration place',
+                    }
+                });
+                if (form.valid()){
+                    var section = $('.business_details_row').clone();
+                    $('.business_details_clone_row').html(section);
+                    $('.business_details_clone_row .business_details_row .remove_business_details_btn').removeClass('d-none');
+                }
             });
             $(document).on('click','.remove_business_details_btn',function(){
                 $(this).closest('.business_details_row').remove();

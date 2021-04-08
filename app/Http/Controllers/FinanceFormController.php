@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BusinessDetail;
 use App\Models\FinanceForm;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -187,20 +188,10 @@ class FinanceFormController extends Controller
     }
 
     public function bussinessDetails(Request $request){
+
         $validator = Validator::make($request->all(),[
             'id'=>'required|exists:finance_forms,id',
-            'business_name'=>'required',
-            'business_started_date'=>'required',
-            'business_type'=>'required',
-            'promoter_name'=>'required',
-            'business_nature'=>'required',
-            'business_monthly_income'=>'required_if:bor_affiliate_vc,Yes',
-            'total_no_machines'=>'required_if:bor_affiliate_type,Other',
-            'total_no_employees'=>'required',
-            'monthly_turnover'=>'required',
-            'business_location'=>'required',
-            'business_location_type'=>'required',
-            'business_duration_place'=>'required',
+            'data'=>'required'
         ]);
 
         if ($validator->fails()){
@@ -211,9 +202,52 @@ class FinanceFormController extends Controller
             ],422);
         }
 
-        $businessDetail = new BusinessDetail();
-        $businessDetail->finance_id = $request->id;
-        $businessDetail->business_name = $request->business_name;
+        $data = json_decode($request->data,true);
+        if ($data){
+            foreach ($data as $datum) {
+                $validator = Validator::make($datum,[
+                    'business_name'=>'required',
+                    'business_started_date'=>'required',
+                    'business_type'=>'required',
+                    'promoter_name'=>'required',
+                    'business_nature'=>'required',
+                    'business_monthly_income'=>'required_if:bor_affiliate_vc,Yes',
+                    'total_no_machines'=>'required_if:bor_affiliate_type,Other',
+                    'total_no_employees'=>'required',
+                    'monthly_turnover'=>'required',
+                    'business_location'=>'required',
+                    'business_location_type'=>'required',
+                    'business_duration_place'=>'required',
+                ]);
+
+                if ($validator->fails()){
+                    return response()->json([
+                        'status'=>false,
+                        'message'=>$validator->errors()->first(),
+                        'data'=>$validator->errors()->messages()
+                    ],422);
+                }
+
+                $businessDetail = new BusinessDetail();
+                $businessDetail->finance_id = $request->id;
+                $businessDetail->business_name = $datum->business_name;
+                $businessDetail->business_started_date = $datum->business_started_date;
+                $businessDetail->business_type = $datum->business_type;
+                $businessDetail->promoter_name = $datum->promoter_name;
+                $businessDetail->business_nature = $datum->business_nature;
+                $businessDetail->business_monthly_income = $datum->business_monthly_income;
+                $businessDetail->total_no_machines = $datum->total_no_machines;
+                $businessDetail->total_no_employees = $datum->total_no_employees;
+                $businessDetail->monthly_turnover = $datum->monthly_turnover;
+                $businessDetail->business_location = $datum->business_location;
+                $businessDetail->business_location_type = $datum->business_location_type;
+                $businessDetail->business_duration_place = $datum->business_duration_place;
+                $businessDetail->save();
+            }
+            return response()->json(['status'=>true,
+                'message'=>'Bussiness Detail Add Successfully!',
+                'data'=>[]],200);
+        }
 
         return response()->json(['status'=>false,
             'message'=>'Something Went Wrong!',

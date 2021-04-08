@@ -30,7 +30,10 @@ $("#pill-vertical").steps({
     stepsOrientation: "vertical",
     onStepChanging: function (event, currentIndex, newIndex)
     {
+        if (currentIndex > newIndex){
 
+            return true;
+        }
         switch (currentIndex) {
             case 0:
                 form = $("#referrance-finance-detail");
@@ -112,66 +115,68 @@ $("#pill-vertical").steps({
                 });
                 break;
             case 2:
-                form = $('#business_details');
-                form.validate({
-                    rules:{
-                        business_name:'required',
-                        business_started_date: {
-                            required:true,
-                            date:true
+                form = $('#business_details').find('.business_detail_form');
+                form.each(function() {   // <- selects every <form> on page
+                    $(this).validate({        // <- initialize validate() on each form
+                        rules:{
+                            business_name:'required',
+                            business_started_date: {
+                                required:true,
+                                date:true
+                            },
+                            business_type:'required',
+                            promoter_name:'required',
+                            business_nature:'required',
+                            business_monthly_income: {
+                                required:true,
+                                digits:true
+                            },
+                            total_no_machines:{
+                                required:true,
+                                digits:true
+                            },
+                            total_no_employees:{
+                                required:true,
+                                digits:true
+                            },
+                            monthly_turnover:{
+                                required:true,
+                                digits:true
+                            },
+                            business_location:'required',
+                            business_location_type:'required',
+                            business_duration_place:'required',
                         },
-                        business_type:'required',
-                        promoter_name:'required',
-                        business_nature:'required',
-                        business_monthly_income: {
-                            required:true,
-                            digits:true
-                        },
-                        total_no_machines:{
-                            required:true,
-                            digits:true
-                        },
-                        total_no_employees:{
-                            required:true,
-                            digits:true
-                        },
-                        monthly_turnover:{
-                            required:true,
-                            digits:true
-                        },
-                        business_location:'required',
-                        business_location_type:'required',
-                        business_duration_place:'required',
-                    },
-                    messages: {
-                        business_name: "Please enter your Bussiness Name",
-                        business_started_date: {
-                            required:"Please Select Start Date",
-                            date:"Please select valid Date"
-                        },
-                        business_type: "Please Select your Bussiness Type",
-                        promoter_name: "Please Enter your Promoter Name",
-                        business_nature: "Please Enter your Promoter Name",
-                        business_monthly_income:{
-                            required:'Please Enter your Business Monthly Income',
-                            digits:'Please Enter only digit Business Monthly Income'
-                        },
-                        total_no_machines:{
-                            required:'Please Enter your Total Number Of Machine',
-                            digits:'Please Enter only digit Total Number Of Machine'
-                        },
-                        total_no_employees:{
-                            required:'Please Enter your  Total Number Of Employees',
-                            digits:'Please Enter only digit  Total Number Of Employee'
-                        },
-                        monthly_turnover:{
-                            required:'Please Enter your Monthly turnover',
-                            digits:'Please Enter only digit  Monthly turnover'
-                        },
-                        business_location:'Please Enter your Business Location',
-                        business_location_type:'Please Enter your Business Location Type',
-                        business_duration_place:'Please Enter your Business Duration place',
-                    }
+                        messages: {
+                            business_name: "Please enter your Bussiness Name",
+                            business_started_date: {
+                                required:"Please Select Start Date",
+                                date:"Please select valid Date"
+                            },
+                            business_type: "Please Select your Bussiness Type",
+                            promoter_name: "Please Enter your Promoter Name",
+                            business_nature: "Please Enter your Promoter Name",
+                            business_monthly_income:{
+                                required:'Please Enter your Business Monthly Income',
+                                digits:'Please Enter only digit Business Monthly Income'
+                            },
+                            total_no_machines:{
+                                required:'Please Enter your Total Number Of Machine',
+                                digits:'Please Enter only digit Total Number Of Machine'
+                            },
+                            total_no_employees:{
+                                required:'Please Enter your  Total Number Of Employees',
+                                digits:'Please Enter only digit  Total Number Of Employee'
+                            },
+                            monthly_turnover:{
+                                required:'Please Enter your Monthly turnover',
+                                digits:'Please Enter only digit  Monthly turnover'
+                            },
+                            business_location:'Please Enter your Business Location',
+                            business_location_type:'Please Enter your Business Location Type',
+                            business_duration_place:'Please Enter your Business Duration place',
+                        }
+                    });
                 });
                 break;
             case 3:
@@ -194,36 +199,50 @@ $("#pill-vertical").steps({
                 });
                 break;
         }
-        if (form.valid()){
-            var data = form.serializeArray();
-            if (currentIndex!==0){
-                data.push({name: 'id', value: $('#finance-form-id').val()});
-            }
-alert(business_form_count)
-            // $.ajax({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     url:base_url+'finance-form/'+currentIndex,
-            //     method:"POST",
-            //     data:data,
-            //     dataType:'json',
-            //     success:function (response) {
-            //         if (currentIndex===0){
-            //             $('#finance-form-id').val(response.data.id)
-            //         }
-            //         alert(response.message)
-            //     },
-            //     error:function (error) {
-            //         const sources = error.responseJSON;
-            //         alert(sources.message)
-            //         return !0;
-            //     }
-            // })
-            return form.valid();
-        }else {
-            return form.valid();
+        return form.valid();
+    },
+    onStepChanged:function (event, nextIndex, currentIndex) {
+        if (currentIndex > nextIndex){
+            return true;
         }
+        var data = [];
+        if (currentIndex===0 || currentIndex===1 || currentIndex===3 ){
+            data = form.serializeArray();
+            data.push({name: 'id', value: $('#finance-form-id').val()});
+        }
+        if (currentIndex===2 || currentIndex===4){
+            var formData=[];
+            form.each(function() {
+                var data = $(this).serializeArray().reduce(function(obj, item) {
+                    obj[item.name] = item.value;
+                    return obj;
+                }, {});
+                formData.push(data);
+            });
+            data.push({name: 'data', value: JSON.stringify(formData)});
+            data.push({name: 'id', value: $('#finance-form-id').val()});
+        }
+        return $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url:base_url+'finance-form/'+currentIndex,
+            method:"POST",
+            data:data,
+            dataType:'json',
+            success:function (response) {
+                if (currentIndex===0){
+                    $('#finance-form-id').val(response.data.id)
+                }
+                alert(response.message)
+                return true;
+            },
+            error:function (error) {
+                const sources = error.responseJSON;
+                alert(sources.message)
+                return !0;
+            }
+        })
     },
     onFinished: function (event, currentIndex)
     {
