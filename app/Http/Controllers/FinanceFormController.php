@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessDetail;
 use App\Models\FinanceForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -42,6 +43,8 @@ class FinanceFormController extends Controller
            return $this->referranceDetail($request);
         }elseif ($step==="1"){
             return $this->borrowerDetails($request);
+        }elseif ($step==="2"){
+            return $this->bussinessDetails($request);
         }
     }
 
@@ -177,6 +180,40 @@ class FinanceFormController extends Controller
                     'data'=>$financeForm],200);
             }
         }
+
+        return response()->json(['status'=>false,
+            'message'=>'Something Went Wrong!',
+            'data'=>[]],422);
+    }
+
+    public function bussinessDetails(Request $request){
+        $validator = Validator::make($request->all(),[
+            'id'=>'required|exists:finance_forms,id',
+            'business_name'=>'required',
+            'business_started_date'=>'required',
+            'business_type'=>'required',
+            'promoter_name'=>'required',
+            'business_nature'=>'required',
+            'business_monthly_income'=>'required_if:bor_affiliate_vc,Yes',
+            'total_no_machines'=>'required_if:bor_affiliate_type,Other',
+            'total_no_employees'=>'required',
+            'monthly_turnover'=>'required',
+            'business_location'=>'required',
+            'business_location_type'=>'required',
+            'business_duration_place'=>'required',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status'=>false,
+                'message'=>$validator->errors()->first(),
+                'data'=>$validator->errors()->messages()
+            ],422);
+        }
+
+        $businessDetail = new BusinessDetail();
+        $businessDetail->finance_id = $request->id;
+        $businessDetail->business_name = $request->business_name;
 
         return response()->json(['status'=>false,
             'message'=>'Something Went Wrong!',
