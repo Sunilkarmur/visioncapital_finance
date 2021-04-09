@@ -178,7 +178,7 @@
                                                     <div class="form-group row  mb-4">
                                                         <label for="business_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
                                                         <div class="col-sm-8">
-                                                            <select class="form-control form-control-sm business_type" name="business_type">
+                                                            <select class="form-control form-control-sm business_type" name="business_type" >
                                                                 <option value="Proprietorship">Proprietorship</option>
                                                                 <option value="Partnership">Partnership</option>
                                                                 <option value="LLP">LLP</option>

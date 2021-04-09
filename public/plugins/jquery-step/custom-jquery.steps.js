@@ -222,7 +222,7 @@ $("#pill-vertical").steps({
             data.push({name: 'data', value: JSON.stringify(formData)});
             data.push({name: 'id', value: $('#finance-form-id').val()});
         }
-        return $.ajax({
+        $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },

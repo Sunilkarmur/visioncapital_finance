@@ -46,6 +46,8 @@ class FinanceFormController extends Controller
             return $this->borrowerDetails($request);
         }elseif ($step==="2"){
             return $this->bussinessDetails($request);
+        }elseif ($step==="3"){
+            return $this->residenceDetails($request);
         }
     }
 
@@ -209,7 +211,7 @@ class FinanceFormController extends Controller
                     'business_name'=>'required',
                     'business_started_date'=>'required',
                     'business_type'=>'required',
-                    'promoter_name'=>'required',
+                    'promoter_name'=>'required_if:business_type,Partnership',
                     'business_nature'=>'required',
                     'business_monthly_income'=>'required_if:bor_affiliate_vc,Yes',
                     'total_no_machines'=>'required_if:bor_affiliate_type,Other',
@@ -230,24 +232,58 @@ class FinanceFormController extends Controller
 
                 $businessDetail = new BusinessDetail();
                 $businessDetail->finance_id = $request->id;
-                $businessDetail->business_name = $datum->business_name;
-                $businessDetail->business_started_date = $datum->business_started_date;
-                $businessDetail->business_type = $datum->business_type;
-                $businessDetail->promoter_name = $datum->promoter_name;
-                $businessDetail->business_nature = $datum->business_nature;
-                $businessDetail->business_monthly_income = $datum->business_monthly_income;
-                $businessDetail->total_no_machines = $datum->total_no_machines;
-                $businessDetail->total_no_employees = $datum->total_no_employees;
-                $businessDetail->monthly_turnover = $datum->monthly_turnover;
-                $businessDetail->business_location = $datum->business_location;
-                $businessDetail->business_location_type = $datum->business_location_type;
-                $businessDetail->business_duration_place = $datum->business_duration_place;
+                $businessDetail->business_name = $datum['business_name'];
+                $businessDetail->business_started_date = $datum['business_started_date'];
+                $businessDetail->business_type = $datum['business_type'];
+                $businessDetail->promoter_name = $datum['promoter_name'];
+                $businessDetail->business_nature = $datum['business_nature'];
+                $businessDetail->business_monthly_income = $datum['business_monthly_income'];
+                $businessDetail->total_no_machines = $datum['total_no_machines'];
+                $businessDetail->total_no_employees = $datum['total_no_employees'];
+                $businessDetail->monthly_turnover = $datum['monthly_turnover'];
+                $businessDetail->business_location = $datum['business_location'];
+                $businessDetail->business_location_type = $datum['business_location_type'];
+                $businessDetail->business_duration_place = $datum['business_duration_place'];
                 $businessDetail->save();
             }
             return response()->json(['status'=>true,
                 'message'=>'Bussiness Detail Add Successfully!',
                 'data'=>[]],200);
         }
+
+        return response()->json(['status'=>false,
+            'message'=>'Something Went Wrong!',
+            'data'=>[]],422);
+    }
+
+    public function residenceDetails(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'id'=>'required|exists:finance_forms,id',
+            'home_address'=>'required',
+            'home_type'=>'required',
+            'home_duration_place'=>'required',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status'=>false,
+                'message'=>$validator->errors()->first(),
+                'data'=>$validator->errors()->messages()
+            ],422);
+        }
+
+        $financeForm = FinanceForm::find($request->id);
+        if ($financeForm){
+            $financeForm->home_address = $request->home_address;
+            $financeForm->home_type = $request->home_type;
+            $financeForm->home_duration_place = $request->home_duration_place;
+            $financeForm->save();
+            return response()->json(['status'=>true,
+                'message'=>'Residence Detail Add Successfully!',
+                'data'=>$financeForm],200);
+        }
+
 
         return response()->json(['status'=>false,
             'message'=>'Something Went Wrong!',
