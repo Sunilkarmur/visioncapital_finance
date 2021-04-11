@@ -32,4 +32,7 @@ Route::group(['middleware'=>'auth'],function (){
     Route::post('update-finance-type',[App\Http\Controllers\HomeController::class, 'updateFinanceType'])->name('update.finance.type');
     Route::get('finance-form',[App\Http\Controllers\FinanceFormController::class, 'create'])->name('finance.form');
     Route::post('finance-form/{step}',[App\Http\Controllers\FinanceFormController::class, 'store'])->name('finance.form.step');
+    Route::delete('finance-form/{finandce_form}',[App\Http\Controllers\FinanceFormController::class, 'destroy'])->name('finance.form.destroy');
+    Route::get('finance-form/{finandce_form}/edit',[App\Http\Controllers\FinanceFormController::class, 'edit'])->name('finance.form.edit');
+    Route::post('finance-form/{finandce_form}/{step}',[App\Http\Controllers\FinanceFormController::class, 'update'])->name('finance.form.update');
 });

@@ -34,254 +34,398 @@ $("#pill-vertical").steps({
 
             return true;
         }
+
+        var status=false;
+
         switch (currentIndex) {
             case 0:
-                form = $("#referrance-finance-detail");
-                form.validate({
-                    // Specify validation rules
-                    rules: {
-                        ref_name: "required",
-                        ref_firm: "required",
-                        ref_contact: "required",
-                        ref_affiliate_vc: "required",
-                        ref_affiliate_type: "required",
-                        ref_affiliate_type_other: "required",
-                    },
-                    // Specify validation error messages
-                    messages: {
-                        ref_name: "Please enter your firstname",
-                        ref_firm: "Please enter your lastname",
-                        ref_contact: '',
-                        ref_affiliate_vc: "Please enter a valid email address",
-                        ref_affiliate_type: "Please enter a valid email address",
-                        ref_affiliate_type_other: "Please enter a valid email address"
-                    },
-                });
-                break;
+                return referranceDetailForm(currentIndex);
             case 1:
-                form = $("#borrower-detail-form");
-                form.validate({
-                    // Specify validation rules
-                    rules: {
-                        // The key name on the left side is the name attribute
-                        // of an input field. Validation rules are defined
-                        // on the right side
-                        bor_name: "required",
-                        bor_amount: {
-                            required:true,
-                            digits:true
-                        },
-                        bor_time_limit: "required",
-                        bor_purpose: "required",
-                        bor_affiliate_vc: "required",
-                        bor_affiliate_type: "required",
-                        bor_affiliate_type_other: "required",
-                        bor_pan_no: {
-                            required:true,
-                        },
-                        bor_aadhar_no: {
-                            required:true,
-                        },
-                        bor_pin_code: {
-                            required:true,
-                            digits:true
-                        },
-                        bor_dob: "required",
-                    },
-                    // Specify validation error messages
-                    messages: {
-                        bor_name: "Please enter your Borrower Name",
-                        bor_amount: {
-                            required:"Please enter your Borrower Amount",
-                            digits:"Enter Valid Amount"
-                        },
-                        bor_time_limit: 'Please enter your Borrower Time Limit',
-                        bor_purpose: "Please enter a valid Borrower Purpose",
-                        bor_affiliate_vc: "Please select Borrower Affiliate VC",
-                        bor_affiliate_type: "Please enter a valid email address",
-                        bor_affiliate_type_other: "Please enter a valid email address",
-                        bor_pan_no: {
-                            required:"Please enter a Pan Number",
-                        },
-                        bor_aadhar_no: {
-                            required:"Please enter a valid Aadhar Number",
-                        },
-                        bor_pin_code: {
-                            required:"Please enter a valid Pin Number",
-                            digits:"Please Enter Valid ZipCode Number"
-                        },
-                        bor_dob: "Please enter a valid Date Of birth"
-                    },
-                });
-                break;
+                return borrowerDetailForm(currentIndex)
             case 2:
-                form = $('#business_details').find('.business_detail_form');
-                form.each(function() {   // <- selects every <form> on page
-                    $(this).validate({        // <- initialize validate() on each form
-                        rules:{
-                            business_name:'required',
-                            business_started_date: {
-                                required:true,
-                                date:true
-                            },
-                            business_type:'required',
-                            promoter_name:'required',
-                            business_nature:'required',
-                            business_monthly_income: {
-                                required:true,
-                                digits:true
-                            },
-                            total_no_machines:{
-                                required:true,
-                                digits:true
-                            },
-                            total_no_employees:{
-                                required:true,
-                                digits:true
-                            },
-                            monthly_turnover:{
-                                required:true,
-                                digits:true
-                            },
-                            business_location:'required',
-                            business_location_type:'required',
-                            business_duration_place:'required',
-                        },
-                        messages: {
-                            business_name: "Please enter your Bussiness Name",
-                            business_started_date: {
-                                required:"Please Select Start Date",
-                                date:"Please select valid Date"
-                            },
-                            business_type: "Please Select your Bussiness Type",
-                            promoter_name: "Please Enter your Promoter Name",
-                            business_nature: "Please Enter your Promoter Name",
-                            business_monthly_income:{
-                                required:'Please Enter your Business Monthly Income',
-                                digits:'Please Enter only digit Business Monthly Income'
-                            },
-                            total_no_machines:{
-                                required:'Please Enter your Total Number Of Machine',
-                                digits:'Please Enter only digit Total Number Of Machine'
-                            },
-                            total_no_employees:{
-                                required:'Please Enter your  Total Number Of Employees',
-                                digits:'Please Enter only digit  Total Number Of Employee'
-                            },
-                            monthly_turnover:{
-                                required:'Please Enter your Monthly turnover',
-                                digits:'Please Enter only digit  Monthly turnover'
-                            },
-                            business_location:'Please Enter your Business Location',
-                            business_location_type:'Please Enter your Business Location Type',
-                            business_duration_place:'Please Enter your Business Duration place',
-                        }
-                    });
-                });
-                break;
+                return businessBakingForm(currentIndex)
             case 3:
-                form = $('#residence-detail');
-                form.validate({
-                    rules:{
-                        home_address:'required',
-                        home_type: {
-                            required:true,
-                        },
-                        home_duration_place:'required',
-                    },
-                    messages: {
-                        home_address:'required',
-                        home_type: {
-                            required:true,
-                        },
-                        home_duration_place:'required',
-                    }
-                });
+                return residenceDetailForm(currentIndex);
+            case 4:
+                return financeBakingForm(currentIndex);
                 break;
+
         }
-        return form.valid();
-    },
-    onStepChanged:function (event, nextIndex, currentIndex) {
-        if (currentIndex > nextIndex){
-            return true;
-        }
-        var data = [];
-        if (currentIndex===0 || currentIndex===1 || currentIndex===3 ){
-            data = form.serializeArray();
-            data.push({name: 'id', value: $('#finance-form-id').val()});
-        }
-        if (currentIndex===2 || currentIndex===4){
-            var formData=[];
-            form.each(function() {
-                var data = $(this).serializeArray().reduce(function(obj, item) {
-                    obj[item.name] = item.value;
-                    return obj;
-                }, {});
-                formData.push(data);
-            });
-            data.push({name: 'data', value: JSON.stringify(formData)});
-            data.push({name: 'id', value: $('#finance-form-id').val()});
-        }
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url:base_url+'finance-form/'+currentIndex,
-            method:"POST",
-            data:data,
-            dataType:'json',
-            success:function (response) {
-                if (currentIndex===0){
-                    $('#finance-form-id').val(response.data.id)
-                }
-                alert(response.message)
-                return true;
-            },
-            error:function (error) {
-                const sources = error.responseJSON;
-                alert(sources.message)
-                return !0;
-            }
-        })
+        console.log(status)
+        return status;
     },
     onFinished: function (event, currentIndex)
     {
-        alert("Submitted!");
+        return guarantorDetailsForm(currentIndex);
     }
 });
 
-$('[data-type="adhaar-number"]').on("change, blur", function() {
-    var value = $(this).val();
-    var maxLength = $(this).attr("maxLength");
-    if (value.length != maxLength) {
-        $(this).addClass("highlight-error");
-    } else {
-        $(this).removeClass("highlight-error");
+function referranceDetailForm(currentIndex) {
+    var data=[];
+    var form = $('.referrance-finance-detail');
+    var referral_affiliate_form =validation(form,{
+        ref_name: "required",
+        ref_firm: "required",
+        ref_contact: "required",
+        ref_affiliate_vc: "required",
+        ref_affiliate_type: "required",
+        ref_affiliate_type_other: "required",
+    },{
+        ref_name: "Please enter your firstname",
+        ref_firm: "Please enter your lastname",
+        ref_contact: 'Please Enter your Referral Contact',
+        ref_affiliate_vc: "Please select a Referral Affiliate VC",
+        ref_affiliate_type: "Please select a Referral Affiliate",
+        ref_affiliate_type_other: "Please enter a Referral Affiliate Type Other"
+    },false)
+    if (!referral_affiliate_form){
+        return referral_affiliate_form;
     }
-});
-$('[data-type="adhaar-number"]').keyup(function() {
-    var value = $(this).val();
-    value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
-    $(this).val(value);
-});
+    var status=false;
+   return addFormData(currentIndex,referral_affiliate_form,function (response) {
+        return response.status;
+    })
+    //    .then(function (response) {
+    //     return response.status
+    // }).catch(function (error) {
+    //    return response.status
+    // })
+}
 
-// Finance Form add
-function addFinanceForm(step,data) {
-    $.ajax({
+function borrowerDetailForm(currentIndex) {
+    var form = $('#borrower-detail-form');
+    var data =validation(form,{
+        bor_name: "required",
+        bor_amount: {
+            required:true,
+        },
+        bor_time_limit: "required",
+        bor_purpose: "required",
+        bor_affiliate_vc: "required",
+        bor_affiliate_type: "required",
+        bor_affiliate_type_other: "required",
+        bor_pan_no: {
+            required:true,
+        },
+        bor_aadhar_no: {
+            required:true,
+        },
+        bor_pin_code: {
+            required:true,
+            digits:true
+        },
+        bor_dob: "required",
+    },{
+        bor_name: "Please enter your Borrower Name",
+        bor_amount: {
+            required:"Please enter your Borrower Amount",
+            digits:"Enter Valid Amount"
+        },
+        bor_time_limit: 'Please enter your Borrower Time Limit',
+        bor_purpose: "Please enter a valid Borrower Purpose",
+        bor_affiliate_vc: "Please select Borrower Affiliate VC",
+        bor_affiliate_type: "Please enter a valid email address",
+        bor_affiliate_type_other: "Please enter a valid email address",
+        bor_pan_no: {
+            required:"Please enter a Pan Number",
+        },
+        bor_aadhar_no: {
+            required:"Please enter a valid Aadhar Number",
+        },
+        bor_pin_code: {
+            required:"Please enter a valid Pin Number",
+            digits:"Please Enter Valid ZipCode Number"
+        },
+        bor_dob: "Please enter a valid Date Of birth"
+    },false)
+    if (!data){
+        return data;
+    }
+    data.push({name: 'id', value: $('#finance-form-id').val()});
+    var status=false;
+  return  addFormData(currentIndex,data,function (response) {
+        return response.status;
+    })
+    //    .then(function (response) {
+    //     console.log(response)
+    //     return response.status
+    // }).catch(function (error) {
+    //    return response.status
+    // })
+}
+
+function businessBakingForm(currentIndex) {
+    var data=[];
+    var form = $('.business_detail_form');
+    var business_finance_form =validation(form,
+        {
+        business_name:'required',
+        business_started_date: {
+            required:true,
+            date:true
+        },
+        business_type:'required',
+        promoter_name:'required',
+        business_nature:'required',
+        business_monthly_income: {
+            required:true,
+            digits:true
+        },
+        total_no_machines:{
+            required:true,
+            digits:true
+        },
+        total_no_employees:{
+            required:true,
+            digits:true
+        },
+        monthly_turnover:{
+            required:true,
+            digits:true
+        },
+        business_location:'required',
+        business_location_type:'required',
+        business_duration_place:'required',
+    },
+        {
+        business_name: "Please enter your Bussiness Name",
+        business_started_date: {
+            required:"Please Select Start Date",
+            date:"Please select valid Date"
+        },
+        business_type: "Please Select your Bussiness Type",
+        promoter_name: "Please Enter your Promoter Name",
+        business_nature: "Please Enter your Promoter Name",
+        business_monthly_income:{
+            required:'Please Enter your Business Monthly Income',
+            digits:'Please Enter only digit Business Monthly Income'
+        },
+        total_no_machines:{
+            required:'Please Enter your Total Number Of Machine',
+            digits:'Please Enter only digit Total Number Of Machine'
+        },
+        total_no_employees:{
+            required:'Please Enter your  Total Number Of Employees',
+            digits:'Please Enter only digit  Total Number Of Employee'
+        },
+        monthly_turnover:{
+            required:'Please Enter your Monthly turnover',
+            digits:'Please Enter only digit  Monthly turnover'
+        },
+        business_location:'Please Enter your Business Location',
+        business_location_type:'Please Enter your Business Location Type',
+        business_duration_place:'Please Enter your Business Duration place',
+    })
+    if (!business_finance_form){
+        return business_finance_form;
+    }
+    data.push({name: 'id', value: $('#finance-form-id').val()});
+    data.push({name: 'data', value: JSON.stringify(business_finance_form)});
+   return  addFormData(currentIndex,data,function (response) {
+        return response.status;
+    })
+    //     .then(function (response) {
+    //     return response.status
+    // }).catch(function (error) {
+    //     return response.status
+    // })
+}
+
+function residenceDetailForm(currentIndex) {
+    var form = $('#residence-detail');
+    var data =validation(form,{
+        home_address:'required',
+        home_type: {
+            required:true,
+        },
+        home_duration_place:'required',
+    },{
+        home_address:'required',
+        home_type: {
+            required:true,
+        },
+        home_duration_place:'required',
+    },false)
+    if (!data){
+        return data;
+    }
+    data.push({name: 'id', value: $('#finance-form-id').val()});
+    var status=false;
+    return addFormData(currentIndex,data,function (response) {
+        return response.status;
+    })
+    //     .then(function (response) {
+    //     console.log(response)
+    //     return response.status
+    // }).catch(function (error) {
+    //     return response.status
+    // })
+}
+function financeBakingForm(currentIndex) {
+    var data=[];
+    var form = $('.banking_finance_form');
+    var banking_finance_form =validation(form,{
+        bank_name:'required',
+        previous_lona_type:'required',
+        bank_branch:'required',
+        loan_amount:'required',
+        emi_amount:'required',
+        bank_balance:'required',
+        duration:'required',
+    },{
+        bank_name:'Please Enter Bank Name',
+        previous_lona_type:'Please Enter Previous Loan Type',
+        bank_branch:'Please Enter Bank Branch ',
+        loan_amount:'Please Enter Loan Amount',
+        emi_amount:'Please Enter EMI Amount',
+        bank_balance:'Please Enter Bank Balance',
+        duration:'Please Enter Duration',
+    })
+    if (!banking_finance_form){
+        return banking_finance_form;
+    }
+    data.push({name: 'id', value: $('#finance-form-id').val()});
+    data.push({name: 'finance_form', value: JSON.stringify(banking_finance_form)});
+
+    var form = $('.saving_ac_bank_form');
+   var saving_valid = validation(form,{
+        saving_ac_bank:'required',
+        saving_ac_branch:'required',
+    },{
+        saving_ac_bank:'Please Enter Current Account Bank',
+        saving_ac_branch: {
+            required:'Please Enter Current Account Branch',
+        },
+    })
+    if (!saving_valid){
+        return saving_valid;
+    }
+    data.push({name: 'saving_bank', value: JSON.stringify(saving_valid)});
+
+    var form = $('.current_ac_bank_form');
+   var current_bank_ac_form = validation(form,{
+       current_ac_bank:'required',
+       current_ac_branch:'required',
+    },{
+       current_ac_bank:'Please Enter Current Account Bank',
+       current_ac_branch: {
+            required:'Please Enter Current Account Branch',
+        },
+    })
+    if (!current_bank_ac_form){
+        return current_bank_ac_form;
+    }
+    data.push({name: 'current_bank', value: JSON.stringify(current_bank_ac_form)});
+   return  addFormData(currentIndex,data,function (response) {
+       return  response.status;
+    });
+}
+
+function guarantorDetailsForm(currentIndex) {
+    var data=[];
+    var form = $('.guarantor_section_form');
+    var banking_finance_form =validation(form,{
+        guarantor_name:'required',
+        guarantor_firm:'required',
+        guarantor_firm_nature:'required',
+        guarantor_address:'required',
+        guarantor_affiliate_vc:'required',
+        guarantor_affiliate_type:'required',
+        guarantor_affiliate_type_other:'required',
+    },{
+        guarantor_name:'Please Enter Guarantor Name',
+        guarantor_firm:'Please Enter Guarantor Firm',
+        guarantor_firm_nature:'Please Enter Guarantor Firm Nature ',
+        guarantor_address:'Please Enter Loan Amount',
+        guarantor_affiliate_vc:'Please Enter EMI Amount',
+        guarantor_affiliate_type:'Please Enter Bank Balance',
+        guarantor_affiliate_type_other:'Please Enter Duration',
+    },true)
+    if (!banking_finance_form){
+        return banking_finance_form;
+    }
+    data.push({name: 'id', value: $('#finance-form-id').val()});
+    data.push({name: 'data', value: JSON.stringify(banking_finance_form)});
+   return  addFormData(currentIndex,data,function (response) {
+       if (response.status===true){
+           window.location.href=base_url+'application';
+       }
+       return  response.status;
+    });
+}
+
+function validation(form,rules,messages,isArray=true) {
+    form.validate({
+        rules:rules,
+        messages: messages
+    });
+    if (form.valid()){
+        if (isArray===true){
+            return formData(form);
+        }
+        return form.serializeArray();
+    }
+    return form.valid();
+}
+
+function formData(form) {
+    var formData=[];
+    if (form.length>0){
+        form.each(function() {
+            var data = $(this).serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+            formData.push(data);
+        });
+    }else {
+        var data = form.serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+        formData.push(data);
+    }
+
+    return formData;
+}
+
+function addFormData(currentIndex,data,callback) {
+    var id=$('#finance-form-id').val();
+    var url=base_url+'finance-form/'+id+'/'+currentIndex;
+    var method='POST';
+    if (window.location.href===base_url+'finance-form/'+currentIndex){
+        url=base_url+'finance-form/'+currentIndex;
+        method='POST';
+    }
+   return  $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url:base_url+'finance-form/'+step,
-        method:"POST",
+        url:url,
+        method:method,
         data:data,
         dataType:'json',
         success:function (response) {
-            alert(response.message);
+            if (currentIndex===0){
+                $('#finance-form-id').val(response.data.id)
+            }
+            swal({
+                    title: "Success!",
+                    text: response.message,
+                    type: "success"
+                },
+                function() {
+
+                }
+            );
+            // alert(response.message)
+            callback(response)
         },
         error:function (error) {
             const sources = error.responseJSON;
-            alert(sources.message)
+            swal("Error!", sources.message, "error");
+            callback(sources)
+            // return Promise.reject(sources);
         }
     })
-    return false
 }

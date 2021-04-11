@@ -36,7 +36,7 @@ class AddColumnsToFinanceFormTable extends Migration
     public function down()
     {
         Schema::table('finance_forms', function (Blueprint $table) {
-            $table->dropColumn('bor_name',50);
+            $table->dropColumn('bor_name');
             $table->dropColumn('bor_amount');
             $table->dropColumn('bor_time_limit');
             $table->dropColumn('bor_purpose');

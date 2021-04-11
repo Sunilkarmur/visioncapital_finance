@@ -12,7 +12,7 @@
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                         <h4>Basic information sheet</h4>
-                                        <input type="hidden" name="finance-form-id" id="finance-form-id" value="">
+                                        <input type="hidden" name="finance-form-id" id="finance-form-id" value="{{ $finance->id }}">
                                     </div>
                                 </div>
                             </div>

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessDetail;
+use App\Models\CurrentBankAccount;
+use App\Models\FinanceBankLoanAccount;
 use App\Models\FinanceForm;
+use App\Models\SavingBankAccount;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -48,6 +53,10 @@ class FinanceFormController extends Controller
             return $this->bussinessDetails($request);
         }elseif ($step==="3"){
             return $this->residenceDetails($request);
+        }elseif ($step==="4"){
+            return $this->bankingFinanceDetails($request);
+        }elseif ($step==="5"){
+            return $this->guarantorDetails($request);
         }
     }
 
@@ -59,31 +68,45 @@ class FinanceFormController extends Controller
      */
     public function show(FinanceForm $financeForm)
     {
-        $applicationList = FinanceForm::where('finance_type','=',session()->get('finance_type'));
+        $applicationList = FinanceForm::withoutTrashed()->where('finance_type','=',session()->get('finance_type'))->where('status','=','1');
         return DataTables::of($applicationList)->make(true);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FinanceForm  $financeForm
+     * @param  Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(FinanceForm $financeForm)
+    public function edit(Request $request,$finandce_form)
     {
-        //
+        $finance = FinanceForm::with('business')->find($finandce_form);
+        if ($finance){
+            return view('edit-application-form',compact('finance'));
+        }
+        return redirect()->back()->with('errors','Invalid finance application number');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FinanceForm  $financeForm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FinanceForm $financeForm)
+    public function update(Request $request,$financeForm,$step)
     {
-        //
+        if ($step==="0"){
+            return $this->referranceDetail($request,$financeForm);
+        }elseif ($step==="1"){
+            return $this->borrowerDetails($request,$financeForm);
+        }elseif ($step==="2"){
+            return $this->bussinessDetails($request,$financeForm);
+        }elseif ($step==="3"){
+            return $this->residenceDetails($request);
+        }elseif ($step==="4"){
+            return $this->bankingFinanceDetails($request);
+        }elseif ($step==="5"){
+            return $this->guarantorDetails($request);
+        }
     }
 
     /**
@@ -92,13 +115,26 @@ class FinanceFormController extends Controller
      * @param  \App\Models\FinanceForm  $financeForm
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FinanceForm $financeForm)
+    public function destroy(Request $request,$finandce_form)
     {
-        //
+        $financeForm = FinanceForm::find($finandce_form);
+        if ($financeForm){
+            $financeForm->deleted_at=Carbon::now()->toDateTime();
+            $financeForm->save();
+            return response()->json([
+                'status'=>true,
+                'message'=>'Your Form is Deleted!',
+                'data'=>array()
+            ],200);
+        }
+        return response()->json([
+            'status'=>false,
+            'message'=>'Something Went Wrong!',
+            'data'=>array()
+        ],422);
     }
 
-    public function referranceDetail(Request $request){
-
+    public function referranceDetail(Request $request,$financeForm=null){
         $validator = Validator::make($request->all(),[
             'ref_name'=>'required',
             'ref_firm'=>'required',
@@ -115,8 +151,11 @@ class FinanceFormController extends Controller
                 'data'=>$validator->errors()->messages()
                 ],422);
         }
-
-        $financeForm = new FinanceForm();
+        if ($financeForm){
+            $financeForm = FinanceForm::find($financeForm);
+        }else{
+            $financeForm = new FinanceForm();
+        }
         $financeForm->ref_name = $request->ref_name;
         $financeForm->ref_firm = $request->ref_firm;
         $financeForm->ref_contact = $request->ref_contact;
@@ -140,7 +179,7 @@ class FinanceFormController extends Controller
         ],422);
     }
 
-    public function borrowerDetails(Request $request){
+    public function borrowerDetails(Request $request,$financeForm=null){
         $validator = Validator::make($request->all(),[
             'id'=>'required|exists:finance_forms,id',
             'bor_name'=>'required',
@@ -164,7 +203,11 @@ class FinanceFormController extends Controller
             ],422);
         }
 
-        $financeForm = FinanceForm::find($request->id);
+        if ($financeForm===null){
+            $financeForm = FinanceForm::find($financeForm);
+        }else{
+            $financeForm = FinanceForm::find($request->id);
+        }
         if ($financeForm){
             $financeForm->bor_name = $request->bor_name;
             $financeForm->bor_amount = $request->bor_amount;
@@ -189,7 +232,7 @@ class FinanceFormController extends Controller
             'data'=>[]],422);
     }
 
-    public function bussinessDetails(Request $request){
+    public function bussinessDetails(Request $request,$financeForm=null){
 
         $validator = Validator::make($request->all(),[
             'id'=>'required|exists:finance_forms,id',
@@ -230,7 +273,14 @@ class FinanceFormController extends Controller
                     ],422);
                 }
 
-                $businessDetail = new BusinessDetail();
+                if ($financeForm===null){
+                    $businessDetail = BusinessDetail::where('finance_id','=',$financeForm)->first();
+                }else{
+                    $businessDetail = new BusinessDetail();
+                }
+                if ($businessDetail===null){
+                    $businessDetail = new BusinessDetail();
+                }
                 $businessDetail->finance_id = $request->id;
                 $businessDetail->business_name = $datum['business_name'];
                 $businessDetail->business_started_date = $datum['business_started_date'];
@@ -281,6 +331,153 @@ class FinanceFormController extends Controller
             $financeForm->save();
             return response()->json(['status'=>true,
                 'message'=>'Residence Detail Add Successfully!',
+                'data'=>$financeForm],200);
+        }
+
+
+        return response()->json(['status'=>false,
+            'message'=>'Something Went Wrong!',
+            'data'=>[]],422);
+    }
+
+    public function bankingFinanceDetails(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'id'=>'required|exists:finance_forms,id',
+            'finance_form'=>'required',
+            'saving_bank'=>'required',
+            'current_bank'=>'required',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status'=>false,
+                'message'=>$validator->errors()->first(),
+                'data'=>$validator->errors()->messages()
+            ],422);
+        }
+
+        try {
+            // Finance Form
+            $financeBank = json_decode($request->finance_form,true);
+            if ($financeBank!==null && count($financeBank)>0){
+                foreach ($financeBank as $value) {
+                    $validator = Validator::make($value,[
+                        'bank_name'=>'required',
+                        'bank_branch'=>'required',
+                        'previous_lona_type'=>'required',
+                        'loan_amount'=>'required',
+                        'emi_amount'=>'required',
+                        'bank_balance'=>'required',
+                        'duration'=>'required',
+                    ]);
+
+                    if ($validator->fails()){
+                        return response()->json([
+                            'status'=>false,
+                            'message'=>$validator->errors()->first(),
+                            'data'=>$validator->errors()->messages()
+                        ],422);
+                    }
+
+                    $financeBankLoanAccount = new FinanceBankLoanAccount();
+                    $financeBankLoanAccount->finance_id = $request->id;
+                    $financeBankLoanAccount->user_id = Auth::user()->id;
+                    $financeBankLoanAccount->bank_name = $value['bank_name'];
+                    $financeBankLoanAccount->bank_branch = $value['bank_branch'];
+                    $financeBankLoanAccount->previous_lona_type = $value['previous_lona_type'];
+                    $financeBankLoanAccount->loan_amount = (float)$value['loan_amount'];
+                    $financeBankLoanAccount->emi_amount = (float)$value['emi_amount'];
+                    $financeBankLoanAccount->bank_balance = (float)$value['bank_balance'];
+                    $financeBankLoanAccount->duration = (integer)$value['duration'];
+                    $financeBankLoanAccount->save();
+                }
+            }
+
+            // Saving Bank Form
+            $savingBank = json_decode($request->saving_bank,true);
+            if ($savingBank!==null && count($savingBank)>0){
+                foreach ($savingBank as $value) {
+                    $validator = Validator::make($value,[
+                        'saving_ac_bank'=>'required',
+                        'saving_ac_branch'=>'required',
+                    ]);
+
+                    if ($validator->fails()){
+                        return response()->json([
+                            'status'=>false,
+                            'message'=>$validator->errors()->first(),
+                            'data'=>$validator->errors()->messages()
+                        ],422);
+                    }
+
+                    $savingBankAccount = new SavingBankAccount();
+                    $savingBankAccount->finance_id = $request->id;
+                    $savingBankAccount->user_id = Auth::user()->id;
+                    $savingBankAccount->bank_name = $value['saving_ac_bank'];
+                    $savingBankAccount->branch_name = $value['saving_ac_branch'];
+                    $savingBankAccount->save();
+                }
+            }
+
+            // Current bank Form
+            $currentBank = json_decode($request->current_bank,true);
+            if ($currentBank!==null && count($currentBank)>0){
+                foreach ($currentBank as $datum) {
+                    $validator = Validator::make($datum,[
+                        'current_ac_bank'=>'required',
+                        'current_ac_branch'=>'required',
+                    ]);
+
+                    if ($validator->fails()){
+                        return response()->json([
+                            'status'=>false,
+                            'message'=>$validator->errors()->first(),
+                            'data'=>$validator->errors()->messages()
+                        ],422);
+                    }
+
+                    $currentBankaccount = new CurrentBankAccount();
+                    $currentBankaccount->finance_id = $request->id;
+                    $currentBankaccount->user_id = Auth::user()->id;
+                    $currentBankaccount->bank_name = $datum['current_ac_bank'];
+                    $currentBankaccount->branch_name = $datum['current_ac_branch'];
+                    $currentBankaccount->save();
+                }
+            }
+
+            return response()->json(['status'=>true,
+                'message'=>'Banking Detail Save Successfully!',
+                'data'=>[]],200);
+        }catch (\Exception $exception){
+            return response()->json(['status'=>false,
+                'message'=>$exception->getMessage(),
+                'data'=>[]],422);
+        }
+    }
+
+    public function guarantorDetails(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'id'=>'required|exists:finance_forms,id',
+            'data'=>'required',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status'=>false,
+                'message'=>$validator->errors()->first(),
+                'data'=>$validator->errors()->messages()
+            ],422);
+        }
+
+        $financeForm = FinanceForm::find($request->id);
+        if ($financeForm){
+            $financeForm->guarantor_detail = $request->data;
+            $financeForm->status = '1';
+            $financeForm->save();
+            return response()->json(['status'=>true,
+                'message'=>'Your Form Complete Submit',
                 'data'=>$financeForm],200);
         }
 

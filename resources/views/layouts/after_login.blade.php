@@ -26,6 +26,10 @@
             pointer-events: none;
         }
     </style>
+    <link href="{{ asset('plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('plugins/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/components/custom-sweetalert.css') }}" rel="stylesheet" type="text/css" />
+    <!--  END CUSTOM STYLE FILE  -->
     @stack('style')
 
 </head>
@@ -210,6 +214,7 @@
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>
 
 <script>
     var base_url='{{ env("APP_URL") }}';
@@ -220,6 +225,8 @@
 
 <script src="{{ asset('plugins/highlight/highlight.pack.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('plugins/sweetalerts/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('plugins/sweetalerts/custom-sweetalert.js') }}"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 @if(!request()->session()->has('finance_type'))
     <script>
