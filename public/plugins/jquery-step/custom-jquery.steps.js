@@ -393,7 +393,8 @@ function addFormData(currentIndex,data,callback) {
     var id=$('#finance-form-id').val();
     var url=base_url+'finance-form/'+id+'/'+currentIndex;
     var method='POST';
-    if (window.location.href===base_url+'finance-form/'+currentIndex){
+    console.log(window.location.href===base_url+'finance-form')
+    if (window.location.href===base_url+'finance-form'){
         url=base_url+'finance-form/'+currentIndex;
         method='POST';
     }
