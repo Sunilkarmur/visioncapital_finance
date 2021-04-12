@@ -22,6 +22,7 @@ $("#example-vertical").steps({
 });
 var form = $("#referrance-finance-detail");
 $("#pill-vertical").steps({
+    enableAllSteps: window.location.href===base_url+'finance-form'?0:1,
     headerTag: "h3",
     bodyTag: "section",
     transitionEffect: "slideLeft",

@@ -24,27 +24,27 @@
                                             <div class="form-group row  mb-4">
                                                 <label for="ref_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Person</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="ref_name" class="form-control form-control-sm" id="ref_name" placeholder="Name of Person">
+                                                    <input type="text" name="ref_name" class="form-control form-control-sm" id="ref_name" placeholder="Name of Person" value="{{ $finance->ref_name }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="ref_firm" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="ref_firm" class="form-control form-control-sm" id="ref_firm" placeholder="Name of Firm">
+                                                    <input type="text" name="ref_firm" class="form-control form-control-sm" id="ref_firm" placeholder="Name of Firm" value="{{ $finance->ref_firm }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="ref_contact" class="col-sm-4 col-form-label col-form-label-sm">Mobile No</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="ref_contact" class="form-control form-control-sm" id="ref_contact" placeholder="Mobile No">
+                                                    <input type="text" name="ref_contact" class="form-control form-control-sm" id="ref_contact" placeholder="Mobile No" value="{{ $finance->ref_contact }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="ref_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to Vision Capital</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm ref_affiliate_vc" name="ref_affiliate_vc">
-                                                        <option value="Yes">Yes</option>
-                                                        <option value="No" selected="">No</option>
+                                                        <option value="Yes" {{ $finance->ref_affiliate_vc==="Yes"?"selected='selected'":"" }}>Yes</option>
+                                                        <option value="No" {{ $finance->ref_affiliate_vc==="No"?"selected='selected'":"" }}>No</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -63,7 +63,7 @@
                                             <div class="form-group row  mb-4 d-none specify">
                                                 <label for="ref_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Specify here</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="ref_affiliate_type_other" class="form-control form-control-sm" id="ref_affiliate_type_other" placeholder="Other">
+                                                    <input type="text" name="ref_affiliate_type_other" class="form-control form-control-sm" id="ref_affiliate_type_other" placeholder="Other" value="{{ $finance->ref_affiliate_type_other }}">
                                                 </div>
                                             </div>
                                         </form>
@@ -74,33 +74,33 @@
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_name" class="col-sm-4 col-form-label col-form-label-sm">Name</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_name" class="form-control form-control-sm" id="bor_name" placeholder="Name">
+                                                    <input type="text" name="bor_name" class="form-control form-control-sm" id="bor_name" placeholder="Name" value="{{ $finance->bor_name }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_amount" class="col-sm-4 col-form-label col-form-label-sm">Amount Required</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_amount" class="form-control form-control-sm" id="bor_amount" placeholder="Amount Required">
+                                                    <input type="text" name="bor_amount" class="form-control form-control-sm" id="bor_amount" placeholder="Amount Required" value="{{ $finance->bor_amount }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_time_limit" class="col-sm-4 col-form-label col-form-label-sm">Time Limit</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_time_limit" class="form-control form-control-sm" id="bor_time_limit" placeholder="Time Limit">
+                                                    <input type="text" name="bor_time_limit" class="form-control form-control-sm" id="bor_time_limit" placeholder="Time Limit" value="{{ $finance->bor_time_limit }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_purpose" class="col-sm-4 col-form-label col-form-label-sm">Purpose</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_purpose" class="form-control form-control-sm" id="bor_purpose" placeholder="Purpose">
+                                                    <input type="text" name="bor_purpose" class="form-control form-control-sm" id="bor_purpose" placeholder="Purpose" value="{{ $finance->bor_purpose }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to Vision Capital</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm bor_affiliate_vc" name="bor_affiliate_vc">
-                                                        <option value="Yes">Yes</option>
-                                                        <option value="No" selected="">No</option>
+                                                        <option value="Yes" {{ $finance->bor_affiliate_vc==='Yes'?'selected="selected"':'' }}>Yes</option>
+                                                        <option value="No" {{ $finance->bor_affiliate_vc==='No'?'selected="selected"':'' }}>No</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -108,42 +108,42 @@
                                                 <label for="bor_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Select Affliated Type</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm bor_affiliate_type" name="bor_affiliate_type">
-                                                        <option value="Loan">Loan</option>
-                                                        <option value="Subsidy">Subsidy</option>
-                                                        <option value="Finance">Finance</option>
-                                                        <option value="VC">VC</option>
-                                                        <option value="Other">Other (Specify)</option>
+                                                        <option value="Loan" {{ $finance->bor_affiliate_type==='Loan'?'selected="selected"':'' }}>Loan</option>
+                                                        <option value="Subsidy" {{ $finance->bor_affiliate_type==='Subsidy'?'selected="selected"':'' }}>Subsidy</option>
+                                                        <option value="Finance" {{ $finance->bor_affiliate_type==='Finance'?'selected="selected"':'' }}>Finance</option>
+                                                        <option value="VC" {{ $finance->bor_affiliate_type==='VC'?'selected="selected"':'' }}>VC</option>
+                                                        <option value="Other" {{ $finance->bor_affiliate_type==='Other'?'selected="selected"':'' }}>Other (Specify)</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4 d-none bor_specify">
                                                 <label for="bor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Specify here</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_affiliate_type_other" class="form-control form-control-sm" id="bor_affiliate_type_other" placeholder="Other">
+                                                    <input type="text" name="bor_affiliate_type_other" class="form-control form-control-sm" id="bor_affiliate_type_other" placeholder="Other" value="{{ $finance->bor_affiliate_type_other }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_pan_no" class="col-sm-4 col-form-label col-form-label-sm">PAN No.</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_pan_no" class="form-control form-control-sm" id="bor_pan_no" placeholder="PAN No.">
+                                                    <input type="text" name="bor_pan_no" class="form-control form-control-sm" id="bor_pan_no" placeholder="PAN No." value="{{ $finance->bor_pan_no }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_aadhar_no" class="col-sm-4 col-form-label col-form-label-sm">Adhar No.</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_aadhar_no" data-type="adhaar-number" class="form-control form-control-sm" id="bor_aadhar_no" placeholder="Adhar No.">
+                                                    <input type="text" name="bor_aadhar_no" data-type="adhaar-number" class="form-control form-control-sm" id="bor_aadhar_no" placeholder="Adhar No." value="{{ $finance->bor_aadhar_no }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_pin_code" class="col-sm-4 col-form-label col-form-label-sm">PIN Code</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="bor_pin_code" class="form-control form-control-sm" id="bor_pin_code" placeholder="PIN Code">
+                                                    <input type="text" name="bor_pin_code" class="form-control form-control-sm" id="bor_pin_code" placeholder="PIN Code" value="{{ $finance->bor_pin_code }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="bor_dob" class="col-sm-4 col-form-label col-form-label-sm">Date of Birth</label>
                                                 <div class="col-sm-8">
-                                                    <input type="date" name="bor_dob" class="form-control form-control-sm" id="bor_dob" placeholder="Date of Birth">
+                                                    <input type="date" name="bor_dob" class="form-control form-control-sm" id="bor_dob" placeholder="Date of Birth" value="{{ $finance->bor_dob }}">
                                                 </div>
                                             </div>
                                         </form>
@@ -245,7 +245,97 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="business_details_clone_row"></div>
+                                            <div class="business_details_clone_row">
+                                                @foreach($finance->business as $kwy=>$value)
+                                                    <form class="business_detail_form">
+                                                        <div class="form-group row  mb-4">
+                                                            <div class="col-12">
+                                                                <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_business_details_btn d-block" type="button">Remove</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="business_name" class="form-control form-control-sm" id="business_name" placeholder="Name of Firm" required value="{{ $value->business_name }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_started_date" class="col-sm-4 col-form-label col-form-label-sm">Started on</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="date" name="business_started_date" class="form-control form-control-sm" id="business_started_date" placeholder="Started on" required value="{{ $value->business_started_date }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control form-control-sm business_type" name="business_type" >
+                                                                    <option value="Proprietorship">Proprietorship</option>
+                                                                    <option value="Partnership">Partnership</option>
+                                                                    <option value="LLP">LLP</option>
+                                                                    <option value="Pvt. Ltd.">Pvt. Ltd.</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group promoter_name_row d-none row  mb-4">
+                                                            <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Main Promoter Name</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="promoter_name" class="form-control form-control-sm" id="promoter_name" placeholder="Main Promoter Name" value="{{ $value->promoter_name }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Nature / Activity</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="business_nature" class="form-control form-control-sm" id="business_nature" placeholder="Nature / Activity" value="{{ $value->business_nature }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_monthly_income" class="col-sm-4 col-form-label col-form-label-sm">Monthly Income</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="business_monthly_income" class="form-control form-control-sm" id="business_monthly_income" placeholder="Monthly Income" value="{{ $value->business_monthly_income }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="total_no_machines" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Machines</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="total_no_machines" class="form-control form-control-sm" id="total_no_machines" placeholder="Total No. of Machines" value="{{ $value->total_no_machines }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="total_no_employees" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Employees</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="total_no_employees" class="form-control form-control-sm" id="total_no_employees" placeholder="Total No. of Employees" value="{{ $value->total_no_employees }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="monthly_turnover" class="col-sm-4 col-form-label col-form-label-sm">Turnover (Monthly)</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="monthly_turnover" class="form-control form-control-sm" id="monthly_turnover" placeholder="Turnover (Monthly)" value="{{ $value->monthly_turnover }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_location" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="business_location" class="form-control form-control-sm" id="business_location" placeholder="Location / Address" value="{{ $value->business_location }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_location_type" class="col-sm-4 col-form-label col-form-label-sm">Ownership Type</label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control form-control-sm business_location_type" name="business_location_type">
+                                                                    <option value="Own">Own</option>
+                                                                    <option value="Rented">Rented</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="business_duration_place" class="col-sm-4 col-form-label col-form-label-sm">Duration at that place:</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="business_duration_place" class="form-control form-control-sm" id="business_duration_place" placeholder="Duration at that place:" value="{{ $value->business_duration_place }}">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </section>
                                     <h3>RESIDENCE DETAILS</h3>
@@ -254,22 +344,22 @@
                                             <div class="form-group row  mb-4">
                                                 <label for="home_address" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="home_address" class="form-control form-control-sm" id="home_address" placeholder="Location / Address">
+                                                    <input type="text" name="home_address" class="form-control form-control-sm" id="home_address" placeholder="Location / Address" value="{{ $finance->home_address }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="home_type" class="col-sm-4 col-form-label col-form-label-sm">Location Type</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm home_type" name="home_type">
-                                                        <option value="Own">Own</option>
-                                                        <option value="Rented">Rented</option>
+                                                        <option value="Own" selected="{{ $finance->home_type==="Own"?'selected':'' }}">Own</option>
+                                                        <option value="Rented" selected="{{ $finance->home_type==="Rented"?'selected':'' }}">Rented</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
                                                 <label for="home_duration_place" class="col-sm-4 col-form-label col-form-label-sm">Duration at that place:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="home_duration_place" class="form-control form-control-sm" id="home_duration_place" placeholder="Duration at that place:">
+                                                    <input type="text" name="home_duration_place" class="form-control form-control-sm" id="home_duration_place" placeholder="Duration at that place:" value="{{ $finance->home_duration_place }}">
                                                 </div>
                                             </div>
                                         </form>

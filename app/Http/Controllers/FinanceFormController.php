@@ -82,6 +82,7 @@ class FinanceFormController extends Controller
     {
         $finance = FinanceForm::with('business')->find($finandce_form);
         if ($finance){
+//            dd($finance);
             return view('edit-application-form',compact('finance'));
         }
         return redirect()->back()->with('errors','Invalid finance application number');
@@ -274,9 +275,9 @@ class FinanceFormController extends Controller
                 }
 
                 if ($financeForm===null){
-                    $businessDetail = BusinessDetail::where('finance_id','=',$financeForm)->first();
-                }else{
                     $businessDetail = new BusinessDetail();
+                }else{
+                    $businessDetail = BusinessDetail::where('finance_id','=',$financeForm)->first();
                 }
                 if ($businessDetail===null){
                     $businessDetail = new BusinessDetail();
