@@ -151,100 +151,14 @@
                                     <h3>BUSINESS DETAILS</h3>
                                     <section>
                                         <div id="business_details">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_business_details" type="button">Add</a>
-                                                </div>
-                                            </div>
-                                            <div class="business_details_row">
-                                                <form class="business_detail_form">
-                                                    <div class="form-group row  mb-4">
-                                                        <div class="col-12">
-                                                            <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_business_details_btn d-none" type="button">Remove</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="business_name" class="form-control form-control-sm" id="business_name" placeholder="Name of Firm" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_started_date" class="col-sm-4 col-form-label col-form-label-sm">Started on</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="date" name="business_started_date" class="form-control form-control-sm" id="business_started_date" placeholder="Started on" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
-                                                        <div class="col-sm-8">
-                                                            <select class="form-control form-control-sm business_type" name="business_type" >
-                                                                <option value="Proprietorship">Proprietorship</option>
-                                                                <option value="Partnership">Partnership</option>
-                                                                <option value="LLP">LLP</option>
-                                                                <option value="Pvt. Ltd.">Pvt. Ltd.</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group promoter_name_row d-none row  mb-4">
-                                                        <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Main Promoter Name</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="promoter_name" class="form-control form-control-sm" id="promoter_name" placeholder="Main Promoter Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_nature" class="col-sm-4 col-form-label col-form-label-sm">Nature / Activity</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="business_nature" class="form-control form-control-sm" id="business_nature" placeholder="Nature / Activity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_monthly_income" class="col-sm-4 col-form-label col-form-label-sm">Monthly Income</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="business_monthly_income" class="form-control form-control-sm" id="business_monthly_income" placeholder="Monthly Income">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="total_no_machines" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Machines</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="total_no_machines" class="form-control form-control-sm" id="total_no_machines" placeholder="Total No. of Machines">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="total_no_employees" class="col-sm-4 col-form-label col-form-label-sm">Total no. of Employees</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="total_no_employees" class="form-control form-control-sm" id="total_no_employees" placeholder="Total No. of Employees">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="monthly_turnover" class="col-sm-4 col-form-label col-form-label-sm">Turnover (Monthly)</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="monthly_turnover" class="form-control form-control-sm" id="monthly_turnover" placeholder="Turnover (Monthly)">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_location" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="business_location" class="form-control form-control-sm" id="business_location" placeholder="Location / Address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_location_type" class="col-sm-4 col-form-label col-form-label-sm">Ownership Type</label>
-                                                        <div class="col-sm-8">
-                                                            <select class="form-control form-control-sm business_location_type" name="business_location_type">
-                                                                <option value="Own">Own</option>
-                                                                <option value="Rented">Rented</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="business_duration_place" class="col-sm-4 col-form-label col-form-label-sm">Duration at that place:</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="business_duration_place" class="form-control form-control-sm" id="business_duration_place" placeholder="Duration at that place:">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-12">--}}
+{{--                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_business_details" type="button">Add</a>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="business_details_row">--}}
+
+{{--                                            </div>--}}
                                             <div class="business_details_clone_row">
                                                 @foreach($finance->business as $kwy=>$value)
                                                     <form class="business_detail_form">
@@ -366,120 +280,129 @@
                                     </section>
                                     <h3>BANKING & FINANCE</h3>
                                     <section>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_banking_finance" type="button">Add</a>
-                                                </div>
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-12">--}}
+{{--                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_banking_finance" type="button">Add</a>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="banking_finance_row">--}}
+{{--                                                --}}
+{{--                                            </div>--}}
+                                            <div class="banking_finance_clone_row">
+                                                @foreach($finance->financeBanking as $key=>$value)
+                                                    <form class="banking_finance_form">
+                                                        <div class="form-group row  mb-4">
+                                                            <div class="col-12">
+                                                                <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_banking_finance_btn d-block" type="button">Remove</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="previous_lona_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
+                                                            <div class="col-sm-8">
+                                                                <select name="previous_lona_type" class="form-control form-control-sm previous_lona_type">
+                                                                    <option value="1" selected={{ $value->previous_lona_type==='1'?"selected":'selected' }}>Home Loan</option>
+                                                                    <option value="2" selected={{ $value->previous_lona_type==='2'?"selected":'selected' }}>Personal Loan</option>
+                                                                    <option value="3" selected={{ $value->previous_lona_type==='3'?"selected":'selected' }}>Business Loan</option>
+                                                                    <option value="4" selected={{ $value->previous_lona_type==='4'?"selected":'selected' }}>Machinary Loan</option>
+                                                                    <option value="5" selected={{ $value->previous_lona_type==='5'?"selected":'selected' }}>Vehicle Loan</option>
+                                                                    <option value="6" selected={{ $value->previous_lona_type==='6'?"selected":'selected' }}>Gold Loan</option>
+                                                                    <option value="7" selected={{ $value->previous_lona_type==='7'?"selected":'selected' }}>CC Loan</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="bank_name" class="col-sm-4 col-form-label col-form-label-sm">Bank</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="bank_name" class="form-control form-control-sm" id="bank_name" placeholder="Bank" required value="{{ $value->bank_name }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="bank_branch" class="col-sm-4 col-form-label col-form-label-sm">Branch</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="bank_branch" class="form-control form-control-sm" id="bank_branch" placeholder="Branch" value="{{ $value->bank_branch }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="loan_amount" class="col-sm-4 col-form-label col-form-label-sm">Loan Amount</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount" value="{{ $value->loan_amount }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="emi_amount" class="col-sm-4 col-form-label col-form-label-sm">EMI Amount</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="emi_amount" class="form-control form-control-sm" id="emi_amount" placeholder="EMI Amount" value="{{ $value->emi_amount }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="bank_balance" class="col-sm-4 col-form-label col-form-label-sm">Outstanding Amount</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="bank_balance" class="form-control form-control-sm" id="bank_balance" placeholder="Balance Amount" value="{{ $value->bank_balance }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="duration" class="col-sm-4 col-form-label col-form-label-sm">Duration</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="duration" class="form-control form-control-sm" id="duration" placeholder="Duration" value="{{ $value->duration }}">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                @endforeach
                                             </div>
-                                            <div class="banking_finance_row">
-                                                <form class="banking_finance_form">
-                                                    <div class="form-group row  mb-4">
-                                                        <div class="col-12">
-                                                            <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_banking_finance_btn d-none" type="button">Remove</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="previous_lona_type" class="col-sm-4 col-form-label col-form-label-sm">Type</label>
-                                                        <div class="col-sm-8">
-                                                            <select name="previous_lona_type" class="form-control form-control-sm previous_lona_type">
-                                                                <option value="1">Home Loan</option>
-                                                                <option value="2">Personal Loan</option>
-                                                                <option value="3">Business Loan</option>
-                                                                <option value="4">Machinary Loan</option>
-                                                                <option value="5">Vehicle Loan</option>
-                                                                <option value="6">Gold Loan</option>
-                                                                <option value="7">CC Loan</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="bank_name" class="col-sm-4 col-form-label col-form-label-sm">Bank</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="bank_name" class="form-control form-control-sm" id="bank_name" placeholder="Bank" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="bank_branch" class="col-sm-4 col-form-label col-form-label-sm">Branch</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="bank_branch" class="form-control form-control-sm" id="bank_branch" placeholder="Branch">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="loan_amount" class="col-sm-4 col-form-label col-form-label-sm">Loan Amount</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="emi_amount" class="col-sm-4 col-form-label col-form-label-sm">EMI Amount</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="emi_amount" class="form-control form-control-sm" id="emi_amount" placeholder="EMI Amount">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="bank_balance" class="col-sm-4 col-form-label col-form-label-sm">Outstanding Amount</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="bank_balance" class="form-control form-control-sm" id="bank_balance" placeholder="Balance Amount">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="duration" class="col-sm-4 col-form-label col-form-label-sm">Duration</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="duration" class="form-control form-control-sm" id="duration" placeholder="Duration">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="banking_finance_clone_row"></div>
                                             <hr style="border-top:1px solid #3b3f5c;" />
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_current_ac_btn" type="button">Add Current Account</a>
-                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_saving_ac_btn mr-2" type="button">Add Saving Account</a>
+{{--                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_current_ac_btn" type="button">Add Current Account</a>--}}
+{{--                                                    <a href="javascript:void(0);" class="btn btn-outline-primary mb-2 float-right add_saving_ac_btn mr-2" type="button">Add Saving Account</a>--}}
                                                 </div>
                                             </div>
                                             <div class="saving_ac_row">
-                                                <form class="saving_ac_bank_form">
-                                                    <div class="form-group row  mb-4">
-                                                        <div class="col-12">
-                                                            <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_saving_ac_btn d-none" type="button">Remove</a>
+                                                @foreach($finance->savingBanking as $value)
+                                                    <form class="saving_ac_bank_form">
+                                                        <div class="form-group row  mb-4">
+                                                            <div class="col-12">
+                                                                <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_saving_ac_btn d-block" type="button">Remove</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="saving_ac_bank " class="col-sm-4 col-form-label col-form-label-sm">Savings Account Bank</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="saving_ac_bank" class="form-control form-control-sm" id="saving_ac_bank" placeholder="Savings Account Bank">
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="saving_ac_bank " class="col-sm-4 col-form-label col-form-label-sm">Savings Account Bank</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="saving_ac_bank" class="form-control form-control-sm" id="saving_ac_bank" placeholder="Savings Account Bank" value="{{ $value->bank_name }}">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="saving_ac_branch" class="col-sm-4 col-form-label col-form-label-sm">Savings Account Branch</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="saving_ac_branch" class="form-control form-control-sm" id="saving_ac_branch" placeholder="Savings Account Branch">
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="saving_ac_branch" class="col-sm-4 col-form-label col-form-label-sm">Savings Account Branch</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="saving_ac_branch" class="form-control form-control-sm" id="saving_ac_branch" placeholder="Savings Account Branch" value="{{ $value->branch_name }}">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                @endforeach
+
                                             </div>
                                             <div class="saving_ac_clone_row"></div>
                                             <div class="current_account_row">
-                                                <form class="current_ac_bank_form">
-                                                    <div class="form-group row  mb-4">
-                                                        <div class="col-12">
-                                                            <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_current_ac_btn d-none" type="button">Remove</a>
+                                                @foreach($finance->currentBanking as $value)
+                                                    <form class="current_ac_bank_form">
+                                                        <div class="form-group row  mb-4">
+                                                            <div class="col-12">
+                                                                <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_current_ac_btn d-block" type="button">Remove</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="current_ac_bank" class="col-sm-4 col-form-label col-form-label-sm">Current  Account Bank</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="current_ac_bank" class="form-control form-control-sm" id="current_ac_bank" placeholder="Current Account Bank">
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="current_ac_bank" class="col-sm-4 col-form-label col-form-label-sm">Current  Account Bank</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="current_ac_bank" class="form-control form-control-sm" id="current_ac_bank" placeholder="Current Account Bank" value="{{ $value->bank_name }}">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row  mb-4">
-                                                        <label for="current_ac_branch" class="col-sm-4 col-form-label col-form-label-sm">Current  Account Branch</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="current_ac_branch" class="form-control form-control-sm" id="current_ac_branch" placeholder="Current Account Branch">
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="current_ac_branch" class="col-sm-4 col-form-label col-form-label-sm">Current  Account Branch</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" name="current_ac_branch" class="form-control form-control-sm" id="current_ac_branch" placeholder="Current Account Branch" value="{{ $value->branch_name }}">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                @endforeach
                                             </div>
                                             <div class="current_account_clone_row"></div>
                                     </section>
@@ -679,72 +602,9 @@
 
 
             $('.add_business_details').on('click',function(){
-                var form = $('#business_details').find('.business_detail_form');
-                form.validate({
-                    rules:{
-                        business_name:'required',
-                        business_started_date: {
-                            required:true,
-                            date:true
-                        },
-                        business_type:'required',
-                        promoter_name:'required',
-                        business_nature:'required',
-                        business_monthly_income: {
-                            required:true,
-                            digits:true
-                        },
-                        total_no_machines:{
-                            required:true,
-                            digits:true
-                        },
-                        total_no_employees:{
-                            required:true,
-                            digits:true
-                        },
-                        monthly_turnover:{
-                            required:true,
-                            digits:true
-                        },
-                        business_location:'required',
-                        business_location_type:'required',
-                        business_duration_place:'required',
-                    },
-                    messages: {
-                        business_name: "Please enter your Bussiness Name",
-                        business_started_date: {
-                            required:"Please Select Start Date",
-                            date:"Please select valid Date"
-                        },
-                        business_type: "Please Select your Bussiness Type",
-                        promoter_name: "Please Enter your Promoter Name",
-                        business_nature: "Please Enter your Promoter Name",
-                        business_monthly_income:{
-                            required:'Please Enter your Business Monthly Income',
-                            digits:'Please Enter only digit Business Monthly Income'
-                        },
-                        total_no_machines:{
-                            required:'Please Enter your Total Number Of Machine',
-                            digits:'Please Enter only digit Total Number Of Machine'
-                        },
-                        total_no_employees:{
-                            required:'Please Enter your  Total Number Of Employees',
-                            digits:'Please Enter only digit  Total Number Of Employee'
-                        },
-                        monthly_turnover:{
-                            required:'Please Enter your Monthly turnover',
-                            digits:'Please Enter only digit  Monthly turnover'
-                        },
-                        business_location:'Please Enter your Business Location',
-                        business_location_type:'Please Enter your Business Location Type',
-                        business_duration_place:'Please Enter your Business Duration place',
-                    }
-                });
-                if (form.valid()){
-                    var section = $('.business_details_row').clone();
-                    $('.business_details_clone_row').html(section);
-                    $('.business_details_clone_row .business_details_row .remove_business_details_btn').removeClass('d-none');
-                }
+                var section = $('.business_details_row').clone();
+                $('.business_details_clone_row').html(section);
+                $('.business_details_clone_row .business_details_row .remove_business_details_btn').removeClass('d-none');
             });
             $(document).on('click','.remove_business_details_btn',function(){
                 $(this).closest('.business_details_row').remove();

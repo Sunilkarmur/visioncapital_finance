@@ -11,7 +11,23 @@ class FinanceForm extends Model
 {
     use HasFactory,SoftDeletes;
 
+
     public function business(){
         return $this->hasMany(BusinessDetail::class,'finance_id','id');
+    }
+    public function businessOne(){
+        return $this->hasOne(BusinessDetail::class,'finance_id','id');
+    }
+
+    public function financeBanking(){
+        return $this->hasMany(FinanceBankLoanAccount::class,'finance_id','id');
+    }
+
+    public function savingBanking(){
+        return $this->hasMany(SavingBankAccount::class,'finance_id','id');
+    }
+
+    public function currentBanking(){
+        return $this->hasMany(CurrentBankAccount::class,'finance_id','id');
     }
 }

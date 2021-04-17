@@ -82,6 +82,10 @@ function referranceDetailForm(currentIndex) {
     if (!referral_affiliate_form){
         return referral_affiliate_form;
     }
+    var id=$('#finance-form-id').val();
+    if (id){
+        referral_affiliate_form.push({name: 'id', value: id});
+    }
     var status=false;
    return addFormData(currentIndex,referral_affiliate_form,function (response) {
         return response.status;
@@ -349,7 +353,21 @@ function guarantorDetailsForm(currentIndex) {
     data.push({name: 'data', value: JSON.stringify(banking_finance_form)});
    return  addFormData(currentIndex,data,function (response) {
        if (response.status===true){
-           window.location.href=base_url+'application';
+           var message='Form Update and Activate Done';
+           var method='POST';
+           if (window.location.href===base_url+'finance-form'){
+               message='Form Add and Activate Done';
+           }
+           swal({
+                   title: "Success!",
+                   text: message,
+                   type: "success"
+               },
+               function() {
+                   window.location.href=base_url+'application';
+               }
+           );
+
        }
        return  response.status;
     });
@@ -408,18 +426,18 @@ function addFormData(currentIndex,data,callback) {
         data:data,
         dataType:'json',
         success:function (response) {
-            if (currentIndex===0){
+            if (response.data.id){
                 $('#finance-form-id').val(response.data.id)
             }
-            swal({
-                    title: "Success!",
-                    text: response.message,
-                    type: "success"
-                },
-                function() {
-
-                }
-            );
+            // swal({
+            //         title: "Success!",
+            //         text: response.message,
+            //         type: "success"
+            //     },
+            //     function() {
+            //
+            //     }
+            // );
             // alert(response.message)
             callback(response)
         },

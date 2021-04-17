@@ -80,9 +80,9 @@ class FinanceFormController extends Controller
      */
     public function edit(Request $request,$finandce_form)
     {
-        $finance = FinanceForm::with('business')->find($finandce_form);
+        $finance = FinanceForm::with(['business','businessOne','financeBanking','savingBanking','currentBanking'])->find($finandce_form);
         if ($finance){
-//            dd($finance);
+//            dd($finance->guarantor_detail);
             return view('edit-application-form',compact('finance'));
         }
         return redirect()->back()->with('errors','Invalid finance application number');
@@ -155,7 +155,11 @@ class FinanceFormController extends Controller
         if ($financeForm){
             $financeForm = FinanceForm::find($financeForm);
         }else{
-            $financeForm = new FinanceForm();
+            if ($request->has('id')){
+                $financeForm = FinanceForm::find($request->id);
+            }else{
+                $financeForm = new FinanceForm();
+            }
         }
         $financeForm->ref_name = $request->ref_name;
         $financeForm->ref_firm = $request->ref_firm;
@@ -204,14 +208,10 @@ class FinanceFormController extends Controller
             ],422);
         }
 
-        if ($financeForm===null){
-            $financeForm = FinanceForm::find($financeForm);
-        }else{
-            $financeForm = FinanceForm::find($request->id);
-        }
+        $financeForm = FinanceForm::find($request->id);
         if ($financeForm){
             $financeForm->bor_name = $request->bor_name;
-            $financeForm->bor_amount = $request->bor_amount;
+            $financeForm->bor_amount = preg_replace("/[^0-9]/", "",$request->bor_amount);
             $financeForm->bor_time_limit = $request->bor_time_limit;
             $financeForm->bor_purpose = $request->bor_purpose;
             $financeForm->bor_affiliate_vc = $request->bor_affiliate_vc;
@@ -250,6 +250,7 @@ class FinanceFormController extends Controller
 
         $data = json_decode($request->data,true);
         if ($data){
+            BusinessDetail::where('finance_id','=',$request->id)->delete();
             foreach ($data as $datum) {
                 $validator = Validator::make($datum,[
                     'business_name'=>'required',
@@ -362,6 +363,7 @@ class FinanceFormController extends Controller
             // Finance Form
             $financeBank = json_decode($request->finance_form,true);
             if ($financeBank!==null && count($financeBank)>0){
+                FinanceBankLoanAccount::where('finance_id','=',$request->id)->delete();
                 foreach ($financeBank as $value) {
                     $validator = Validator::make($value,[
                         'bank_name'=>'required',
@@ -398,6 +400,7 @@ class FinanceFormController extends Controller
             // Saving Bank Form
             $savingBank = json_decode($request->saving_bank,true);
             if ($savingBank!==null && count($savingBank)>0){
+                SavingBankAccount::where('finance_id','=',$request->id)->delete();
                 foreach ($savingBank as $value) {
                     $validator = Validator::make($value,[
                         'saving_ac_bank'=>'required',
@@ -424,6 +427,7 @@ class FinanceFormController extends Controller
             // Current bank Form
             $currentBank = json_decode($request->current_bank,true);
             if ($currentBank!==null && count($currentBank)>0){
+                CurrentBankAccount::where('finance_id','=',$request->id)->delete();
                 foreach ($currentBank as $datum) {
                     $validator = Validator::make($datum,[
                         'current_ac_bank'=>'required',
