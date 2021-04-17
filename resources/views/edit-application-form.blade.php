@@ -416,65 +416,67 @@
                                             </div>
                                         </div>
                                         <div class="guarantor_section">
-                                            <form class="guarantor_section_form">
-                                                <div class="form-group row  mb-4">
-                                                    <div class="col-12">
-                                                        <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_gaurantor d-none" type="button">Remove</a>
+                                            @foreach(json_decode($finance->guarantor_detail) as $value)
+                                                <form class="guarantor_section_form">
+                                                    <div class="form-group row  mb-4">
+                                                        <div class="col-12">
+                                                            <a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_gaurantor d-block" type="button">Remove</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="guarantor_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Person</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="guarantor_name" class="form-control form-control-sm" id="guarantor_name" placeholder="Name of Person">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="guarantor_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Person</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="guarantor_name" class="form-control form-control-sm" id="guarantor_name" placeholder="Name of Person" value="{{ $value->guarantor_firm }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="guarantor_firm" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="guarantor_firm" class="form-control form-control-sm" id="guarantor_firm" placeholder="Name of Firm">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="guarantor_firm" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="guarantor_firm" class="form-control form-control-sm" id="guarantor_firm" placeholder="Name of Firm" value="{{ $value->guarantor_firm }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="guarantor_firm_nature" class="col-sm-4 col-form-label col-form-label-sm">Nature /Activity of Firm</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="guarantor_firm_nature" class="form-control form-control-sm" id="guarantor_firm_nature" placeholder="Nature /Activity of Firm">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="guarantor_firm_nature" class="col-sm-4 col-form-label col-form-label-sm">Nature /Activity of Firm</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="guarantor_firm_nature" class="form-control form-control-sm" id="guarantor_firm_nature" placeholder="Nature /Activity of Firm" value="{{ $value->guarantor_firm_nature }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="guarantor_address" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="guarantor_address" class="form-control form-control-sm" id="guarantor_address" placeholder="Location / Address">
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="guarantor_address" class="col-sm-4 col-form-label col-form-label-sm">Location / Address</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="guarantor_address" class="form-control form-control-sm" id="guarantor_address" placeholder="Location / Address" value="{{ $value->guarantor_address }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4">
-                                                    <label for="guarantor_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to Vision Capital</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control form-control-sm guarantor_affiliate_vc" name="guarantor_affiliate_vc">
-                                                            <option value="1">Yes</option>
-                                                            <option value="0" selected="">No</option>
-                                                        </select>
+                                                    <div class="form-group row  mb-4">
+                                                        <label for="guarantor_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to Vision Capital</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm guarantor_affiliate_vc" name="guarantor_affiliate_vc">
+                                                                <option value="1">Yes</option>
+                                                                <option value="0" selected="">No</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4 d-none affiliate_type">
-                                                    <label for="guarantor_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Select Affliated Type</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control form-control-sm guarantor_affiliate_type[]" name="guarantor_affiliate_type">
-                                                            <option value="Loan">Loan</option>
-                                                            <option value="Subsidy">Subsidy</option>
-                                                            <option value="Finance">Finance</option>
-                                                            <option value="VC">VC</option>
-                                                            <option value="Other">Other (Specify)</option>
-                                                        </select>
+                                                    <div class="form-group row  mb-4 d-none affiliate_type">
+                                                        <label for="guarantor_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Select Affliated Type</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm guarantor_affiliate_type[]" name="guarantor_affiliate_type">
+                                                                <option value="Loan">Loan</option>
+                                                                <option value="Subsidy">Subsidy</option>
+                                                                <option value="Finance">Finance</option>
+                                                                <option value="VC">VC</option>
+                                                                <option value="Other">Other (Specify)</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row  mb-4 d-none guarantor_specify">
-                                                    <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Specify here</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" name="guarantor_affiliate_type_other" class="form-control form-control-sm" id="guarantor_affiliate_type_other" placeholder="Other">
+                                                    <div class="form-group row  mb-4 d-none guarantor_specify">
+                                                        <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Specify here</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="guarantor_affiliate_type_other" class="form-control form-control-sm" id="guarantor_affiliate_type_other" placeholder="Other" value="{{ $value->guarantor_affiliate_type_other }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <hr style="border-top:1px solid #3b3f5c;" />
-                                            </form>
+                                                    <hr style="border-top:1px solid #3b3f5c;" />
+                                                </form>
+                                            @endforeach
 
                                         </div>
                                         <div class="guarantor_section_clone"></div>

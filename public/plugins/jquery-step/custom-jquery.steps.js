@@ -364,10 +364,10 @@ function guarantorDetailsForm(currentIndex) {
                    type: "success"
                },
                function() {
-                   window.location.href=base_url+'application';
+
                }
            );
-
+           window.location.href=base_url+'application';
        }
        return  response.status;
     });

@@ -82,7 +82,6 @@ class FinanceFormController extends Controller
     {
         $finance = FinanceForm::with(['business','businessOne','financeBanking','savingBanking','currentBanking'])->find($finandce_form);
         if ($finance){
-//            dd($finance->guarantor_detail);
             return view('edit-application-form',compact('finance'));
         }
         return redirect()->back()->with('errors','Invalid finance application number');
