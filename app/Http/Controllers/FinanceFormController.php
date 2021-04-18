@@ -7,6 +7,7 @@ use App\Models\CurrentBankAccount;
 use App\Models\FinanceBankLoanAccount;
 use App\Models\FinanceForm;
 use App\Models\SavingBankAccount;
+use App\Models\OfficeUse;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -80,7 +81,7 @@ class FinanceFormController extends Controller
      */
     public function edit(Request $request,$finandce_form)
     {
-        $finance = FinanceForm::with(['business','businessOne','financeBanking','savingBanking','currentBanking'])->find($finandce_form);
+        $finance = FinanceForm::with(['business','businessOne','financeBanking','savingBanking','currentBanking', 'officeUse'])->find($finandce_form);
         if ($finance){
             return view('edit-application-form',compact('finance'));
         }
@@ -106,6 +107,8 @@ class FinanceFormController extends Controller
             return $this->bankingFinanceDetails($request);
         }elseif ($step==="5"){
             return $this->guarantorDetails($request);
+        }elseif ($step==="6"){
+            return $this->officeUseDetails($request);
         }
     }
 
@@ -460,6 +463,7 @@ class FinanceFormController extends Controller
         }
     }
 
+    
     public function guarantorDetails(Request $request){
 
         $validator = Validator::make($request->all(),[
@@ -490,4 +494,78 @@ class FinanceFormController extends Controller
             'message'=>'Something Went Wrong!',
             'data'=>[]],422);
     }
+    public function officeUseDetails(Request $request){
+        try {        
+            $validator = Validator::make($request->all(),[
+                'id'=> 'required|exists:finance_forms,id',
+                'remarks'=> 'required',
+            ]);
+
+            if ($validator->fails()){
+                return response()->json([
+                    'status'=>false,
+                    'message'=>$validator->errors()->first(),
+                    'data'=>$validator->errors()->messages()
+                ],422);
+            }
+
+            $res_final = [];
+            $busi_final = [];
+            $id_final = [];
+            $all_proof = [];
+            foreach($request->resi_proof as $key=>$res)
+            {
+                array_push($res_final, $res);
+            }
+            foreach($request->business_proof as $key=>$res)
+            {
+                array_push($busi_final, $res);
+            }
+            foreach($request->id_proof as $key=>$res)
+            {
+                array_push($id_final, $res);
+            }
+            $all_proof = [
+                'resi_proof' => $res_final,
+                'busi_proof' => $busi_final,
+                'id_proof' => $id_final
+            ];
+
+            $office_use =  OfficeUse::where('finance_id', $request->id)->first();
+            if(!$office_use)
+            {
+                $office_use = new OfficeUse();
+            }
+            $office_use->finance_id = $request->id;
+            $office_use->remark = $request->remarks;
+            $office_use->cibil_score_required_type = $request->cibil_score_required_type;
+            $office_use->cibil_score = $request->cibil_score;
+            $office_use->managment_review_select = $request->managment_review_select;
+            $office_use->management_review_text = $request->management_review_text;
+            $office_use->visit_select = $request->visit_select;
+            $office_use->visit_review_select = $request->visit_review_select;
+            $office_use->visit_review_text = $request->visit_review_text;
+            $office_use->attend_by = $request->attend_by;
+            $office_use->document_select = $request->document_select;
+            $office_use->document_review_select = $request->document_review_select;
+            $office_use->document_review_text = $request->document_review_text;
+            $office_use->client_document_select = $request->client_document_select;
+            $office_use->client_documents = json_encode($all_proof);
+            $office_use->save();
+            return response()->json([
+                'status'=> true, 
+                'message'=> 'Details saved successfully!',
+                'data'=> []],
+                200);
+            
+
+        } catch (\Exceptions $e) {
+            return response()->json([
+                'status'=>false, 
+                'message'=>$e->getMessage(),
+                'data'=>[]],
+                422);
+        }
+    }
+    
 }

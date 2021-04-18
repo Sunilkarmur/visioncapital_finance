@@ -30,4 +30,8 @@ class FinanceForm extends Model
     public function currentBanking(){
         return $this->hasMany(CurrentBankAccount::class,'finance_id','id');
     }
+
+    public function officeUse(){
+        return $this->hasOne(officeUse::class,'finance_id','id');
+    }
 }
