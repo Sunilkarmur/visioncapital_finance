@@ -34,5 +34,6 @@ Route::group(['middleware'=>'auth'],function (){
     Route::post('finance-form/{step}',[App\Http\Controllers\FinanceFormController::class, 'store'])->name('finance.form.step');
     Route::delete('finance-form/{finandce_form}',[App\Http\Controllers\FinanceFormController::class, 'destroy'])->name('finance.form.destroy');
     Route::get('finance-form/{finandce_form}/edit',[App\Http\Controllers\FinanceFormController::class, 'edit'])->name('finance.form.edit');
+    Route::get('finance-form/{finandce_form}/office-use',[App\Http\Controllers\FinanceFormController::class, 'officialUse'])->name('finance.form.offician.use');
     Route::post('finance-form/{finandce_form}/{step}',[App\Http\Controllers\FinanceFormController::class, 'update'])->name('finance.form.update');
 });

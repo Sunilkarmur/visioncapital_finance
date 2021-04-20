@@ -51,8 +51,6 @@ $("#pill-vertical").steps({
                 return financeBakingForm(currentIndex);
             case 5:
                 return guarantorDetailsForm(currentIndex);
-            case 6:
-                return officeUseForm(currentIndex);
                 break;
 
         }
@@ -60,10 +58,7 @@ $("#pill-vertical").steps({
         return status;
     },
     onFinished: function (event, currentIndex) {
-        if (window.location.href === base_url + 'finance-form'){
-            return guarantorDetailsForm(currentIndex);
-        }
-        return officeUseForm(currentIndex);
+        return guarantorDetailsForm(currentIndex);
     }
 });
 

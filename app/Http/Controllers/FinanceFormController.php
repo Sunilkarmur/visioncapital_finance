@@ -91,6 +91,21 @@ class FinanceFormController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function officialUse(Request $request,$finandce_form)
+    {
+        $finance = FinanceForm::with(['officeUse'])->find($finandce_form);
+        if ($finance){
+            return view('application-form-official-use',compact('finance'));
+        }
+        return redirect()->back()->with('errors','Invalid finance application number');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @return \Illuminate\Http\Response
