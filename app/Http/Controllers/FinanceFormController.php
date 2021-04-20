@@ -591,4 +591,15 @@ class FinanceFormController extends Controller
         }
     }
 
+    // Return Finance Details
+    public function viewApplicationDetails($finance_id)
+    {
+        $application = FinanceForm::with(['business','financeBanking','savingBanking','currentBanking', 'officeUse'])->where('id', $finance_id)->first();
+        // dd($application);
+        if ($application){
+            return view('view_application', compact('application'));
+        }
+        return redirect()->back()->with('errors','Invalid finance application number');   
+    }
+
 }
