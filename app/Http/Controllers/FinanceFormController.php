@@ -83,6 +83,8 @@ class FinanceFormController extends Controller
     {
         $finance = FinanceForm::with(['business','businessOne','financeBanking','savingBanking','currentBanking', 'officeUse'])->find($finandce_form);
         if ($finance){
+//            dd($finance->officeUse && $finance->officeUse->cibil_score_required_type=='1');
+//            dd($finance->officeUse && $finance->officeUse->cibil_score_required_type=='1');
             return view('edit-application-form',compact('finance'));
         }
         return redirect()->back()->with('errors','Invalid finance application number');
@@ -463,7 +465,7 @@ class FinanceFormController extends Controller
         }
     }
 
-    
+
     public function guarantorDetails(Request $request){
 
         $validator = Validator::make($request->all(),[
@@ -495,7 +497,7 @@ class FinanceFormController extends Controller
             'data'=>[]],422);
     }
     public function officeUseDetails(Request $request){
-        try {        
+        try {
             $validator = Validator::make($request->all(),[
                 'id'=> 'required|exists:finance_forms,id',
                 'remarks'=> 'required',
@@ -513,24 +515,30 @@ class FinanceFormController extends Controller
             $busi_final = [];
             $id_final = [];
             $all_proof = [];
-            foreach($request->resi_proof as $key=>$res)
-            {
-                array_push($res_final, $res);
+            if ($request->has('resi_proof')){
+                foreach($request->resi_proof as $key=>$res)
+                {
+                    array_push($res_final, $res);
+                }
             }
-            foreach($request->business_proof as $key=>$res)
-            {
-                array_push($busi_final, $res);
+            if ($request->has('business_proof')){
+                foreach($request->business_proof as $key=>$res)
+                {
+                    array_push($busi_final, $res);
+                }
             }
-            foreach($request->id_proof as $key=>$res)
-            {
-                array_push($id_final, $res);
+            if ($request->has('id_proof')){
+                foreach($request->id_proof as $key=>$res)
+                {
+                    array_push($id_final, $res);
+                }
             }
+
             $all_proof = [
                 'resi_proof' => $res_final,
                 'busi_proof' => $busi_final,
                 'id_proof' => $id_final
             ];
-
             $office_use =  OfficeUse::where('finance_id', $request->id)->first();
             if(!$office_use)
             {
@@ -538,7 +546,7 @@ class FinanceFormController extends Controller
             }
             $office_use->finance_id = $request->id;
             $office_use->remark = $request->remarks;
-            $office_use->cibil_score_required_type = $request->cibil_score_required_type;
+            $office_use->cibil_score_required_type = $request->cibil_socre_required_type;
             $office_use->cibil_score = $request->cibil_score;
             $office_use->managment_review_select = $request->managment_review_select;
             $office_use->management_review_text = $request->management_review_text;
@@ -553,19 +561,19 @@ class FinanceFormController extends Controller
             $office_use->client_documents = json_encode($all_proof);
             $office_use->save();
             return response()->json([
-                'status'=> true, 
+                'status'=> true,
                 'message'=> 'Details saved successfully!',
                 'data'=> []],
                 200);
-            
+
 
         } catch (\Exceptions $e) {
             return response()->json([
-                'status'=>false, 
+                'status'=>false,
                 'message'=>$e->getMessage(),
                 'data'=>[]],
                 422);
         }
     }
-    
+
 }

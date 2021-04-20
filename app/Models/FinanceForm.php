@@ -32,6 +32,6 @@ class FinanceForm extends Model
     }
 
     public function officeUse(){
-        return $this->hasOne(officeUse::class,'finance_id','id');
+        return $this->hasOne(OfficeUse::class,'finance_id','id');
     }
 }
