@@ -29,7 +29,7 @@ $("#pill-vertical").steps({
     cssClass: 'pills wizard',
     titleTemplate: '#title#',
     stepsOrientation: "vertical",
-    startIndex: window.location.href === base_url + 'finance-form' ? 0 : 6,
+    startIndex: window.location.href === base_url + 'finance-form' ? 5 : 6,
     onStepChanging: function (event, currentIndex, newIndex) {
         if (currentIndex > newIndex) {
 
@@ -49,7 +49,7 @@ $("#pill-vertical").steps({
                 return residenceDetailForm(currentIndex);
             case 4:
                 return financeBakingForm(currentIndex);
-            case 5: 
+            case 5:
                 return guarantorDetailsForm(currentIndex);
             case 6:
                 return officeUseForm(currentIndex);
@@ -60,6 +60,9 @@ $("#pill-vertical").steps({
         return status;
     },
     onFinished: function (event, currentIndex) {
+        if (window.location.href === base_url + 'finance-form'){
+            return guarantorDetailsForm(currentIndex);
+        }
         return officeUseForm(currentIndex);
     }
 });
