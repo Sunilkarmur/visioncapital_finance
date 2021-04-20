@@ -515,7 +515,7 @@ class FinanceFormController extends Controller
         try {
             $validator = Validator::make($request->all(),[
                 'id'=> 'required|exists:finance_forms,id',
-                'remarks'=> 'required',
+                'type'=> 'required',
             ]);
 
             if ($validator->fails()){
@@ -526,54 +526,73 @@ class FinanceFormController extends Controller
                 ],422);
             }
 
-            $res_final = [];
-            $busi_final = [];
-            $id_final = [];
-            $all_proof = [];
-            if ($request->has('resi_proof')){
-                foreach($request->resi_proof as $key=>$res)
-                {
-                    array_push($res_final, $res);
-                }
-            }
-            if ($request->has('business_proof')){
-                foreach($request->business_proof as $key=>$res)
-                {
-                    array_push($busi_final, $res);
-                }
-            }
-            if ($request->has('id_proof')){
-                foreach($request->id_proof as $key=>$res)
-                {
-                    array_push($id_final, $res);
-                }
-            }
-
-            $all_proof = [
-                'resi_proof' => $res_final,
-                'busi_proof' => $busi_final,
-                'id_proof' => $id_final
-            ];
             $office_use =  OfficeUse::where('finance_id', $request->id)->first();
             if(!$office_use)
             {
                 $office_use = new OfficeUse();
             }
             $office_use->finance_id = $request->id;
-            $office_use->remark = $request->remarks;
-            $office_use->cibil_score_required_type = $request->cibil_socre_required_type;
-            $office_use->cibil_score = $request->cibil_score;
-            $office_use->managment_review_select = $request->managment_review_select;
-            $office_use->management_review_text = $request->management_review_text;
-            $office_use->visit_select = $request->visit_select;
-            $office_use->visit_review_select = $request->visit_review_select;
-            $office_use->visit_review_text = $request->visit_review_text;
-            $office_use->attend_by = $request->attend_by;
-            $office_use->document_select = $request->document_select;
-            $office_use->document_review_select = $request->document_review_select;
-            $office_use->document_review_text = $request->document_review_text;
-            $office_use->client_document_select = $request->client_document_select;
-            $office_use->client_documents = json_encode($all_proof);
+            if ($request->type==='1'){
+                $validator = Validator::make($request->all(),[
+                    'remarks'=> 'required',
+                    'cibil_socre_required_type'=> 'required',
+                    'cibil_socre'=> 'required',
+                    'managment_review_select'=> 'required',
+                    'management_review_text'=> 'required',
+                ]);
+
+                if ($validator->fails()){
+                    return response()->json([
+                        'status'=>false,
+                        'message'=>$validator->errors()->first(),
+                        'data'=>$validator->errors()->messages()
+                    ],422);
+                }
+                $office_use->remark = $request->remarks;
+                $office_use->cibil_score_required_type = $request->cibil_socre_required_type;
+                $office_use->cibil_score = $request->cibil_socre;
+                $office_use->managment_review_select = $request->managment_review_select;
+                $office_use->management_review_text = $request->management_review_text;
+            }elseif ($request->type==='2'){
+                $office_use->visit_select = $request->visit_select;
+                $office_use->visit_review_select = $request->visit_review_select;
+                $office_use->visit_review_text = $request->visit_review_text;
+                $office_use->attend_by = $request->attend_by;
+            }elseif ($request->type==='3'){
+                $res_final = [];
+                $busi_final = [];
+                $id_final = [];
+                $all_proof = [];
+                if ($request->has('resi_proof')){
+                    foreach($request->resi_proof as $key=>$res)
+                    {
+                        array_push($res_final, $res);
+                    }
+                }
+                if ($request->has('business_proof')){
+                    foreach($request->business_proof as $key=>$res)
+                    {
+                        array_push($busi_final, $res);
+                    }
+                }
+                if ($request->has('id_proof')){
+                    foreach($request->id_proof as $key=>$res)
+                    {
+                        array_push($id_final, $res);
+                    }
+                }
+
+                $all_proof = [
+                    'resi_proof' => $res_final,
+                    'busi_proof' => $busi_final,
+                    'id_proof' => $id_final
+                ];
+                $office_use->document_select = $request->document_select;
+                $office_use->document_review_select = $request->document_review_select;
+                $office_use->document_review_text = $request->document_review_text;
+                $office_use->client_document_select = $request->client_document_select;
+                $office_use->client_documents = json_encode($all_proof);
+            }
             $office_use->save();
             return response()->json([
                 'status'=> true,
