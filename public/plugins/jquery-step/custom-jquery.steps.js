@@ -22,14 +22,13 @@ $("#example-vertical").steps({
 });
 var form = $("#referrance-finance-detail");
 $("#pill-vertical").steps({
-    enableAllSteps: window.location.href === base_url + 'finance-form' ? 0 : 1,
+    enableAllSteps: 0,
     headerTag: "h3",
     bodyTag: "section",
     transitionEffect: "slideLeft",
     cssClass: 'pills wizard',
     titleTemplate: '#title#',
     stepsOrientation: "vertical",
-    startIndex: window.location.href === base_url + 'finance-form' ? 5 : 6,
     onStepChanging: function (event, currentIndex, newIndex) {
         if (currentIndex > newIndex) {
 
@@ -58,7 +57,11 @@ $("#pill-vertical").steps({
         return status;
     },
     onFinished: function (event, currentIndex) {
-        return guarantorDetailsForm(currentIndex);
+        var status = guarantorDetailsForm(currentIndex);
+        console.log(status,"status")
+        if (status){
+            window.location.href=base_url+'application';
+        }
     }
 });
 

@@ -15,19 +15,69 @@
                                         <input type="hidden" name="finance-form-id" id="finance-form-id"
                                                value="{{ $finance->id }}">
                                         <div class="widget-content widget-content-area">
-                                            <form id="pill-vertical-official">
-                                                <div>
-                                                    <h3>CBL Score</h3>
-                                                    <section>
-                                                    </section>
-                                                    <h3>Visit Review</h3>
-                                                    <section>
-                                                    </section>
-                                                    <h3>Document Verify</h3>
-                                                    <section>
-                                                    </section>
-                                                </div>
-                                            </form>
+                                            <div id="pill-vertical-official">
+                                                <h3>CBL Score</h3>
+                                                <section>
+                                                    <div class="form-group row  mb-4 remarks">
+                                                        <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Remarks</label>
+                                                        <div class="col-sm-8">
+                                                            <textarea name="remarks" class="form-control form-control-sm" id="remarks" placeholder="Remarks"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row  mb-4 cibil_score">
+                                                        <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score Required?</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm cibil_socre_required_type" name="cibil_socre_required_type">
+                                                                <option value="1">Yes</option>
+                                                                <option value="0" selected="true">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="form-group row cibil_score_checked d-none  mb-4">
+                                                        <label for="cibil_socre_checked" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score Checked?</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm cibil_socre_checked" name="cibil_socre_checked">
+                                                                <option value="1">Yes</option>
+                                                                <option value="0" selected="true">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="form-group row cibil_score_row  mb-4 d-none">
+                                                        <label for="cibil_score_row" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="cibil_socre" class="form-control form-control-sm" id="cibil_socre" placeholder="CIBIL Score">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mgmt_review_row d-none  mb-4">
+                                                        <label for="mgmt_review_row" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score Management Review?</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control form-control-sm managment_review_select" name="managment_review_select">
+                                                                <option value="1">Approved</option>
+                                                                <option value="0" selected="true">Rejected</option>
+                                                                <option value="2" selected="true">On Hold</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row cibil_score_management_review_text_row d-none  mb-4 d-none">
+                                                        <label for="management_review_text_row" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score Management Review Note</label>
+                                                        <div class="col-sm-8">
+                                                            <textarea name="management_review_text" class="form-control form-control-sm" id="management_review_text" placeholder="Management Review"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="form-group row cibil_score_row  mb-4">
+                                                        <label for="signature" class="col-sm-4 col-form-label col-form-label-sm">Signature</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="signature" class="form-control form-control-sm" id="signature" placeholder="Signature">
+                                                        </div>
+                                                    </div> -->
+                                                </section>
+                                                <h3>Visit Review</h3>
+                                                <section>
+                                                </section>
+                                                <h3>Document Verify</h3>
+                                                <section>
+                                                </section>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -72,8 +122,6 @@
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            var f1 = flatpickr(document.getElementById('bor_dob'));
-            var f2 = flatpickr(document.getElementById('business_started_date'));
 
             $('.managment_review_select').change(function(){
                 if($(this).val()==1){
@@ -197,16 +245,8 @@
     <script src="{{ asset('plugins/input-mask/input-mask.js') }}"></script>
     <script>
         $(document).ready(function (e) {
-            var form = $("#pill-vertical-official");
-            form.validate({
-                errorPlacement: function errorPlacement(error, element) { element.before(error); },
-                rules: {
-                    confirm: {
-                        equalTo: "#password"
-                    }
-                }
-            });
-            form.children("div").steps({
+            $("#pill-vertical-official").steps({
+                enableAllSteps: 0,
                 headerTag: "h3",
                 bodyTag: "section",
                 transitionEffect: "slideLeft",
@@ -214,46 +254,19 @@
                 titleTemplate: '#title#',
                 stepsOrientation: "vertical",
                 startIndex: 0,
-                transition: {
-                    animation: 'slide-h'
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    if (currentIndex > newIndex) {
+
+                        return true;
+                    }
+
+                    var status = true;
+                    return status;
                 },
-                onStepChanging: function (event, currentIndex, newIndex)
-                {
-                    form.validate().settings.ignore = ":disabled,:hidden";
-                    return form.valid();
-                },
-                onFinishing: function (event, currentIndex)
-                {
-                    form.validate().settings.ignore = ":disabled";
-                    return form.valid();
-                },
-                onFinished: function (event, currentIndex)
-                {
-                    alert("Submitted!");
+                onFinished: function (event, currentIndex) {
+                    return guarantorDetailsForm(currentIndex);
                 }
             });
-            // $("#pill-vertical-official").steps({
-            //     enableAllSteps: 0,
-            //     headerTag: "h3",
-            //     bodyTag: "section",
-            //     transitionEffect: "slideLeft",
-            //     cssClass: 'pills wizard',
-            //     titleTemplate: '#title#',
-            //     stepsOrientation: "vertical",
-            //     startIndex: 0,
-            //     onStepChanging: function (event, currentIndex, newIndex) {
-            //         if (currentIndex > newIndex) {
-            //
-            //             return true;
-            //         }
-            //
-            //         var status = true;
-            //         return status;
-            //     },
-            //     onFinished: function (event, currentIndex) {
-            //         return guarantorDetailsForm(currentIndex);
-            //     }
-            // });
         })
     </script>
     <!-- END PAGE LEVEL SCRIPTS -->
