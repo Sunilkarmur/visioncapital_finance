@@ -69,8 +69,20 @@ class FinanceFormController extends Controller
      */
     public function show(FinanceForm $financeForm)
     {
-        $applicationList = FinanceForm::withoutTrashed()->where('finance_type','=',session()->get('finance_type'))->where('status','=','1');
-        return DataTables::of($applicationList)->make(true);
+        $applicationList = FinanceForm::withoutTrashed()
+            ->with('businessOne')
+            ->where('finance_type','=',session()->get('finance_type'))->where('status','=','1');
+        return DataTables::of($applicationList)
+            ->editColumn('ref_affiliate_type',function ($value) {
+                if ($value->ref_affiliate_vc==='No'){
+                    return 'Vision Capital';
+                }
+                if ($value->ref_affiliate_type==='Other'){
+                    return $value->ref_affiliate_type_other;
+                }
+                    return $value->ref_affiliate_type;
+            })
+            ->make(true);
     }
 
     /**
@@ -100,6 +112,21 @@ class FinanceFormController extends Controller
     {
         $finance = FinanceForm::with(['officeUse'])->find($finandce_form);
         if ($finance){
+            if ($finance->officeUse){
+                $documents = $finance->officeUse->client_document_detail;
+            }else{
+                $documents = null;
+            }
+            if ($documents){
+                $finance->resi_proof=$documents->resi_proof;
+                $finance->busi_proof=$documents->busi_proof;
+                $finance->id_proof=$documents->id_proof;
+            }else{
+                $finance->resi_proof=[];
+                $finance->busi_proof=[];
+                $finance->id_proof=[];
+            }
+//dd(array_search('aadahar_card',$finance->resi_proof),$finance->resi_proof);
             return view('application-form-official-use',compact('finance'));
         }
         return redirect()->back()->with('errors','Invalid finance application number');
@@ -536,7 +563,7 @@ class FinanceFormController extends Controller
                 $validator = Validator::make($request->all(),[
                     'remarks'=> 'required',
                     'cibil_socre_required_type'=> 'required',
-                    'cibil_socre'=> 'required',
+                    'cibil_socre'=> 'required_if:cibil_socre_required_type,Yes',
                     'managment_review_select'=> 'required',
                     'management_review_text'=> 'required',
                 ]);
@@ -569,8 +596,8 @@ class FinanceFormController extends Controller
                         array_push($res_final, $res);
                     }
                 }
-                if ($request->has('business_proof')){
-                    foreach($request->business_proof as $key=>$res)
+                if ($request->has('busi_proof')){
+                    foreach($request->busi_proof as $key=>$res)
                     {
                         array_push($busi_final, $res);
                     }
@@ -592,6 +619,19 @@ class FinanceFormController extends Controller
                 $office_use->document_review_text = $request->document_review_text;
                 $office_use->client_document_select = $request->client_document_select;
                 $office_use->client_documents = json_encode($all_proof);
+            }elseif ($request->type==='4'){
+                $validator = Validator::make($request->all(),[
+                    'status'=> 'required'
+                ]);
+
+                if ($validator->fails()){
+                    return response()->json([
+                        'status'=>false,
+                        'message'=>$validator->errors()->first(),
+                        'data'=>$validator->errors()->messages()
+                    ],422);
+                }
+                $office_use->status = $request->status;
             }
             $office_use->save();
             return response()->json([
@@ -618,7 +658,7 @@ class FinanceFormController extends Controller
         if ($application){
             return view('view_application', compact('application'));
         }
-        return redirect()->back()->with('errors','Invalid finance application number');   
+        return redirect()->back()->with('errors','Invalid finance application number');
     }
 
 }

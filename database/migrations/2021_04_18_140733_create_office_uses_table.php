@@ -29,7 +29,7 @@ class CreateOfficeUsesTable extends Migration
             $table->enum('document_review_select', ['0', '1', '2'])->default('2');
             $table->text('document_review_text')->nullable();;
             $table->enum('client_document_select', ['0', '1'])->default('1');
-            $table->string('client_documents');
+            $table->json('client_documents')->nullable();
             $table->timestamps();
         });
     }

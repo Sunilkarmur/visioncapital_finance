@@ -304,7 +304,7 @@ $busi_details = $application->business;
                 </div>
               </div>
               <!-- <div class="col-6">
-                                        
+
                                     </div>                               -->
             </div>
           </div>
@@ -338,7 +338,7 @@ $busi_details = $application->business;
                 <div class="form-group row  mb-4">
                   <label for="loan_amount" class="col-sm-4 col-form-label col-form-label-sm">Loan Amount</label>
                   <div class="col-sm-8">
-                    <!-- <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount"> 
+                    <!-- <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount">
                                                     -->
                     <label class="mt-1">{{ $finance->loan_amount }}</label>
                   </div>
@@ -429,7 +429,7 @@ $busi_details = $application->business;
         </div>
       </div>
     </div>
-  
+
   <!-- BANKING & FINANCE end -->
   <!-- GUARANTOR DETAILS -->
   <div class="row layout-top-spacing">
@@ -529,7 +529,7 @@ $busi_details = $application->business;
                 <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">CIBIL
                   Score Required?</label>
                 <div class="col-sm-8">
-                  <label class="mt-1">{{ $application->officeUse->remark == '1' ? 'Yes' : 'No' }}</label>
+                  <label class="mt-1">{{ $application->officeUse->cibil_score_required_type == '1' ? 'Yes' : 'No' }}</label>
                 </div>
               </div>
               <div class="form-group row cibil_score_row  mb-4 d-none">

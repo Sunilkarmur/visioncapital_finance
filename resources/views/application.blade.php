@@ -78,12 +78,17 @@
             ajax:'{{ route("finance.list") }}',
             columns: [
                 {data: 'bor_name', name: 'bor_name'},
-                {data: 'ref_firm', name: 'ref_firm'},
+                {
+                    data: 'business_one.business_name',
+                    name: 'business_one.business_name',
+                    bSortable: false,
+                    filterable:false
+                },
                 {data: 'ref_contact', name: 'ref_contact'},
                 {data: 'bor_amount', name: 'bor_amount'},
                 {data: 'ref_name', name: 'ref_name'},
                 {data: 'ref_firm', name: 'ref_firm'},
-                {data: 'bor_dob', name: 'bor_dob'},
+                {data: 'ref_affiliate_type', name: 'ref_affiliate_type'},
                 {
                     data: 'id',
                     name: 'id',
