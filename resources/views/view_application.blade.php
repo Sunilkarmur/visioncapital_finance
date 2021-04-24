@@ -169,7 +169,9 @@ $busi_details = $application->business;
       </div>
     </div>
     <!-- Borrower Details end -->
+
     <!-- BUSINESS Details -->
+    @if(!empty($application->business))
     <div class="row layout-top-spacing">
       <div class="col-xl-12 col-lg-12 layout-spacing">
         <div class="statbox widget box box-shadow">
@@ -262,7 +264,9 @@ $busi_details = $application->business;
         </div>
       </div>
     </div>
+    @endif
     <!-- BUSINESS Details end -->
+
     <!-- RESIDENCE Details -->
     <div class="row layout-top-spacing">
       <div class="col-xl-12 col-lg-12 layout-spacing">
@@ -304,7 +308,7 @@ $busi_details = $application->business;
                 </div>
               </div>
               <!-- <div class="col-6">
-
+                                        
                                     </div>                               -->
             </div>
           </div>
@@ -312,6 +316,7 @@ $busi_details = $application->business;
       </div>
     </div>
     <!-- RESIDENCE Details end -->
+
     <!-- BANKING & FINANCE -->
     <div class="row layout-top-spacing">
       <div class="col-xl-12 col-lg-12 layout-spacing">
@@ -324,7 +329,7 @@ $busi_details = $application->business;
             </div>
           </div>
           <div class="widget-content widget-content-area">
-
+            @if(!empty($application->financeBanking))
             <div class="row">
               @foreach($application->financeBanking as $finance)
               <div class="col-6">
@@ -338,7 +343,7 @@ $busi_details = $application->business;
                 <div class="form-group row  mb-4">
                   <label for="loan_amount" class="col-sm-4 col-form-label col-form-label-sm">Loan Amount</label>
                   <div class="col-sm-8">
-                    <!-- <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount">
+                    <!-- <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount"> 
                                                     -->
                     <label class="mt-1">{{ $finance->loan_amount }}</label>
                   </div>
@@ -383,7 +388,10 @@ $busi_details = $application->business;
               </div>
               @endforeach
             </div>
+            @endif
+
             <div class="row">
+              @if(!empty($application->savingBanking))
               @foreach($application->savingBanking as $saving)
               <div class="col-6">
                 <div class="form-group row  mb-4">
@@ -404,6 +412,8 @@ $busi_details = $application->business;
                 </div>
               </div>
               @endforeach
+              @endif
+              @if(!empty($application->currentBanking))
               @foreach($application->currentBanking as $current)
               <div class="col-6">
                 <div class="form-group row  mb-4">
@@ -424,150 +434,155 @@ $busi_details = $application->business;
                 </div>
               </div>
               @endforeach
+              @endif
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- BANKING & FINANCE end -->
 
-  <!-- BANKING & FINANCE end -->
-  <!-- GUARANTOR DETAILS -->
-  <div class="row layout-top-spacing">
-    <div class="col-xl-12 col-lg-12 layout-spacing">
-      <div class="statbox widget box box-shadow">
-        <div class="widget-header">
-          <div class="row">
-            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-              <h4>GUARANTOR DETAILS</h4>
+    <!-- GUARANTOR DETAILS -->
+    @if(!empty($application->guarantor_detail))
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+          <div class="widget-header">
+            <div class="row">
+              <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                <h4>GUARANTOR DETAILS</h4>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="widget-content widget-content-area">
-          <div class="row">
-            @foreach(json_decode($application->guarantor_detail) as $guarantor)
-            <div class="col-6">
-              <div class="form-group row  mb-4">
-                <label for="guarantor_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Person</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $guarantor->guarantor_name }}</label>
+          <div class="widget-content widget-content-area">
+            <div class="row">
+              @foreach(json_decode($application->guarantor_detail) as $guarantor)
+              <div class="col-6">
+                <div class="form-group row  mb-4">
+                  <label for="guarantor_name" class="col-sm-4 col-form-label col-form-label-sm">Name of Person</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $guarantor->guarantor_name }}</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4">
+                  <label for="guarantor_firm" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $guarantor->guarantor_firm }}</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4">
+                  <label for="guarantor_firm_nature" class="col-sm-4 col-form-label col-form-label-sm">Firm
+                    Nature</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $guarantor->guarantor_firm_nature }}</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4">
+                  <label for="guarantor_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to
+                    Vision
+                    Capital</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $guarantor->guarantor_affiliate_vc == '1' ? 'Yes' : 'No' }}</label>
+                  </div>
                 </div>
               </div>
-              <div class="form-group row  mb-4">
-                <label for="guarantor_firm" class="col-sm-4 col-form-label col-form-label-sm">Name of Firm</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $guarantor->guarantor_firm }}</label>
+              <div class="col-6">
+                <div class="form-group row  mb-4">
+                  <label for="guarantor_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Affiliated
+                    Type</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $guarantor->guarantor_affiliate_type }}</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4">
+                  <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Specify
+                    Here</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $guarantor->guarantor_affiliate_type_other }}</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4">
+                  <label for="guarantor_address" class="col-sm-4 col-form-label col-form-label-sm">Location
+                    / Address</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $guarantor->guarantor_address }}</label>
+                  </div>
                 </div>
               </div>
-              <div class="form-group row  mb-4">
-                <label for="guarantor_firm_nature" class="col-sm-4 col-form-label col-form-label-sm">Firm
-                  Nature</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $guarantor->guarantor_firm_nature }}</label>
-                </div>
-              </div>
-              <div class="form-group row  mb-4">
-                <label for="guarantor_affiliate_vc" class="col-sm-4 col-form-label col-form-label-sm">Affliated to
-                  Vision
-                  Capital</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $guarantor->guarantor_affiliate_vc == '1' ? 'Yes' : 'No' }}</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group row  mb-4">
-                <label for="guarantor_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Affiliated
-                  Type</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $guarantor->guarantor_affiliate_type }}</label>
-                </div>
-              </div>
-              <div class="form-group row  mb-4">
-                <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">Specify
-                  Here</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $guarantor->guarantor_affiliate_type_other }}</label>
-                </div>
-              </div>
-              <div class="form-group row  mb-4">
-                <label for="guarantor_address" class="col-sm-4 col-form-label col-form-label-sm">Location
-                  / Address</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $guarantor->guarantor_address }}</label>
-                </div>
-              </div>
-            </div>
-            @endforeach
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- GUARANTOR DETAILS end -->
-  <!-- FOR OFFICE USE ONLY -->
-  <div class="row layout-top-spacing">
-    <div class="col-xl-12 col-lg-12 layout-spacing">
-      <div class="statbox widget box box-shadow">
-        <div class="widget-header">
-          <div class="row">
-            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-              <h4>FOR OFFICE USE ONLY</h4>
-            </div>
-          </div>
-        </div>
-        <div class="widget-content widget-content-area">
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group row  mb-4 remarks">
-                <label for="guarantor_affiliate_type_other"
-                  class="col-sm-4 col-form-label col-form-label-sm">Remarks</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $application->officeUse->remark }}</label>
-                </div>
-              </div>
-              <div class="form-group row  mb-4 remarks">
-                <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">CIBIL
-                  Score Required?</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $application->officeUse->cibil_score_required_type == '1' ? 'Yes' : 'No' }}</label>
-                </div>
-              </div>
-              <div class="form-group row cibil_score_row  mb-4 d-none">
-                <label for="cibil_socre" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $application->officeUse->cibil_score }}</label>
-                </div>
-              </div>
-              <div class="form-group row cibil_score_row  mb-4">
-                <label for="attend_by" class="col-sm-4 col-form-label col-form-label-sm">Attended By</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">{{ $application->officeUse->attend_by }}</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group row cibil_score_row d-none  mb-4">
-                <label for="signature" class="col-sm-4 col-form-label col-form-label-sm">Signature</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">Signature</label>
-                </div>
-              </div>
-              <div class="form-group row  mb-4 d-none remarks">
-                <label for="guarantor_affiliate_type_other"
-                  class="col-sm-4 col-form-label col-form-label-sm">Status</label>
-                <div class="col-sm-8">
-                  <label class="mt-1">Approved</label>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
       </div>
     </div>
+    @endif
+    <!-- GUARANTOR DETAILS end -->
+
+    <!-- FOR OFFICE USE ONLY -->
+    @if(!empty($application->officeUse))
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+          <div class="widget-header">
+            <div class="row">
+              <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                <h4>FOR OFFICE USE ONLY</h4>
+              </div>
+            </div>
+          </div>
+          <div class="widget-content widget-content-area">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group row  mb-4 remarks">
+                  <label for="guarantor_affiliate_type_other"
+                    class="col-sm-4 col-form-label col-form-label-sm">Remarks</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $application->officeUse->remark }}</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4 remarks">
+                  <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">CIBIL
+                    Score Required?</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $application->officeUse->remark == '1' ? 'Yes' : 'No' }}</label>
+                  </div>
+                </div>
+                <div class="form-group row cibil_score_row  mb-4 d-none">
+                  <label for="cibil_socre" class="col-sm-4 col-form-label col-form-label-sm">CIBIL Score</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $application->officeUse->cibil_score }}</label>
+                  </div>
+                </div>
+                <div class="form-group row cibil_score_row  mb-4">
+                  <label for="attend_by" class="col-sm-4 col-form-label col-form-label-sm">Attended By</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $application->officeUse->attend_by }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group row cibil_score_row d-none  mb-4">
+                  <label for="signature" class="col-sm-4 col-form-label col-form-label-sm">Signature</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">Signature</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4 d-none remarks">
+                  <label for="guarantor_affiliate_type_other"
+                    class="col-sm-4 col-form-label col-form-label-sm">Status</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">Approved</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
+    <!-- FOR OFFICE USE ONLY end -->
   </div>
-  <!-- FOR OFFICE USE ONLY end -->
-</div>
-</div>
 </div>
 <!--  END CONTENT AREA  -->
 @endsection
