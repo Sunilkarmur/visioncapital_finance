@@ -1002,7 +1002,7 @@
             });
 
             $("#pill-vertical-edit").steps({
-                enableAllSteps: 0,
+                enableAllSteps: 1,
                 headerTag: "h3",
                 bodyTag: "section",
                 transitionEffect: "slideLeft",

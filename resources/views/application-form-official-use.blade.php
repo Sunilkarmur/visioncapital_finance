@@ -597,6 +597,7 @@
                     data: formData,
                     dataType: 'json',
                     success: function (response) {
+                        window.location.href='{{ route("finance.index") }}';
                         return true;
                     },
                     error: function (error) {
