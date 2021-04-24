@@ -544,7 +544,7 @@ $busi_details = $application->business;
                   <label for="guarantor_affiliate_type_other" class="col-sm-4 col-form-label col-form-label-sm">CIBIL
                     Score Required?</label>
                   <div class="col-sm-8">
-                    <label class="mt-1">{{ $application->officeUse->remark == '1' ? 'Yes' : 'No' }}</label>
+                    <label class="mt-1">{{ $application->officeUse->cibil_score_required_type == '1' ? 'Yes' : 'No' }}</label>
                   </div>
                 </div>
                 <div class="form-group row cibil_score_row  mb-4 d-none">
