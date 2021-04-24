@@ -37,4 +37,5 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('finance-form/{finandce_form}/office-use',[App\Http\Controllers\FinanceFormController::class, 'officialUse'])->name('finance.form.offician.use');
     Route::post('finance-form/{finandce_form}/{step}',[App\Http\Controllers\FinanceFormController::class, 'update'])->name('finance.form.update');
     Route::get('application_view/{id}', [App\Http\Controllers\FinanceFormController::class, 'viewApplicationDetails'])->name('finance.application_view');
+//    Route::get('approved-application-list', [App\Http\Controllers\FinanceFormController::class, 'viewApplicationDetails'])->name('finance.application_view');
 });
