@@ -268,9 +268,9 @@
                                                 <label for="finish_row" class="col-sm-4 col-form-label col-form-label-sm">Loan Status</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm" name="status">
-                                                        <option value="1" {{ ($officeUse && $officeUse->status==='Pending')?'selected':'' }}>On Hold</option>
-                                                        <option value="0" {{ ($officeUse && $officeUse->status==='Approved')?'selected':'' }}>Approve</option>
-                                                        <option value="0" {{ ($officeUse && $officeUse->status==='Rejected')?'selected':'' }}>Reject</option>
+                                                        <option value="Pending" {{ ($officeUse && $officeUse->status==='Pending')?'selected':'' }}>On Hold</option>
+                                                        <option value="Approved" {{ ($officeUse && $officeUse->status==='Approved')?'selected':'' }}>Approve</option>
+                                                        <option value="Rejected" {{ ($officeUse && $officeUse->status==='Rejected')?'selected':'' }}>Reject</option>
                                                     </select>
                                                 </div>
                                             </div>
