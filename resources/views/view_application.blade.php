@@ -567,11 +567,11 @@ $busi_details = $application->business;
                     <label class="mt-1">Signature</label>
                   </div>
                 </div>
-                <div class="form-group row  mb-4 d-none remarks">
+                <div class="form-group row  mb-4 remarks">
                   <label for="guarantor_affiliate_type_other"
                     class="col-sm-4 col-form-label col-form-label-sm">Status</label>
                   <div class="col-sm-8">
-                    <label class="mt-1">Approved</label>
+                    <label class="mt-1">{{ $application->officeUse->status }}</label>
                   </div>
                 </div>
               </div>
