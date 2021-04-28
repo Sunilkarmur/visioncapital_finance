@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApprovedController;
+use App\Http\Controllers\TrackApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Approved application list
     Route::get('approved-application-list', [ApprovedController::class, 'approvedApplicationList'])->name('finance.approved_application');
+
+    // Track Applicaton
+    Route::get('tract-application',[TrackApplicationController::class,'index'])->name('tract.application.index');
+    Route::post('track-approved-application/{application_number}',[TrackApplicationController::class,'trackApproveApplication'])->name('track-approved-application');
 });
