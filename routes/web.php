@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('application_view/{id}', [App\Http\Controllers\FinanceFormController::class, 'viewApplicationDetails'])->name('finance.application_view');
 
     // Approved application list
+    Route::get('view_approved_application/{id}', [ApprovedController::class, 'viewApprovedApplication'])->name('finance.view_approved_application');
+    Route::post('application_process/{id}', [ApprovedController::class, 'storeApprovedApplication'])->name('finance.store_application_process');
     Route::get('approved-application-list', [ApprovedController::class, 'approvedApplicationList'])->name('finance.approved_application');
 
     // Track Applicaton

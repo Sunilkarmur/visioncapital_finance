@@ -8,7 +8,7 @@
 
     <div class="page-header">
       <div class="page-title">
-        <h3>Approved Applicants List</h3>
+        <h3>Approved Application List</h3>
       </div>
     </div>
 
@@ -21,13 +21,14 @@
             <table id="column-filter" class="table table-hover non-hover approved_application" style="width:100%">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Firm Name</th>
-                  <!-- <th>Mobile</th>
+                  <th>Mobile</th>
                   <th>Amount</th>
                   <th>Time Limit</th>
                   <th>Status</th>
-                  <th>Action</th> -->
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
