@@ -202,13 +202,13 @@
                       <div class="row col-8">
                         <div class="n-chk mt-2">
                           <label class="new-control new-checkbox new-checkbox-rounded checkbox-success">
-                            <input type="radio" class="new-control-input" name="signature_type" value="borrower_sign">
+                            <input type="checkbox" class="new-control-input" name="borrower_sign" value="Borrower Sign">
                             <span class="new-control-indicator"></span>Borrower Sign
                           </label>
                         </div>&nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="n-chk mt-2">
                           <label class="new-control new-checkbox new-checkbox-rounded checkbox-success">
-                            <input type="radio" class="new-control-input" name="signature_type" value="gaurantor_sign">
+                            <input type="checkbox" class="new-control-input" name="gaurantor_sign" value="Gaurantor Sign">
                             <span class="new-control-indicator"></span>Gaurantor Sign
                           </label>
                         </div>
@@ -265,6 +265,10 @@
 </div>
 <!--  END CONTENT AREA  -->
 @endsection
+
+@push('style')
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}">
+@endpush
 
 @push('script')
 <script src="{{ asset('js/view_approved_app.js') }}"></script>

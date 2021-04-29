@@ -53,6 +53,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/dt-global_style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/custom_dt_miscellaneous.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/tables/table-basic.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}">
 <!-- END PAGE LEVEL CUSTOM STYLES -->
 @endpush
 

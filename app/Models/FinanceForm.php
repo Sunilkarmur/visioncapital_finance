@@ -34,4 +34,8 @@ class FinanceForm extends Model
     public function officeUse(){
         return $this->hasOne(OfficeUse::class,'finance_id','id');
     }
+
+    public function loanAccountDetails(){
+        return $this->hasOne(LoanAccount::class,'finance_id','id');
+    }
 }
