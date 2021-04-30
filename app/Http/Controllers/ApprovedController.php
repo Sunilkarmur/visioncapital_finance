@@ -61,39 +61,34 @@ class ApprovedController extends Controller
     public function storeApprovedApplication(LoanProcessionRequest $request, $id)
     {
         try {
-            if(session('finance_type'))
-            {
-                $wallet = Wallet::where([['type', session('finance_type')],['status', '1']])
-                    ->first();
+            $wallet = Wallet::where([['type', $request->finance_type],['status', '1']])
+                ->first();
 
-                $first_month_interest = $this->firstMonthCalculateInterest($request->disbursement_amt);
+            $first_month_interest = $this->firstMonthCalculateInterest($request->disbursement_amt);
 
-                $accounnt_loan = new LoanAccount();
-                $accounnt_loan->account_id = $this->generateLoanAccountNumber() ;
-                $accounnt_loan->finance_id = $request->finance_id;
-                $accounnt_loan->is_processing_fees = $request->processing_fees_select;
-                $accounnt_loan->agreement = $request->agreement;
-                $accounnt_loan->franking = $request->franking;
-                $accounnt_loan->sign = $request->sign;
-                $accounnt_loan->notarized_agreement = $request->notarized_agreement;
-                $accounnt_loan->disbursement = $request->disbusrsement;
-                $accounnt_loan->processing_fees = $request->processing_fees;
-                $accounnt_loan->signature = $request->signature_type;
-                $accounnt_loan->notarized_status = $request->notarised_select;
-                $accounnt_loan->disbursement_status = $request->disbursement_select;
-                $accounnt_loan->disbursement_amount = $request->disbursement_amt;
-                $accounnt_loan->processing_date = Carbon::now();
-                $accounnt_loan->loan_pecentage = config('constants.loan_pecentage');
-                $accounnt_loan->first_emi_amount = $first_month_interest;
-                $accounnt_loan->emi_amount = $this->calcEmiAmount($request->disbursement_amt);
-                $accounnt_loan->save();
+            $accounnt_loan = new LoanAccount();
+            $accounnt_loan->account_id = $this->generateLoanAccountNumber() ;
+            $accounnt_loan->finance_id = $request->finance_id;
+            $accounnt_loan->is_processing_fees = $request->processing_fees_select;
+            $accounnt_loan->agreement = $request->agreement;
+            $accounnt_loan->franking = $request->franking;
+            $accounnt_loan->sign = $request->sign;
+            $accounnt_loan->notarized_agreement = $request->notarized_agreement;
+            $accounnt_loan->disbursement = $request->disbusrsement;
+            $accounnt_loan->processing_fees = $request->processing_fees;
+            $accounnt_loan->signature = $request->signature_type;
+            $accounnt_loan->notarized_status = $request->notarised_select;
+            $accounnt_loan->disbursement_status = $request->disbursement_select;
+            $accounnt_loan->disbursement_amount = $request->disbursement_amt;
+            $accounnt_loan->processing_date = Carbon::now();
+            $accounnt_loan->loan_pecentage = config('constants.loan_pecentage');
+            $accounnt_loan->first_emi_amount = $first_month_interest;
+            $accounnt_loan->emi_amount = $this->calcEmiAmount($request->disbursement_amt);
+            $accounnt_loan->save();
 
-                $wallet->amount = $wallet->amount - $request->disbursement_amt;
-                $wallet->save();
-                return response()->json(['status'=>true,'message'=>'Loan Account Generate Successfully!','data'=>$accounnt_loan],200);
-
-            }
-            return response()->json(['status'=>false,'message'=>'Session not Exists!','data'=>[]],422);
+            $wallet->amount = $wallet->amount - $request->disbursement_amt;
+            $wallet->save();
+            return response()->json(['status'=>true,'message'=>'Loan Account Generate Successfully!','data'=>$accounnt_loan],200);
 
         } catch (\Exception $e) {
             return response()->json(['status'=>false,'message'=>$e->getMessage(),'data'=>[]],422);
