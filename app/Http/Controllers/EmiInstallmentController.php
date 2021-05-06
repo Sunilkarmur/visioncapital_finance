@@ -15,9 +15,9 @@ class EmiInstallmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($account_id=null)
     {
-        return view('emi-list');
+        return view('emi-list',compact('account_id'));
     }
 
     /**
@@ -62,12 +62,12 @@ class EmiInstallmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmiInstallment  $emiInstallment
+     * @param  $account_id
      * @return \Illuminate\Http\Response
      */
-    public function show(EmiInstallment $emiInstallment)
+    public function show($account_id)
     {
-        $data = EmiInstallment::with('loanAccount');
+        $data = EmiInstallment::where('account_id','=',$account_id);
         return Datatables::of($data)->make(true);
     }
 

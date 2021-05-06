@@ -72,7 +72,7 @@
                     { extend: 'print', className: 'btn' }
                 ]
             },
-            ajax: '{{ route("emi.list") }}',
+            ajax: '{{ route("emi.list",["account_id"=>$account_id]) }}',
             columns: [{
                 data: 'account_id',
                 name: 'account_id',
