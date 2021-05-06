@@ -43,8 +43,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('view_approved_application/{id}', [ApprovedController::class, 'viewApprovedApplication'])->name('finance.view_approved_application');
     Route::post('application_process/{id}', [ApprovedController::class, 'storeApprovedApplication'])->name('finance.store_application_process');
     Route::get('approved-application-list', [ApprovedController::class, 'approvedApplicationList'])->name('finance.approved_application');
+    Route::post('distribute-amount-submit',[ApprovedController::class,'distributeAmountSubmit'])->name('distribute.amount.submit');
+    Route::post('get-loan-account-list',[ApprovedController::class,'getLoanAccountList'])->name('loan.account.list');
+    Route::post('get-loan-account-detail',[ApprovedController::class,'getLoanAccountDetail'])->name('loan.account.detail');
 
     // Track Applicaton
     Route::get('tract-application',[TrackApplicationController::class,'index'])->name('tract.application.index');
-    Route::post('track-approved-application/{application_number}',[TrackApplicationController::class,'trackApproveApplication'])->name('track-approved-application');
+    Route::post('track-approved-application',[TrackApplicationController::class,'trackApproveApplication'])->name('track-approved-application');
+
+    // Emi Installment
+    Route::post('/emi',[\App\Http\Controllers\EmiInstallmentController::class,'store'])->name('emi.store');
 });

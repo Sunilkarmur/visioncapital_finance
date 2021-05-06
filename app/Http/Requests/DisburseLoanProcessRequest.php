@@ -5,9 +5,8 @@ namespace App\Http\Requests;
 use App\Models\FinanceForm;
 use App\Models\Wallet;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class LoanProcessionRequest extends FormRequest
+class DisburseLoanProcessRequest extends FormRequest
 {
     /**
      * Prepare the data for validation.
@@ -17,7 +16,6 @@ class LoanProcessionRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'finance_id' => decrypt($this->id),
             'finance_type' => session()->has('finance_type')?session('finance_type'):null,
         ]);
     }
@@ -78,6 +76,7 @@ class LoanProcessionRequest extends FormRequest
         }
         return false;
     }
+
 
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {

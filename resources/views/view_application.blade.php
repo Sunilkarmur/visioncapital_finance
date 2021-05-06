@@ -308,7 +308,7 @@ $busi_details = $application->business;
                 </div>
               </div>
               <!-- <div class="col-6">
-                                        
+
                                     </div>                               -->
             </div>
           </div>
@@ -343,7 +343,7 @@ $busi_details = $application->business;
                 <div class="form-group row  mb-4">
                   <label for="loan_amount" class="col-sm-4 col-form-label col-form-label-sm">Loan Amount</label>
                   <div class="col-sm-8">
-                    <!-- <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount"> 
+                    <!-- <input type="text" name="loan_amount" class="form-control form-control-sm" id="loan_amount" placeholder="Loan Amount">
                                                     -->
                     <label class="mt-1">{{ $finance->loan_amount }}</label>
                   </div>
@@ -414,7 +414,7 @@ $busi_details = $application->business;
               @endforeach
               @endif
               @if(!empty($application->currentBanking))
-              @foreach($application->currentBanking as $current)
+                @foreach($application->currentBanking as $current)
               <div class="col-6">
                 <div class="form-group row  mb-4">
                   <label for="current_ac_bank" class="col-sm-4 col-form-label col-form-label-sm">Current Account

@@ -23,6 +23,7 @@ $(document).ready(function () {
       { data: 'bor_amount', name: 'bor_amount' },
       { data: 'bor_time_limit', name: 'bor_time_limit' },
       { data: 'status', name: 'status' },
+      { data: 'loan_account_id', name: 'loan_account_id' },
       { data: 'action', name: 'action' },
     ],
     "oLanguage": {
@@ -79,3 +80,43 @@ $(document).ready(function () {
   });
 
 });
+
+
+$("#distribute-amount-submit").on("submit", function (e) {
+    var dataString = $(this).serializeArray();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: $(this).attr('action'),
+        method: $(this).attr('method'),
+        data: dataString,
+        dataType: 'json',
+        success: function (response) {
+            swal({
+                    title: "Success!",
+                    text: response.message,
+                    type: "success"
+                },
+                function() {
+
+                }
+            );
+            setTimeout(function () {
+                window.location.reload();
+            },1000)
+        },
+        error: function (error) {
+            const sources = error.responseJSON;
+            swal("Error!", sources.message, "error");
+            // return Promise.reject(sources);
+        }
+    })
+
+    e.preventDefault();
+});
+
+function onDistributeAmount(id) {
+    $('#finance_id').val(id)
+}
+

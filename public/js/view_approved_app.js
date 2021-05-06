@@ -66,8 +66,8 @@ $("#progress-form").on("submit", function (e) {
                 }
             );
             setTimeout(function () {
-                window.location.href=base_url+'approved-application-list';
-            },3000)
+                window.location.reload();
+            },1000)
         },
         error: function (error) {
             const sources = error.responseJSON;
