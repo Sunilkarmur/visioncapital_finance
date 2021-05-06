@@ -258,7 +258,7 @@ class FinanceFormController extends Controller
         if ($financeForm){
             $financeForm->bor_name = $request->bor_name;
             $financeForm->bor_amount = preg_replace("/[^0-9]/", "",$request->bor_amount);
-            $financeForm->remaing_disbursement_amount = preg_replace("/[^0-9]/", "",$request->bor_amount);
+            $financeForm->remaing_disbursement_amount = (float)preg_replace("/[^0-9]/", "",$request->bor_amount);
             $financeForm->bor_time_limit = $request->bor_time_limit;
             $financeForm->bor_purpose = $request->bor_purpose;
             $financeForm->bor_affiliate_vc = $request->bor_affiliate_vc;

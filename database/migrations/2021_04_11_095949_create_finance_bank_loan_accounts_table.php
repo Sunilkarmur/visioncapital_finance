@@ -20,9 +20,9 @@ class CreateFinanceBankLoanAccountsTable extends Migration
             $table->string('bank_name');
             $table->string('previous_lona_type');
             $table->string('bank_branch');
-            $table->float('loan_amount');
-            $table->float('emi_amount');
-            $table->float('bank_balance');
+            $table->double('loan_amount',16,2);
+            $table->double('emi_amount',16,2);
+            $table->double('bank_balance',16,2);
             $table->string('duration')->default('1');
             $table->timestamps();
         });

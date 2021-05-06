@@ -23,6 +23,7 @@ class CreateLoanAccountsTable extends Migration
             $table->string('sign')->nullable();
             $table->string('notarized_agreement')->nullable();
             $table->string('disbursement')->nullable();
+            $table->string('signature')->nullable();
             $table->string('borrower_sign')->nullable();
             $table->string('gaurantor_sign')->nullable();
             $table->decimal('processing_fees', 16,2)->default(0);
