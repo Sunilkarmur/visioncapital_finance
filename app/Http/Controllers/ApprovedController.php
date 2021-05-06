@@ -121,7 +121,7 @@ class ApprovedController extends Controller
             $accounnt_loan->save();
 
             $financeForm = FinanceForm::find($request->finance_id);
-            $financeForm->remaing_disbursement_amount = (float)$request->disbursement_amt - (float)$financeForm->bor_amount;
+            $financeForm->remaing_disbursement_amount = (float)$financeForm->remaing_disbursement_amount - (float)$request->disbursement_amt;
             $financeForm->save();
 
             $wallet->amount = $wallet->amount - $request->disbursement_amt;
@@ -211,7 +211,7 @@ class ApprovedController extends Controller
             $accounnt_loan->save();
 
             $financeForm = FinanceForm::find($request->finance_id);
-            $financeForm->remaing_disbursement_amount = (float)$request->disbursement_amt - (float)$financeForm->bor_amount;
+            $financeForm->remaing_disbursement_amount = (float)$financeForm->remaing_disbursement_amount - (float)$request->disbursement_amt;
             $financeForm->save();
 
             $wallet->amount = $wallet->amount - $request->disbursement_amt;
