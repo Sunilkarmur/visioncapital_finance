@@ -71,7 +71,8 @@ class FinanceFormController extends Controller
     {
         $applicationList = FinanceForm::withoutTrashed()
             ->with('businessOne')
-            ->where('finance_type','=',session()->get('finance_type'))->where('status','=','1');
+            ->where('finance_type','=',session()->get('finance_type'))
+            ->where('status','=','1')->orderBy('id','desc');
         return DataTables::of($applicationList)
             ->editColumn('ref_affiliate_type',function ($value) {
                 if ($value->ref_affiliate_vc==='No'){

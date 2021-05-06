@@ -152,11 +152,22 @@ class ApprovedController extends Controller
         if ($currentDate->format('Y-m-d')>=$currentMonthDate->format('Y-m-d')){
             $currentMonthDate = Carbon::parse(Carbon::now()->addMonth(1)->year.'-'.Carbon::now()->addMonth(1)->month.'-12')->format('Y-m-d');
         }
-        $datetime1 = new \DateTime($currentDate->format('Y-m-d H:s:i'));
-        $datetime2 = new \DateTime($currentMonthDate->format('Y-m-d H:s:i'));
-        $totalDays = $datetime1->diff($datetime2);
-//        $totalDays = $currentDate->diffInDays($currentMonthDate);
+//        $to = Carbon::createFromFormat('Y-m-d H:s:i', $currentDate->format('Y-m-d'));
+//        $from = Carbon::createFromFormat('Y-m-d H:s:i', $currentMonthDate->format('Y-m-d'));
 
+//        $diff_in_days = $to->diffInDays($from);
+
+//        $datetime1 = $currentDate->format('Y-m-d H:s:i');
+//        $datetime2 = $currentMonthDate->format('Y-m-d H:s:i');
+//        $totalDays = $datetime1->diff($datetime2);
+        $totalDays = $currentDate->diffInDays($currentMonthDate);
+
+        $fdate = $currentDate->format('Y-m-d');
+        $tdate = $currentMonthDate->format('Y-m-d');
+        $datetime1 = strtotime($fdate); // convert to timestamps
+        $datetime2 = strtotime($tdate); // convert to timestamps
+        $days = (int)(($datetime2 - $datetime1)/86400); // will give the difference in days , 86400 is the timestamp difference of a day
+        $totalDays=$days+1;
         $si = ((float)$price * config('constants.loan_pecentage'))/100;
         $daysInterest = $si/30;
         $si = $daysInterest*$totalDays;
@@ -235,8 +246,11 @@ class ApprovedController extends Controller
         $this->validate($request,[
             'account_id'=>'required|exists:loan_accounts,account_id'
         ]);
-        $loanAccount = LoanAccount::where('account_id','=',$request->account_id)->first();
+        $loanAccount = LoanAccount::with('emi')->where('account_id','=',$request->account_id)->first();
         if ($loanAccount){
+            if ($loanAccount->emi===null){
+                $loanAccount->emi_amount=$loanAccount->first_emi_amount;
+            }
             return response()->json([
                 'status'=>true,
                 'message'=>'Loan Account List',

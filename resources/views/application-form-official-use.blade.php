@@ -121,7 +121,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row document_review_text_row d-none  mb-4 d-none">
-                                                <label for="document_review_text_row" class="col-sm-4 col-form-label col-form-label-sm">Visit Management Review Note</label>
+                                                <label for="document_review_text_row" class="col-sm-4 col-form-label col-form-label-sm">Document Management Review Note</label>
                                                 <div class="col-sm-8">
                                                     <textarea name="document_review_text" class="form-control form-control-sm" id="document_review_text" placeholder="Management Review">{{ $officeUse?$officeUse->document_review_text:'' }}</textarea>
                                                 </div>
