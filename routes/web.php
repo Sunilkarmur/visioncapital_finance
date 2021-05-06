@@ -52,5 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('track-approved-application',[TrackApplicationController::class,'trackApproveApplication'])->name('track-approved-application');
 
     // Emi Installment
+    Route::get('/emi',[\App\Http\Controllers\EmiInstallmentController::class,'index'])->name('emi.index');
+    Route::get('/emi/list',[\App\Http\Controllers\EmiInstallmentController::class,'show'])->name('emi.list');
     Route::post('/emi',[\App\Http\Controllers\EmiInstallmentController::class,'store'])->name('emi.store');
 });

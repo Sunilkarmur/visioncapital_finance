@@ -6,6 +6,7 @@ use App\Http\Requests\EmiInstallmentRequest;
 use App\Models\EmiInstallment;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use DataTables, Response, Carbon\Carbon;
 
 class EmiInstallmentController extends Controller
 {
@@ -16,7 +17,7 @@ class EmiInstallmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('emi-list');
     }
 
     /**
@@ -66,7 +67,8 @@ class EmiInstallmentController extends Controller
      */
     public function show(EmiInstallment $emiInstallment)
     {
-        //
+        $data = EmiInstallment::with('loanAccount');
+        return Datatables::of($data)->make(true);
     }
 
     /**
