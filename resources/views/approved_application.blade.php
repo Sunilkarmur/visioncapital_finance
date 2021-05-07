@@ -56,7 +56,7 @@
                     <form class="mt-0" action="{{ route('distribute.amount.submit') }}" method="post" id="distribute-amount-submit">
                         @csrf
                         <div class="form-group">
-                            <label for="disbursement_amt">Disbursement Amount</label>
+                            <label for="disbursement_amount">Disbursement Amount</label>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                             <input type="hidden" name="finance_id" value="" id="finance_id">
                             <input type="text" class="form-control mb-2" id="disbursement_amount" placeholder="Disbursement Amount" name="disbursement_amt">

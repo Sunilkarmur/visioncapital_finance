@@ -126,7 +126,7 @@
                                                     <textarea name="document_review_text" class="form-control form-control-sm" id="document_review_text" placeholder="Management Review">{{ $officeUse?$officeUse->document_review_text:'' }}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="form-group row client_document_row  mb-4 d-none">
+                                            <!-- <div class="form-group row client_document_row  mb-4 d-none">
                                                 <label for="client_document_row" class="col-sm-4 col-form-label col-form-label-sm">Select Documentation</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control form-control-sm client_document_select" name="client_document_select">
@@ -134,130 +134,138 @@
                                                         <option value="0" {{ ($officeUse && $officeUse->client_document_select==='0')?'selected':'' }}>Gaurantor's Document</option>
                                                     </select>
                                                 </div>
+                                            </div> -->
+                                            <div class="form-group row mt-4 mb-4 py-4">
+                                                <div class="col-6">
+                                                    <h5 for="visit_text_row" class="col-sm-12 mb-2">Client's Document</h5><hr style="border: 1px solid #000" />
+                                                <div class="col-sm-12">
+                                                    <h6 class="mt-1">Residence Proof</h6>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" name="resi_proof[]" class="new-control-input new-control new-checkbox checkbox-primary text-dark" value="rent_agreement" {{ in_array('rent_agreement',$finance->resi_proof) ?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="resi_proof[]" value="aadahar_card" {{ in_array('aadahar_card',$finance->resi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Aadhar Card
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input" name="resi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->resi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Light bill
+                                                        </label>
+                                                    </div>
+                                                    <h6 class="mt-1">Business Proof</h6>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="gst_cert" {{ in_array('gst_cert',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>GST Certificate
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="rent_bill" {{ in_array('rent_bill',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Light bill
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="tax_bill" {{ in_array('tax_bill',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>TAX bill
+                                                        </label>
+                                                    </div>
+                                                    <h6 class="mt-1">ID Proof</h6>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="id_proof[]" value="pan_card" {{ in_array('pan_card',$finance->id_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>PAN Card
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="id_proof[]" value="photo" {{ in_array('photo',$finance->id_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>PHOTO
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h5 for="visit_text_row" class="col-sm-12 mb-2">Gaurantor's Document</h5><hr style="border: 1px solid #000" />
+                                                <div class="col-sm-12">
+                                                    <h6 class="mt-1">Residence Proof</h6>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="resi_proof[]" value="rent_agreement" {{ in_array('rent_agreement',$finance->resi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="resi_proof[]" value="aadahar_card" {{ in_array('aadahar_card',$finance->resi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Aadhar Card
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="resi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->resi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Light bill
+                                                        </label>
+                                                    </div>
+                                                    <h6 class="mt-1">Business Proof</h6>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="gst_cert" {{ in_array('gst_cert',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>GST Certificate
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="rent_bill" {{ in_array('rent_bill',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>Light bill
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="busi_proof[]" value="tax_bill" {{ in_array('tax_bill',$finance->busi_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>TAX bill
+                                                        </label>
+                                                    </div>
+                                                    <h6 class="mt-1">ID Proof</h6>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="id_proof[]" value="pan_card" {{ in_array('pan_card',$finance->id_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>PAN Card
+                                                        </label>
+                                                    </div>
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox checkbox-primary text-dark">
+                                                            <input type="checkbox" class="new-control-input new-control new-checkbox checkbox-primary text-dark" name="id_proof[]" value="photo" {{ in_array('photo',$finance->id_proof)?'checked':'' }}>
+                                                            <span class="new-control-indicator"></span>PHOTO
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                </div>
                                             </div>
                                             <div class="form-group row client_document_text_row d-none  mb-4">
-                                                <label for="visit_text_row" class="col-sm-4 col-form-label col-form-label-sm">Client's Document</label>
-                                                <div class="col-sm-8">
-                                                    <h6 class="mt-1">Residence Proof</h6>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" name="resi_proof[]" class="new-control-input" value="rent_agreement" {{ in_array('rent_agreement',$finance->resi_proof) ?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="resi_proof[]" value="aadahar_card" {{ in_array('aadahar_card',$finance->resi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Aadhar Card
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="resi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->resi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Light bill
-                                                        </label>
-                                                    </div>
-                                                    <h6 class="mt-1">Business Proof</h6>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="gst_cert" {{ in_array('gst_cert',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>GST Certificate
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="rent_bill" {{ in_array('rent_bill',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Light bill
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="tax_bill" {{ in_array('tax_bill',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>TAX bill
-                                                        </label>
-                                                    </div>
-                                                    <h6 class="mt-1">ID Proof</h6>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="id_proof[]" value="pan_card" {{ in_array('pan_card',$finance->id_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>PAN Card
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="id_proof[]" value="photo" {{ in_array('photo',$finance->id_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>PHOTO
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                             <div class="form-group row gaurantor_document_text_row d-none  mb-4">
-                                                <label for="visit_text_row" class="col-sm-4 col-form-label col-form-label-sm">Gaurantor's Document</label>
-                                                <div class="col-sm-8">
-                                                    <h6 class="mt-1">Residence Proof</h6>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="resi_proof[]" value="rent_agreement" {{ in_array('rent_agreement',$finance->resi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="resi_proof[]" value="aadahar_card" {{ in_array('aadahar_card',$finance->resi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Aadhar Card
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="resi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->resi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Light bill
-                                                        </label>
-                                                    </div>
-                                                    <h6 class="mt-1">Business Proof</h6>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="gst_cert" {{ in_array('gst_cert',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>GST Certificate
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="rent_bill" {{ in_array('rent_bill',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Index Copy / Rent Agreement
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="light_bill" {{ in_array('light_bill',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>Light bill
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="busi_proof[]" value="tax_bill" {{ in_array('tax_bill',$finance->busi_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>TAX bill
-                                                        </label>
-                                                    </div>
-                                                    <h6 class="mt-1">ID Proof</h6>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="id_proof[]" value="pan_card" {{ in_array('pan_card',$finance->id_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>PAN Card
-                                                        </label>
-                                                    </div>
-                                                    <div class="n-chk">
-                                                        <label class="new-control new-checkbox checkbox-primary">
-                                                            <input type="checkbox" class="new-control-input" name="id_proof[]" value="photo" {{ in_array('photo',$finance->id_proof)?'checked':'' }}>
-                                                            <span class="new-control-indicator"></span>PHOTO
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </form>
                                     </section>
@@ -292,6 +300,7 @@
     <!--  BEGIN CUSTOM STYLE FILE  -->
     <link href="{{ asset('assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/jquery-step/jquery.steps.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}">
     <style>
         #formValidate .wizard > .content {
             min-height: 25em;
@@ -308,6 +317,12 @@
             margin-bottom: 3px;
             display: block;
             width: 100%;
+        }
+        .form-group h6{
+            padding: 10px 0px;
+        }
+        .form-group label, label{
+            color: #3b3f5c;
         }
     </style>
 @endpush
