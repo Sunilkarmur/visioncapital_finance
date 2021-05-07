@@ -334,23 +334,24 @@ function residenceDetailForm(currentIndex) {
 function financeBakingForm(currentIndex) {
     var data = [];
     var form = $('.banking_finance_form');
-    var banking_finance_form = validation(form, {
-        bank_name: 'required',
-        previous_lona_type: 'required',
-        bank_branch: 'required',
-        loan_amount: 'required',
-        emi_amount: 'required',
-        bank_balance: 'required',
-        duration: 'required',
-    }, {
-        bank_name: 'Please Enter Bank Name',
-        previous_lona_type: 'Please Enter Previous Loan Type',
-        bank_branch: 'Please Enter Bank Branch ',
-        loan_amount: 'Please Enter Loan Amount',
-        emi_amount: 'Please Enter EMI Amount',
-        bank_balance: 'Please Enter Bank Balance',
-        duration: 'Please Enter Duration',
-    })
+    // var banking_finance_form = validation(form, {
+    //     bank_name: 'required',
+    //     previous_lona_type: 'required',
+    //     bank_branch: 'required',
+    //     loan_amount: 'required',
+    //     emi_amount: 'required',
+    //     bank_balance: 'required',
+    //     duration: 'required',
+    // }, {
+    //     bank_name: 'Please Enter Bank Name',
+    //     previous_lona_type: 'Please Enter Previous Loan Type',
+    //     bank_branch: 'Please Enter Bank Branch ',
+    //     loan_amount: 'Please Enter Loan Amount',
+    //     emi_amount: 'Please Enter EMI Amount',
+    //     bank_balance: 'Please Enter Bank Balance',
+    //     duration: 'Please Enter Duration',
+    // })
+    var banking_finance_form = validation(form,'','')
     if (!banking_finance_form) {
         return banking_finance_form;
     }

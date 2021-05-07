@@ -299,9 +299,11 @@
                                                                 <option value="5">Vehicle Loan</option>
                                                                 <option value="6">Gold Loan</option>
                                                                 <option value="7">CC Loan</option>
+                                                                <option value="8">N/A</option>
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="link_loan_type">
                                                     <div class="form-group row  mb-4">
                                                         <label for="bank_name" class="col-sm-4 col-form-label col-form-label-sm">Bank</label>
                                                         <div class="col-sm-8">
@@ -337,6 +339,7 @@
                                                         <div class="col-sm-8">
                                                             <input type="text" name="duration" class="form-control form-control-sm" id="duration" placeholder="Duration">
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </form>
                                             </div>
@@ -501,13 +504,20 @@
 
 @push('script')
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-step/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-step/custom-jquery.steps.js') }}"></script>
+    <script src="{{ asset('plugins/input-mask/input-mask.js') }}"></script>
+    <script src="{{ asset('plugins/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
+    
+    <!-- END PAGE LEVEL SCRIPTS -->
     <script type="text/javascript">
         $(document).ready(function(){
-
             $('.add_gaurantor').on('click',function(){
                 var section = $('.guarantor_section').clone();
                 // $(this).addClass('d-none');
-                $('.guarantor_section_clone').html(section);
+                $('.guarantor_section_clone').html(section).find("input").val("");
                 $('.guarantor_section_clone .guarantor_section .remove_gaurantor').removeClass('d-none');
                 // $('.guarantor_section_clone').before('<div class="form-group row  mb-4"><div class="col-12"><a href="javascript:void(0);" class="btn btn-outline-danger mb-2 float-right remove_gaurantor" type="button">Remove</a></div></div>');
             });
@@ -570,9 +580,18 @@
                 }
             });
 
+            $('.previous_lona_type').change(function(){
+                if($(this).val()==8){
+                    $('.link_loan_type').addClass('d-none');
+                }
+                else{
+                    $('.link_loan_type').removeClass('d-none');   
+                }
+            })
+
             $('.add_banking_finance').on('click',function(){
                 var section = $('.banking_finance_row').clone();
-                $('.banking_finance_clone_row').html(section);
+                $('.banking_finance_clone_row').html(section).find("input").val("");
                 section.find('form').each(function() {
                     $(this).add('rules',{
                         bank_name:'required',
@@ -581,6 +600,7 @@
                         bank_name:'Please Enter Bank Name',
                     })
                 })
+
                 $('.banking_finance_clone_row .banking_finance_row .remove_banking_finance_btn').removeClass('d-none');
             });
             $(document).on('click','.remove_banking_finance_btn',function(){
@@ -721,11 +741,4 @@
 
         });
     </script>
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
-    <script src="{{ asset('plugins/jquery-step/jquery.steps.min.js') }}"></script>
-    <script src="{{ asset('plugins/jquery-step/custom-jquery.steps.js') }}"></script>
-    <script src="{{ asset('plugins/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
-    <script src="{{ asset('plugins/input-mask/input-mask.js') }}"></script>
-    <!-- END PAGE LEVEL SCRIPTS -->
 @endpush

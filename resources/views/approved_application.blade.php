@@ -84,32 +84,39 @@
                     <form class="mt-0" id="add-installment-form" action="{{ route('emi.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            <select class="form-control mb-2" id="select-loan-account" name="account_id">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> -->
+                            <label for="select-loan-account">Choose Loan Account</label>
+                            <select class="custom-select mb-2" id="select-loan-account" name="account_id">
                                 <option>Select Loan Account</option>
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="instalment_date">Instalment Date</label>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            <input type="date" class="form-control flatpickr flatpickr-input mb-2" placeholder="Instalment Date" name="instalment_date" >
+                            <input type="date" class="form-control mb-2" placeholder="Instalment Date" name="instalment_date" id="instalment_date">
                         </div>
                         <div class="form-group">
+                            <label for="paid_date">Paid Date</label>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            <input type="date" class="form-control mb-2" placeholder="Paid Date" name="paid_date" >
+                            <input type="date" class="form-control mb-2" placeholder="Paid Date" name="paid_date" id="paid_date">
                         </div>
                         <div class="form-group">
+                            <label for="instalment_amount">Instalment Amount</label>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                            <input type="text" class="form-control mb-2" id="instalment_amount" placeholder="Instalment Amount" name="instalment_amount" readonly>
+                            <input type="text" class="form-control mb-2" id="instalment_amount" placeholder="Instalment Amount" name="instalment_amount" readonly id="instalment_amount">
                         </div>
                         <div class="form-group">
+                            <label for="paid_amount">Paid Amount</label>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                             <input type="text" class="form-control mb-2" id="paid_amount" placeholder="Paid Amount" name="paid_amount">
                         </div>
                         <div class="form-group">
+                            <label for="penalty">Penalty</label>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
-                            <input type="text" class="form-control mb-2" id="penalty" placeholder="Penalty" name="penalty">
+                            <input type="text" class="form-control mb-2" id="penalty" placeholder="Penalty" name="penalty" id="penalty">
                         </div>
                         <div class="form-group">
+                            <label for="remarks">Remarks</label>
                             <textarea class="form-control mb-2" id="remarks" name="remarks" placeholder="Remarks"></textarea>
                         </div>
                         <div class="form-group">
@@ -234,8 +241,8 @@
         })
 
     });
-     flatpickr(document.getElementById('instalment_date'));
-    flatpickr(document.getElementById('paid_date'));
+    //  flatpickr(document.getElementById('instalment_date'));
+    // flatpickr(document.getElementById('paid_date'));
 
 </script>
 <!-- END PAGE LEVEL CUSTOM SCRIPTS -->

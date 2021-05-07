@@ -413,24 +413,26 @@ class FinanceFormController extends Controller
             if ($financeBank!==null && count($financeBank)>0){
                 FinanceBankLoanAccount::where('finance_id','=',$request->id)->delete();
                 foreach ($financeBank as $value) {
-                    $validator = Validator::make($value,[
-                        'bank_name'=>'required',
-                        'bank_branch'=>'required',
-                        'previous_lona_type'=>'required',
-                        'loan_amount'=>'required',
-                        'emi_amount'=>'required',
-                        'bank_balance'=>'required',
-                        'duration'=>'required',
-                    ]);
 
-                    if ($validator->fails()){
-                        return response()->json([
-                            'status'=>false,
-                            'message'=>$validator->errors()->first(),
-                            'data'=>$validator->errors()->messages()
-                        ],422);
+                    if($value['previous_lona_type']!=8){
+                        $validator = Validator::make($value,[
+                            'bank_name'=>'required',
+                            'bank_branch'=>'required',
+                            'previous_lona_type'=>'required',
+                            'loan_amount'=>'required',
+                            'emi_amount'=>'required',
+                            'bank_balance'=>'required',
+                            'duration'=>'required',
+                        ]);
+
+                        if ($validator->fails()){
+                            return response()->json([
+                                'status'=>false,
+                                'message'=>$validator->errors()->first(),
+                                'data'=>$validator->errors()->messages()
+                            ],422);
+                        }
                     }
-
                     $financeBankLoanAccount = new FinanceBankLoanAccount();
                     $financeBankLoanAccount->finance_id = $request->id;
                     $financeBankLoanAccount->user_id = Auth::user()->id;
