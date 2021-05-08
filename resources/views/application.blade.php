@@ -122,8 +122,8 @@ var table = $('#column-filter').DataTable({
           '</li>' +
           '<li><a href="' + base_url + 'finance-form/' + data +
           '/edit"  data-toggle="tooltip" data-placement="top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>' +
-          '<li><a class="btn btn-primary" href="' + base_url + 'finance-form/' + data +
-          '/office-use"  data-toggle="tooltip" data-placement="top" title="Official Use">Official Use</a></li>' +
+          '<li><a href="' + base_url + 'finance-form/' + data +
+          '/office-use"  data-toggle="tooltip" data-placement="top" title="Official Use"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></a></li>' +
           '<li>' +
           '<a href="javascript:void(0);" onclick="deleteApplicationForm(' + data +
           ')" data-toggle="tooltip" data-placement="top" title="Delete" class="warning confirm">' +
