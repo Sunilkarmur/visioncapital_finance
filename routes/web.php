@@ -15,9 +15,9 @@ use App\Http\Controllers\TrackApplicationController;
 |
  */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+//Route::get('/', function () {
+//    return redirect()->route('login');
+//});
 
 Auth::routes([
     'register' => false, // Registration Routes...
@@ -26,6 +26,7 @@ Auth::routes([
 ]);
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('application', [App\Http\Controllers\FinanceFormController::class, 'index'])->name('finance.index');
