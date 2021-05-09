@@ -35,14 +35,24 @@ class EmiInstallmentRequest extends FormRequest
     public function rules()
     {
         return [
+            'finance_id'=>'required|exists:finance_forms,id',
             'account_id'=>'required|exists:loan_accounts,account_id',
             'finance_type'=>'required',
             'instalment_date'=>'required|date',
             'paid_date'=>'required|date',
             'instalment_amount'=>'required',
             'paid_amount'=>'required',
-            'penalty'=>'required',
             'remarks'=>'required',
         ];
+    }
+
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ((float)$this->paid_amount<(float)$this->instalment_amount){
+                $validator->errors()->add('paid_amount', 'Invalid Paid Amount!');
+            }
+        });
     }
 }

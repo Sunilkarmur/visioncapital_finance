@@ -229,12 +229,31 @@ class ApprovedController extends Controller
         $this->validate($request,[
             'finance_id'=>'required|exists:finance_forms,id'
         ]);
-        $loanAccount = LoanAccount::where('finance_id','=',$request->finance_id)->pluck('account_id');
+        $loanAccount = LoanAccount::with('emi')->where('finance_id','=',$request->finance_id)->get();
         if (count($loanAccount)>0){
+            $data=array();
+            $paidAmount=0.00;
+            $account_id=0.00;
+            $processing_date='';
+            foreach ($loanAccount as $key=>$value) {
+                if ($key===0){
+                    $account_id=$value->account_id;
+                    $processing_date=$value->processing_date;
+                }
+                if ($value->emi===null){
+                    $paidAmount+=$value->first_emi_amount;
+                }else{
+                    $paidAmount+=$value->emi_amount;
+                }
+            }
+            $data['finance_id']=$request->finance_id;
+            $data['paid_amount']=$paidAmount;
+            $data['account_id']=$account_id;
+            $data['processing_date']=$processing_date;
             return response()->json([
                 'status'=>true,
                 'message'=>'Loan Account List',
-                'data'=>$loanAccount
+                'data'=>$data
             ],200);
         }
         return response()->json([

@@ -17,13 +17,13 @@ $(document).ready(function () {
     },
     columns: [
       { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-      { data: 'ref_name', name: 'ref_name' },
+      { data: 'bor_name', name: 'bor_name' },
       { data: 'ref_firm', name: 'ref_firm' },
       { data: 'ref_contact', name: 'ref_contact' },
       { data: 'bor_amount', name: 'bor_amount' },
       { data: 'bor_time_limit', name: 'bor_time_limit' },
       { data: 'status', name: 'status' },
-      { data: 'loan_account_id', name: 'loan_account_id' },
+      { data: 'remaing_disbursement_amount', name: 'remaing_disbursement_amount' },
       { data: 'action', name: 'action' },
     ],
     "oLanguage": {

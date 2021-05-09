@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmiInstallmentRequest;
 use App\Models\EmiInstallment;
+use App\Models\LoanAccount;
 use App\Models\Wallet;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use DataTables, Response, Carbon\Carbon;
 
@@ -38,20 +40,32 @@ class EmiInstallmentController extends Controller
      */
     public function store(EmiInstallmentRequest $request)
     {
-        $emiInstallment = new EmiInstallment();
-        $emiInstallment->account_id = $request->account_id;
-        $emiInstallment->installment_date = $request->instalment_date;
-        $emiInstallment->paid_date = $request->paid_date;
-        $emiInstallment->installment_amount = $request->instalment_amount;
-        $emiInstallment->paid_amount = $request->paid_amount;
-        $emiInstallment->penalty_amount = $request->penalty;
-        $emiInstallment->remark = $request->remarks;
-        $emiInstallment->save();
+        $loanAccount = LoanAccount::with('emi')->where('finance_id','=',$request->finance_id)->get();
+        foreach ($loanAccount as $key=>$value) {
+            if ($value->emi===null){
+                $paidAmount=$value->first_emi_amount;
+            }else{
+                $paidAmount=$value->emi_amount;
+            }
+            $penalty_amount=0.00;
+            if ($value->account_id===$request->account_id){
+                $penalty_amount=$request->has('penalty')?$request->penalty:0;
+            }
+            $emiInstallment = new EmiInstallment();
+            $emiInstallment->account_id = $value->account_id;
+            $emiInstallment->installment_date = $request->instalment_date;
+            $emiInstallment->paid_date = $request->paid_date;
+            $emiInstallment->installment_amount = $paidAmount;
+            $emiInstallment->paid_amount = $paidAmount;
+            $emiInstallment->penalty_amount = $request->has('penalty')?$request->penalty:0;
+            $emiInstallment->remark = $request->remarks;
+            $emiInstallment->save();
 
-        $wallet = Wallet::where([['type', $request->finance_type],['status', '1']])
-            ->first();
-        $wallet->amount = $wallet->amount + ($request->paid_amount + $request->penalty);
-        $wallet->save();
+            $wallet = Wallet::where([['type', $request->finance_type],['status', '1']])
+                ->first();
+            $wallet->amount = $wallet->amount + ($paidAmount + $penalty_amount);
+            $wallet->save();
+        }
         return response()->json([
             'status'=>true,
             'message'=>'Emi Installment Add Successfully',

@@ -72,8 +72,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade login-modal" id="addInstallment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
+    <div class="modal fade" id="addInstallment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Installment</h5>
@@ -84,41 +84,53 @@
                 <div class="modal-body">
                     <form class="mt-0" id="add-installment-form" action="{{ route('emi.store') }}" method="POST">
                         @csrf
-                        <div class="form-group">
-                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> -->
-                            <label for="select-loan-account">Choose Loan Account</label>
-                            <select class="custom-select mb-2" id="select-loan-account" name="account_id">
-                                <option>Select Loan Account</option>
-                            </select>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> -->
+                                <label for="select-loan-account">Loan Account Number</label>
+                                <input type="hidden" class="form-control mb-2" id="select_finance_id" placeholder="Finance Form Id" name="finance_id" readonly>
+                                <input type="text" class="form-control mb-2" id="select-loan-account" placeholder="Account Id" name="account_id" readonly>
+                            </div>
+                            <div class="form-group col-6">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> -->
+                                <label for="processing_date">Processing Date</label>
+                                <input type="text" class="form-control mb-2" id="processing_date" placeholder="processing_date" name="processing_date" readonly>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="instalment_date">Instalment Date</label>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            <input type="date" class="form-control mb-2" placeholder="Instalment Date" name="instalment_date" id="instalment_date">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="instalment_date">Instalment Date</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                <input type="date" class="form-control mb-2" placeholder="Instalment Date" name="instalment_date" id="instalment_date">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="paid_date">Paid Date</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                <input type="date" class="form-control mb-2" placeholder="Paid Date" name="paid_date" id="paid_date">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="paid_date">Paid Date</label>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            <input type="date" class="form-control mb-2" placeholder="Paid Date" name="paid_date" id="paid_date">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="instalment_amount">Instalment Amount</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                <input type="text" class="form-control mb-2" id="instalment_amount" placeholder="Instalment Amount" name="instalment_amount" readonly id="instalment_amount">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="paid_amount">Paid Amount</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                <input type="text" class="form-control mb-2" id="paid_amount" placeholder="Paid Amount" name="paid_amount">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="instalment_amount">Instalment Amount</label>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                            <input type="text" class="form-control mb-2" id="instalment_amount" placeholder="Instalment Amount" name="instalment_amount" readonly id="instalment_amount">
-                        </div>
-                        <div class="form-group">
-                            <label for="paid_amount">Paid Amount</label>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                            <input type="text" class="form-control mb-2" id="paid_amount" placeholder="Paid Amount" name="paid_amount">
-                        </div>
-                        <div class="form-group">
-                            <label for="penalty">Penalty</label>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
-                            <input type="text" class="form-control mb-2" id="penalty" placeholder="Penalty" name="penalty" id="penalty">
-                        </div>
-                        <div class="form-group">
-                            <label for="remarks">Remarks</label>
-                            <textarea class="form-control mb-2" id="remarks" name="remarks" placeholder="Remarks"></textarea>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="penalty">Penalty</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                                <input type="text" class="form-control mb-2" id="penalty" placeholder="Penalty" name="penalty" id="penalty">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="remarks">Remarks</label>
+                                <textarea class="form-control mb-2" id="remarks" name="remarks" placeholder="Remarks"></textarea>
+                            </div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -169,11 +181,12 @@
             },
             dataType: 'json',
             success: function (response) {
-                var html='<option value="">Select Loan Account</option>';
-               $.each(response.data,function (index, value) {
-                   html+='<option value="'+value+'">'+value+'</option>';
-               })
-               $('#select-loan-account').html(html)
+                const sources = response.data;
+               $('#select_finance_id').val(sources.finance_id)
+               $('#select-loan-account').val(sources.account_id)
+                $('#instalment_amount').val(sources.paid_amount)
+                $('#processing_date').val(sources.processing_date)
+                $('#paid_amount').val(sources.paid_amount)
             },
             error: function (error) {
                 const sources = error.responseJSON;
@@ -181,45 +194,48 @@
             }
         })
     }
-    $('#select-loan-account').change(function (event) {
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: '{{ route("loan.account.detail") }}',
-            method: 'POST',
-            data: {
-                account_id:event.target.value
-            },
-            dataType: 'json',
-            success: function (response) {
-                const sources = response.data;
-                $('#instalment_amount').val(sources.emi_amount)
-            },
-            error: function (error) {
-                const sources = error.responseJSON;
-                swal("Error!", sources.message, "error");
-            }
-        })
-    })
+    {{--$('#select-loan-account').change(function (event) {--}}
+    {{--    $.ajax({--}}
+    {{--        headers: {--}}
+    {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+    {{--        },--}}
+    {{--        url: '{{ route("loan.account.detail") }}',--}}
+    {{--        method: 'POST',--}}
+    {{--        data: {--}}
+    {{--            account_id:event.target.value--}}
+    {{--        },--}}
+    {{--        dataType: 'json',--}}
+    {{--        success: function (response) {--}}
+    {{--            const sources = response.data;--}}
+    {{--            $('#instalment_amount').val(sources.emi_amount)--}}
+    {{--        },--}}
+    {{--        error: function (error) {--}}
+    {{--            const sources = error.responseJSON;--}}
+    {{--            swal("Error!", sources.message, "error");--}}
+    {{--        }--}}
+    {{--    })--}}
+    {{--})--}}
 
     $("#add-installment-form").on("submit", function (e) {
         e.preventDefault();
         var form = $("#add-installment-form").validate({
             rules:{
                 account_id:'required',
-                instalment_date:'required'
+                instalment_date:'required',
+                paid_date:'required',
+                paid_amount:'required',
             },
             messages:{
                 account_id:'Please Select Account Id',
-                instalment_date:'Please Select Instalment Date'
+                instalment_date:'Please Select Instalment Date',
+                paid_date:'Please Select Paid Date',
+                paid_amount:'Please Enter Paid Amount',
             }
         });
         if (!form.valid()){
             return form.valid();
         }
         var dataString = $(this).serializeArray();
-        console.log(dataString)
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -237,7 +253,7 @@
             },
             error: function (error) {
                 const sources = error.responseJSON;
-              //  swal("Error!", sources.message, "error");
+               swal("Error!", sources.message, "error");
             }
         })
 
