@@ -90,6 +90,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row  mb-4">
+                                                <label for="bor_mobile" class="col-sm-4 col-form-label col-form-label-sm">Mobile</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="bor_mobile" class="form-control form-control-sm" id="bor_mobile" placeholder="Borrow Mobile">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row  mb-4">
                                                 <label for="bor_purpose" class="col-sm-4 col-form-label col-form-label-sm">Purpose</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" name="bor_purpose" class="form-control form-control-sm" id="bor_purpose" placeholder="Purpose">
