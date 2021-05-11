@@ -214,8 +214,8 @@ class FinanceFormController extends Controller
         $financeForm->finance_type = session()->get('finance_type');
         $financeForm->ref_affiliate_vc = $request->ref_affiliate_vc;
         if ($request->ref_affiliate_vc==='Yes'){
-            $financeForm->ref_affiliate_type = $request->ref_affiliate_type;
-            if ($request->ref_affiliate_type==='Other'){
+            $financeForm->ref_affiliate_type = is_array($request->ref_affiliate_type)?implode(',',$request->ref_affiliate_type):'';
+            if (in_array('Other',$request->ref_affiliate_type)){
                 $financeForm->ref_affiliate_type_other = $request->ref_affiliate_type_other;
             }
         }

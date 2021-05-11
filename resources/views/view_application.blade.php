@@ -13,6 +13,52 @@ $busi_details = $application->business;
         <h3>View Application</h3>
       </div>
     </div>
+
+
+      <!-- FOR OFFICE USE ONLY -->
+      <div class="row layout-top-spacing pt-4">
+          <div class="col-lg-12 layout-spacing">
+              <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                      <div class="row">
+                          <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                              <h4>Status</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="widget-content widget-content-area">
+                      <div class="track">
+                          <div class="step active">
+                              <span class="icon"><i class="fa fa-check"></i></span>
+                              <span class="text">Processing fees received</span>
+                          </div>
+                          <div class="step active">
+                              <span class="icon"> <i class="fa fa-check"></i></span>
+                              <span class="text">Agreement</span>
+                          </div>
+                          <div class="step">
+                              <span class="icon"><i class="fa fa-check"></i></span>
+                              <span class="text">Franking</span>
+                          </div>
+                          <div class="step">
+                              <span class="icon"><i class="fa fa-check"></i></span>
+                              <span class="text">Sign</span>
+                          </div>
+                          <div class="step">
+                              <span class="icon"><i class="fa fa-check"></i></span>
+                              <span class="text">Notarized Agreement</span>
+                          </div>
+                          <div class="step">
+                              <span class="icon"><i class="fa fa-check"></i></span>
+                              <span class="text">Disbusrsement</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- FOR OFFICE USE ONLY end -->
+
     <!-- REFERENCE -->
     <div class="row layout-top-spacing">
       <div class="col-xl-12 col-lg-12 layout-spacing">
@@ -586,3 +632,33 @@ $busi_details = $application->business;
 </div>
 <!--  END CONTENT AREA  -->
 @endsection
+
+@push('style')
+    <style>
+
+        /*
+            Just for demo purpose ---- Remove it.
+        */
+        /*<starter kit design>*/
+
+        .widget-one {
+
+        }
+        .widget-one h6 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            margin-bottom: 22px;
+        }
+        .widget-one p {
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+
+        #formValidate .wizard > .content {min-height: 25em;}
+
+        #example-vertical.wizard > .content {min-height: 24.5em;}
+
+        /*</starter kit design>*/
+    </style>
+@endpush

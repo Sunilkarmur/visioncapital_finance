@@ -19,7 +19,7 @@ class CreateFinanceFormsTable extends Migration
             $table->string('ref_firm',50)->nullable();
             $table->string('ref_contact',15)->nullable();
             $table->enum('ref_affiliate_vc',['Yes','No'])->default('No');
-            $table->enum('ref_affiliate_type',['Loan','Subsidy','Finance','VC','Other'])->default('Loan');
+            $table->string('ref_affiliate_type')->default('Loan');
             $table->string('ref_affiliate_type_other',255)->nullable();
             $table->timestamps();
         });

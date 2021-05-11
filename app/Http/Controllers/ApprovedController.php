@@ -22,6 +22,7 @@ class ApprovedController extends Controller
                 ->whereHas('officeUse', function ($q) {
                     $q->where('status', 'Approved');
                 })
+                ->where('finance_type','=',session()->get('finance_type'))
                 ->orderBy('id', 'DESC')
                 ->get();
 

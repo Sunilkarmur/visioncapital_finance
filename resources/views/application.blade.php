@@ -26,7 +26,7 @@
                   <th>Amount</th>
                   <th>Reference Name</th>
                   <th>Ref. Firm Name</th>
-                  <th>Application of Reference</th>
+                  <th>Affiliation of Reference</th>
                   <!-- <th>Status</th> -->
                   <th>Action</th>
                 </tr>

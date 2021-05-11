@@ -51,7 +51,7 @@
                                             <div class="form-group row  mb-4 d-none select_affiliate_type">
                                                 <label for="ref_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Select Affliated Type</label>
                                                 <div class="col-sm-8">
-                                                    <select class="form-control form-control-sm ref_affiliate_type" name="ref_affiliate_type">
+                                                    <select class="form-control form-control-sm ref_affiliate_type" name="ref_affiliate_type[]" id="ref_affiliate_type" multiple="multiple">
                                                         <option value="Loan">Loan</option>
                                                         <option value="Subsidy">Subsidy</option>
                                                         <option value="Finance">Finance</option>
@@ -485,6 +485,7 @@
     <!--  BEGIN CUSTOM STYLE FILE  -->
     <link href="{{ asset('assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/jquery-step/jquery.steps.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/select2/select2.min.css') }}">
     <style>
         #formValidate .wizard > .content {min-height: 25em;}
         #example-vertical.wizard > .content {min-height: 24.5em;}
@@ -510,10 +511,18 @@
     <script src="{{ asset('plugins/jquery-step/custom-jquery.steps.js') }}"></script>
     <script src="{{ asset('plugins/input-mask/input-mask.js') }}"></script>
     <script src="{{ asset('plugins/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
-    
+    <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('plugins/select2/custom-select2.js') }}"></script>
+
     <!-- END PAGE LEVEL SCRIPTS -->
     <script type="text/javascript">
         $(document).ready(function(){
+
+            $("#ref_affiliate_type").select2({
+                tags: true,
+                templateSelection: formatState
+            });
+
             $('.add_gaurantor').on('click',function(){
                 var section = $('.guarantor_section').clone();
                 // $(this).addClass('d-none');
@@ -585,7 +594,7 @@
                     $('.link_loan_type').addClass('d-none');
                 }
                 else{
-                    $('.link_loan_type').removeClass('d-none');   
+                    $('.link_loan_type').removeClass('d-none');
                 }
             })
 
@@ -737,8 +746,6 @@
             $(document).on('click','.remove_current_ac_btn',function(){
                 $(this).closest('.current_account_row').remove();
             });
-
-
         });
     </script>
 @endpush
