@@ -92,8 +92,8 @@ var table = $('#column-filter').DataTable({
       filterable: false
     },
     {
-      data: 'ref_contact',
-      name: 'ref_contact'
+      data: 'bor_mob_no',
+      name: 'bor_mob_no'
     },
     {
       data: 'bor_amount',

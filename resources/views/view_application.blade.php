@@ -142,6 +142,12 @@ $busi_details = $application->business;
                   </div>
                 </div>
                 <div class="form-group row  mb-4">
+                  <label for="bor_mob_no" class="col-sm-4 col-form-label col-form-label-sm">Mobile No.</label>
+                  <div class="col-sm-8">
+                    <label class="mt-1">{{ $application->bor_mob_no }}</label>
+                  </div>
+                </div>
+                <div class="form-group row  mb-4">
                   <label for="bor_amount" class="col-sm-4 col-form-label col-form-label-sm">Amount Required</label>
                   <div class="col-sm-8">
                     <label class="mt-1">{{ $application->bor_amount }}</label>
@@ -537,7 +543,7 @@ $busi_details = $application->business;
                   <label for="guarantor_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Affiliated
                     Type</label>
                   <div class="col-sm-8">
-                    <label class="mt-1">{{ $guarantor->guarantor_affiliate_type }}</label>
+                    <label class="mt-1">{{ !empty($guarantor->guarantor_affiliate_type) }}</label>
                   </div>
                 </div>
                 <div class="form-group row  mb-4">
