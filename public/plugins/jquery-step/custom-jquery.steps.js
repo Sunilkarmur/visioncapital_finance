@@ -174,6 +174,7 @@ function borrowerDetailForm(currentIndex) {
         bor_affiliate_vc: "required",
         bor_affiliate_type: "required",
         bor_affiliate_type_other: "required",
+        bor_mob_no: "required",
         bor_pan_no: {
             required: true,
         },
@@ -196,6 +197,9 @@ function borrowerDetailForm(currentIndex) {
         bor_affiliate_vc: "Please select Borrower Affiliate VC",
         bor_affiliate_type: "Please enter a valid email address",
         bor_affiliate_type_other: "Please enter a valid email address",
+        bor_mob_no: {
+            required: "Please enter a Mobile Number",
+        },
         bor_pan_no: {
             required: "Please enter a Pan Number",
         },
@@ -415,6 +419,7 @@ function guarantorDetailsForm(currentIndex) {
     if (!banking_finance_form) {
         return banking_finance_form;
     }
+
     data.push({ name: 'id', value: $('#finance-form-id').val() });
     data.push({ name: 'data', value: JSON.stringify(banking_finance_form) });
     return addFormData(currentIndex, data, function (response) {

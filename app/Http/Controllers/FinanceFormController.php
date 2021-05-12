@@ -115,8 +115,10 @@ class FinanceFormController extends Controller
         if ($finance){
             if ($finance->officeUse){
                 $documents = $finance->officeUse->client_document_detail;
+                $gau_documents = $finance->officeUse->gaurantor_document_detail;
             }else{
                 $documents = null;
+                $gau_documents = null;
             }
             if ($documents){
                 $finance->resi_proof=$documents->resi_proof;
@@ -126,6 +128,15 @@ class FinanceFormController extends Controller
                 $finance->resi_proof=[];
                 $finance->busi_proof=[];
                 $finance->id_proof=[];
+            }
+            if ($gau_documents){
+                $finance->gau_resi_proof=$gau_documents->gau_resi_proof;
+                $finance->gau_busi_proof=$gau_documents->gau_busi_proof;
+                $finance->gau_id_proof=$gau_documents->gau_id_proof;
+            }else{
+                $finance->gau_resi_proof=[];
+                $finance->gau_busi_proof=[];
+                $finance->gau_id_proof=[];
             }
 //dd(array_search('aadahar_card',$finance->resi_proof),$finance->resi_proof);
             return view('application-form-official-use',compact('finance'));
@@ -242,6 +253,7 @@ class FinanceFormController extends Controller
             'bor_affiliate_type'=>'required_if:bor_affiliate_vc,Yes',
             'bor_affiliate_type_other'=>'required_if:bor_affiliate_type,Other',
             'bor_pan_no'=>'required',
+            'bor_mob_no'=>'required',
             'bor_aadhar_no'=>'required',
             'bor_pin_code'=>'required',
             'bor_dob'=>'required',
@@ -265,6 +277,7 @@ class FinanceFormController extends Controller
             $financeForm->bor_affiliate_vc = $request->bor_affiliate_vc;
             $financeForm->bor_affiliate_type = $request->bor_affiliate_type;
             $financeForm->bor_affiliate_type_other = $request->bor_affiliate_type_other;
+            $financeForm->bor_mob_no = $request->bor_mob_no;
             $financeForm->bor_pan_no = $request->bor_pan_no;
             $financeForm->bor_aadhar_no = $request->bor_aadhar_no;
             $financeForm->bor_pin_code = $request->bor_pin_code;
@@ -594,6 +607,12 @@ class FinanceFormController extends Controller
                 $busi_final = [];
                 $id_final = [];
                 $all_proof = [];
+
+                $gau_res_final = [];
+                $gau_busi_final = [];
+                $gau_id_final = [];
+                $gau_all_proof = [];
+                
                 if ($request->has('resi_proof')){
                     foreach($request->resi_proof as $key=>$res)
                     {
@@ -618,14 +637,41 @@ class FinanceFormController extends Controller
                     'busi_proof' => $busi_final,
                     'id_proof' => $id_final
                 ];
+
+                if ($request->has('gau_resi_proof')){
+                    foreach($request->gau_resi_proof as $key=>$res)
+                    {
+                        array_push($gau_res_final, $res);
+                    }
+                }
+                if ($request->has('gau_busi_proof')){
+                    foreach($request->gau_busi_proof as $key=>$res)
+                    {
+                        array_push($gau_busi_final, $res);
+                    }
+                }
+                if ($request->has('gau_id_proof')){
+                    foreach($request->gau_id_proof as $key=>$res)
+                    {
+                        array_push($gau_id_final, $res);
+                    }
+                }
+
+                $gau_all_proof = [
+                    'gau_resi_proof' => $gau_res_final,
+                    'gau_busi_proof' => $gau_busi_final,
+                    'gau_id_proof' => $gau_id_final
+                ];
                 $office_use->document_select = $request->document_select;
                 $office_use->document_review_select = $request->document_review_select;
                 $office_use->document_review_text = $request->document_review_text;
                 $office_use->client_document_select = $request->client_document_select;
                 $office_use->client_documents = json_encode($all_proof);
+                $office_use->gaurantor_documents = json_encode($gau_all_proof);
             }elseif ($request->type==='4'){
                 $validator = Validator::make($request->all(),[
-                    'status'=> 'required'
+                    'status'=> 'required',
+                    'finance_type'=> 'required'
                 ]);
 
                 if ($validator->fails()){
@@ -636,6 +682,15 @@ class FinanceFormController extends Controller
                     ],422);
                 }
                 $office_use->status = $request->status;
+                $finance_form = FinanceForm::find($request->id);
+                if($finance_form){
+                    if($request->has('disbursement_amount')){
+                        $finance_form->bor_amount = $request->disbursement_amount;
+                        $finance_form->remaing_disbursement_amount = $request->disbursement_amount;
+                    }
+                    $finance_form->finance_type=$request->finance_type;
+                    $finance_form->save();
+                }
             }
             $office_use->save();
             return response()->json([
