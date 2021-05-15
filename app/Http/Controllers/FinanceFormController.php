@@ -275,8 +275,12 @@ class FinanceFormController extends Controller
             $financeForm->bor_time_limit = $request->bor_time_limit;
             $financeForm->bor_purpose = $request->bor_purpose;
             $financeForm->bor_affiliate_vc = $request->bor_affiliate_vc;
-            $financeForm->bor_affiliate_type = $request->bor_affiliate_type;
-            $financeForm->bor_affiliate_type_other = $request->bor_affiliate_type_other;
+//            $financeForm->bor_affiliate_type = $request->bor_affiliate_type;
+            $financeForm->bor_affiliate_type = is_array($request->bor_affiliate_type)?implode(',',$request->bor_affiliate_type):'';
+            if (in_array('Other',$request->bor_affiliate_type)){
+//                $financeForm->ref_affiliate_type_other = $request->ref_affiliate_type_other;
+                $financeForm->bor_affiliate_type_other = $request->bor_affiliate_type_other;
+            }
             $financeForm->bor_mob_no = $request->bor_mob_no;
             $financeForm->bor_pan_no = $request->bor_pan_no;
             $financeForm->bor_aadhar_no = $request->bor_aadhar_no;
@@ -612,7 +616,7 @@ class FinanceFormController extends Controller
                 $gau_busi_final = [];
                 $gau_id_final = [];
                 $gau_all_proof = [];
-                
+
                 if ($request->has('resi_proof')){
                     foreach($request->resi_proof as $key=>$res)
                     {
@@ -684,10 +688,12 @@ class FinanceFormController extends Controller
                 $office_use->status = $request->status;
                 $finance_form = FinanceForm::find($request->id);
                 if($finance_form){
+                    $finance_form->bor_request_amount = $finance_form->bor_amount;
                     if($request->has('disbursement_amount')){
                         $finance_form->bor_amount = $request->disbursement_amount;
                         $finance_form->remaing_disbursement_amount = $request->disbursement_amount;
                     }
+
                     $finance_form->finance_type=$request->finance_type;
                     $finance_form->save();
                 }

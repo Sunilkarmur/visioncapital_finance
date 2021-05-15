@@ -66,7 +66,7 @@
                         Type</label>
                       <div class="col-sm-8">
                         <select class="form-control form-control-sm ref_affiliate_type" name="ref_affiliate_type[]"
-                          id="ref_affiliate_type" >
+                          id="ref_affiliate_type" multiple>
                           <option value="Loan">Loan</option>
                           <option value="Subsidy">Subsidy</option>
                           <option value="Finance">Finance</option>
@@ -708,17 +708,22 @@ button {
 @endpush
 
 @push('script')
-<script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('plugins/select2/custom-select2.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-step/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-step/custom-jquery.steps.js') }}"></script>
+    <script src="{{ asset('plugins/input-mask/input-mask.js') }}"></script>
+    <script src="{{ asset('plugins/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
 
-<script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
-<script src="{{ asset('plugins/select2/custom-select2.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        // $("#ref_affiliate_type").select2({
-        //     tags: true,
-        //     templateSelection: formatState
-        // });
+        $("#ref_affiliate_type").select2({
+            tags: true,
+            templateSelection: formatState
+        });
         //
         // $("#guarantor_affiliate_type").select2({
         //     tags: true,
@@ -914,11 +919,5 @@ button {
         });
     });
 </script>
-<script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
-<script src="{{ asset('plugins/jquery-step/jquery.steps.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-step/custom-jquery.steps.js') }}"></script>
-<script src="{{ asset('plugins/input-mask/input-mask.js') }}"></script>
-<script src="{{ asset('plugins/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
-
 <!-- END PAGE LEVEL SCRIPTS -->
 @endpush

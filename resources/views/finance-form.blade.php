@@ -121,7 +121,7 @@
                       <label for="bor_affiliate_type" class="col-sm-4 col-form-label col-form-label-sm">Select Affliated
                         Type</label>
                       <div class="col-sm-8">
-                        <select class="form-control form-control-sm bor_affiliate_type" name="bor_affiliate_type">
+                        <select class="form-control form-control-sm bor_affiliate_type" name="bor_affiliate_type[]" id="bor_affiliate_type" multiple>
                           <option value="Loan">Loan</option>
                           <option value="Subsidy">Subsidy</option>
                           <option value="Finance">Finance</option>
@@ -627,6 +627,10 @@ $(document).ready(function() {
     tags: true,
     templateSelection: formatState
   });
+  $("#bor_affiliate_type").select2({
+    tags: true,
+    templateSelection: formatState
+  });
 
   $("#guarantor_affiliate_type").select2({
     tags: true,
@@ -648,7 +652,8 @@ $(document).ready(function() {
   });
 
   $(document).on('change', '.ref_affiliate_vc', function() {
-    if ($(this).val() == 0) {
+      console.log($(this).val() )
+    if ($(this).val() === 'No') {
       $('.select_affiliate_type').addClass('d-none');
       $('.specify').addClass('d-none');
     } else {
@@ -673,10 +678,12 @@ $(document).ready(function() {
     }
   });
   $('.bor_affiliate_type').change(function() {
-    if ($(this).val() == 'Other') {
-      $('.bor_specify').removeClass('d-none');
+      var values = $(this).val();
+      var search = $.inArray('Other', values);
+    if (search == -1) {
+        $('.bor_specify').addClass('d-none');
     } else {
-      $('.bor_specify').addClass('d-none');
+        $('.bor_specify').removeClass('d-none');
     }
   });
   $('.guarantor_affiliate_vc').change(function() {

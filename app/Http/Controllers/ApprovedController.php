@@ -55,18 +55,26 @@ class ApprovedController extends Controller
                     return $status_data;
                 })
                 ->addColumn('action', function ($applications) {
-                    $button = '<ul class="table-controls">
+                    $disbursement_status=false;
+                    if ($applications->loanAccountDetails) {
+                        $disbursement_status=true;
+                    }
+                    $button='<ul class="table-controls">';
+                    if ($disbursement_status){
+                        $button .= '
                     <li>
                         <a href="javascript:void(0);" onclick="onAddInstallment('.$applications->id.')" data-toggle="modal" data-target="#addInstallment" title="Add Installment">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder-plus"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
                         </a>
-                    </li>
-                    <li>
+                    </li>';
+                        $button .='   <li>
                         <a href="javascript:void(0);" onclick="onDistributeAmount('.$applications->id.')" title="Disburse Amount" data-toggle="modal" data-target="#addDisbursement">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-database"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
                         </a>
-                    </li>
-                    <li>
+                    </li>';
+                    }
+
+                 $button .='     <li>
                         <a href="' . route('finance.view_approved_application', encrypt($applications->id)) . '" data-toggle="tooltip" data-placement="top" title="View"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a>
                     </li>
                     <li>
@@ -165,8 +173,8 @@ class ApprovedController extends Controller
 //        $totalDays = $datetime1->diff($datetime2);
         $totalDays = $currentDate->diffInDays($currentMonthDate);
 
-        $fdate = $currentDate->format('Y-m-d');
-        $tdate = $currentMonthDate->format('Y-m-d');
+        $fdate = $currentDate;
+        $tdate = $currentMonthDate;
         $datetime1 = strtotime($fdate); // convert to timestamps
         $datetime2 = strtotime($tdate); // convert to timestamps
         $days = (int)(($datetime2 - $datetime1)/86400); // will give the difference in days , 86400 is the timestamp difference of a day
